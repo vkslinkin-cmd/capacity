@@ -1,0 +1,2616 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capacity · Plan 2026</title>
+<style>
+:root{--bg:#f4f6f9;--panel:#fff;--panel2:#f0f3f7;--line:#dbe3ec;--text:#223044;--muted:#6f7f92;--accent:#315fc5;--good:#169267;--warn:#c58a2b;--bad:#c83d49;--blue:#5d8eea;--orange:#e3a24a;--green:#79b894;--shadow:0 12px 30px rgba(30,55,90,.12)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+.top{height:62px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 24px;gap:14px;position:sticky;top:0;z-index:50}.brand{font-weight:800}.brand span{color:var(--muted);font-weight:500}.spacer{flex:1}.theme{padding:8px 11px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:8px}
+.page{max-width:1700px;margin:auto;padding:22px 24px 40px}h1{margin:0;font-size:25px}.sub{color:var(--muted);margin-top:5px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 10px}.btn{padding:9px 12px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;position:relative;z-index:20}.filter{position:relative}.filter>button{min-width:155px;text-align:left;padding:8px 10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:8px}.filter.open .menu{display:block}.menu{display:none;position:absolute;top:calc(100% + 5px);left:0;width:290px;max-height:340px;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow);padding:8px;z-index:100}.search{width:100%;padding:7px 8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:7px;margin-bottom:7px}.menu-actions{display:flex;gap:6px;padding-bottom:7px;border-bottom:1px solid var(--line);margin-bottom:5px}.menu-actions button{font-size:11px;padding:5px 7px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:6px}.opt{display:flex;gap:8px;align-items:center;padding:6px 5px;border-radius:6px;font-size:12px;cursor:pointer}.opt:hover{background:var(--panel2)}.opt input{accent-color:var(--accent)}
+.metrics{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}.metric span{display:block;font-size:10px;color:var(--muted)}.metric b{font-size:15px}.metric.free b{color:var(--good)}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}.quick-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.quick-card span{display:block;font-size:11px;color:var(--muted)}.quick-card b{display:block;font-size:20px;margin-top:3px}.quick-card small{color:var(--muted)}
+.board{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:14px}.board-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}.board-head b{font-size:15px}.board-head span{font-size:11px;color:var(--muted)}.plan-note{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:12px}.plan-note b{color:var(--text)}.plan-note .line{display:block}
+.map-scroll{overflow-x:auto;padding-bottom:4px}.map{display:grid;grid-template-columns:repeat(6,minmax(230px,1fr));gap:14px;min-width:1500px;align-items:start}.geo-group{border:2px dashed #9db0c5;border-radius:12px;padding:9px;position:relative;background:rgba(117,142,170,.035);display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:9px}.geo-label{position:absolute;top:-10px;left:10px;padding:2px 8px;background:var(--panel);border:1px solid #c8d4e2;border-radius:999px;color:var(--muted);font-size:10px;font-weight:700;z-index:3}
+.dc{min-width:100px}.dc-head{display:flex;justify-content:space-between;gap:7px;align-items:baseline;margin-bottom:6px}.dc-head b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dc-head span{font-size:10px;color:var(--muted)}.vessel{height:330px;border:1px solid #b9c7d7;border-radius:7px 7px 13px 13px;background:var(--panel2);display:flex;flex-direction:column-reverse;overflow:hidden;position:relative;transition:.15s}.vessel.drop{outline:3px solid #79a7f0;outline-offset:2px}.seg{min-height:1px;border-top:1px solid #ffffff55;cursor:grab;transition:.1s}.seg:hover{filter:brightness(1.08);outline:1px solid #fff;z-index:2}.seg.dim{opacity:.12}
+.dc-bar{height:5px;background:#e7edf3;border-radius:99px;margin-top:5px;overflow:hidden}.dc-bar i{display:block;height:100%;border-radius:99px}.dc-foot{margin-top:5px;font-size:10px;color:var(--muted)}
+.legend{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:13px;padding-top:12px;border-top:1px solid var(--line);max-height:88px;overflow:auto}.legend-title{font-size:11px;color:var(--muted)}.legend-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);font-size:11px;color:var(--text);cursor:pointer}.legend-pill.selected{box-shadow:0 0 0 2px #b7cdf5 inset;border-color:#83a9e9}.legend-dot{width:8px;height:8px;border-radius:2px;display:inline-block}
+.load-board{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.load-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.load-card{border:1px solid var(--line);border-radius:9px;padding:9px;background:var(--panel2)}.load-top,.load-meta{display:flex;justify-content:space-between;gap:6px;font-size:10px}.load-top b{font-size:12px}.track{height:8px;background:#dfe7ef;border-radius:99px;overflow:hidden;margin:6px 0}.track i{display:block;height:100%;border-radius:99px}.add{color:var(--good);font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.table-card{margin-top:14px}.table-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.table-scroll{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;white-space:nowrap}th{font-size:11px;color:var(--muted)}tbody tr{cursor:pointer}tbody tr:hover{background:var(--panel2)}tbody tr.selected{background:#eaf1ff}.num{text-align:right;font-variant-numeric:tabular-nums}.heat{display:inline-block;min-width:52px;padding:2px 6px;border-radius:5px}
+.dialog{width:min(1100px,calc(100% - 24px));max-height:90vh;overflow:auto;border:1px solid var(--line);border-radius:13px;background:var(--panel);color:var(--text);padding:18px;box-shadow:0 22px 70px rgba(20,36,59,.3)}dialog::backdrop{background:rgba(20,36,59,.55)}.dialog h3{margin:0 0 4px}.dialog p{margin:0 0 12px;color:var(--muted);font-size:12px}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.err{color:var(--bad);font-size:12px;min-height:18px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}.field input,.field select{padding:9px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:7px}.dc-inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.dc-input{padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--panel2)}.dc-input b{display:block;font-size:11px;margin-bottom:5px}.dc-input input{width:100%;padding:7px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--text)}.total-line{display:flex;justify-content:space-between;padding:10px;background:var(--panel2);border-radius:8px;margin-top:10px}.transfer-preview{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.preview{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--panel2)}
+.general-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.gcard{padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--panel2)}.gcard span{display:block;font-size:10px;color:var(--muted)}.gcard b{display:block;font-size:18px;margin-top:3px}.general-chart{margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--panel2)}.bars{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;align-items:end;min-width:1200px;height:245px}.barcol{height:235px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}.barstack{height:195px;width:42px;position:relative;border:1px solid #bdcad8;border-radius:6px 6px 9px 9px;background:#e8edf3;overflow:hidden;display:flex;flex-direction:column-reverse}.barseg.now{background:var(--blue)}.barseg.add{background:var(--orange)}.barseg.power{background:var(--green)}.diffline{position:absolute;left:-3px;right:-3px;height:2px;background:var(--bad);z-index:3}.barlabel{font-size:9px;color:var(--muted);text-align:center;white-space:nowrap;max-width:80px;overflow:hidden;text-overflow:ellipsis}.general-table-wrap{overflow:auto;margin-top:12px}.general-table{min-width:1100px}.v-good{background:rgba(22,146,103,.10);color:var(--good);font-weight:700}.v-warn{background:rgba(197,138,43,.11);color:var(--warn);font-weight:700}.v-bad{background:rgba(200,61,73,.10);color:var(--bad);font-weight:700}
+.journal-table{min-width:1200px}.undo{padding:5px 8px;font-size:11px;border:1px solid #d2dae5;border-radius:6px;background:var(--panel2);color:var(--text)}.undone{opacity:.55}.dark{--bg:#0d1118;--panel:#151b25;--panel2:#1c2532;--line:#2d3849;--text:#edf3fc;--muted:#92a0b4}.dark .top{background:#111720}.dark .vessel,.dark .barstack{background:#0f151e;border-color:#506076}.dark .geo-group{border-color:#5d708a}.dark .plan-note{background:#141c28}
+@media(max-width:900px){.load-grid{grid-template-columns:1fr 1fr}.general-summary{grid-template-columns:1fr 1fr}.dc-inputs{grid-template-columns:1fr 1fr}.map{grid-template-columns:repeat(3,minmax(230px,1fr))}}@media(max-width:600px){.quick{grid-template-columns:1fr}.load-grid,.general-summary,.dc-inputs,.transfer-preview{grid-template-columns:1fr}.metrics{width:100%;margin-left:0}}
+</style>
+<style id="v12-css">
+/* V12: fit all 12 DC glasses and restore card/interaction polish */
+.map-scroll{overflow:visible!important;padding-bottom:0!important}
+.map{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:8px!important;min-width:0!important;width:100%!important;align-items:start!important}
+.geo-group{display:grid!important;grid-template-columns:repeat(var(--geo-count),minmax(0,1fr))!important;gap:6px!important;padding:8px 5px 7px!important;border:1.5px dashed #8ea2b8!important;border-radius:8px!important;min-width:0!important}
+.geo-label{top:-9px!important;font-size:9px!important;padding:1px 7px!important}
+.dc{min-width:0!important;width:100%!important}
+.dc-head b{font-size:11px!important}
+.dc-head span{font-size:9px!important}
+.vessel{height:310px!important;border-radius:6px 6px 10px 10px!important}
+.seg{min-height:1px!important}
+/* Screenshot-like load card directly under each glass */
+.dc-load{margin-top:5px;background:#eef3f7;border:1px solid #dbe3ec;border-radius:7px;padding:7px 7px 8px;color:#61738a;font-size:9px;line-height:1.35}
+.dc-load .row{display:flex;justify-content:space-between;gap:5px;align-items:baseline}
+.dc-load .row b{font-size:11px}
+.dc-load .track{height:5px!important;background:#dde5ed!important;margin:4px 0 5px!important;border-radius:9px!important}
+.dc-load .track i{height:100%;display:block;border-radius:9px}
+.dc-load .numbers{font-size:9px;color:#66798e}
+.dc-load .status{font-size:9px;font-weight:700;margin-top:3px}
+.dc-load .newpower{font-size:9px;font-weight:650;margin-top:3px}
+.dc-load .tiny{font-size:8.5px;color:#7b8999;margin-top:2px}
+.dc-load.over{background:#f2f4f7;border-color:#e1e5ea}
+.dc-load.warn{background:#f4f5f7}
+.dc-load.good{background:#eef5f2}
+#loadBoard{display:none!important}
+/* Hover tooltip */
+#v12Tip{position:fixed;z-index:100000;display:none;pointer-events:none;background:#101923;color:#fff;border:1px solid #41536a;border-radius:8px;padding:9px 11px;font-size:12px;line-height:1.35;box-shadow:0 10px 28px rgba(0,0,0,.28);max-width:320px}
+#v12Tip b{display:block;margin-bottom:2px}
+#v12Tip span{color:#b9c7d7}
+/* Power edit */
+#powerDialog{width:min(760px,calc(100% - 24px))}
+.power-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.power-item{border:1px solid var(--line);border-radius:8px;background:var(--panel2);padding:8px}
+.power-item label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}
+.power-item input{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--text)}
+.power-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.power-dynamic-note{margin-top:8px;padding:8px 10px;background:var(--panel2);border:1px solid var(--line);border-radius:7px;font-size:11px;color:var(--muted)}
+/* Filters: no re-render while menu is open */
+.filters{z-index:100!important}
+.filter.open{z-index:1000}
+.menu{z-index:10000!important}
+.filter .opt{user-select:none}
+/* Metrics next to filters */
+.metrics{align-items:center}
+.metrics .power-config{padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:var(--panel2);color:var(--text);font-size:11px;cursor:pointer}
+/* selected segments are visible, unselected dim */
+.seg.dim{opacity:.11!important;filter:saturate(.25)!important}
+.seg.selected-seg{outline:1px solid #fff!important;filter:brightness(1.08)!important}
+@media(max-width:1200px){.vessel{height:290px!important}.dc-load{font-size:8.5px}.dc-head b{font-size:10px!important}}
+@media(max-width:900px){.map{grid-template-columns:repeat(12,minmax(76px,1fr))!important;min-width:910px!important}.geo-group{grid-column:span var(--geo-count)!important}.map-scroll{overflow-x:auto!important}.power-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head><body>
+<header class="top"><div class="brand">capacity <span>/ plan 2026</span></div><div class="spacer"></div><button id="theme" class="theme">Темная тема</button></header>
+<main class="page"><h1>Распределение CPU по датацентрам</h1><div class="sub">Единая интерактивная модель: фильтры → Allocation map → таблица → переносы → журнал</div>
+<div class="actions"><button class="btn" id="addBtn">Добавить продукт</button><button class="btn" id="generalBtn">Общие данные</button><button class="btn" id="journalBtn">Журнал переносов</button><button class="btn" id="importBtn">Импорт данных</button></div>
+<section class="filters" id="filters"></section><section class="quick" id="quick"></section>
+<section class="board"><div class="board-head"><b>Allocation map</b><span>Drag & drop сегмента или двойной клик → точный перенос vCPU</span></div><div class="plan-note"><b>План до конца 2026</b><span class="line">серый фон — ёмкость ДЦ на 31/12/2026;</span><span class="line">оранжевый фон — плановая нагрузка;</span><span class="line">зелёный — свободные vCPU;</span><span class="line"><b>Новые мощности:</b> PHR2 + 32 400; PHR4 + 29 300; ICVA + 31 174; GZNK + 30 000 vCPU.</span></div><div class="map-scroll"><div class="map" id="map"></div></div><div class="legend" id="legend"></div></section>
+<section class="load-board" id="loadBoard"></section>
+<section class="card table-card"><div class="table-head"><b>Продукты</b><span class="muted">Мультивыбор: клик по строкам синхронизирует Allocation map и легенду</span></div><div class="table-scroll"><table><thead id="prodHead"></thead><tbody id="prodBody"></tbody></table></div></section></main>
+<dialog id="transferDialog" class="dialog"><h3>Перенос ядер</h3><p id="transferMeta"></p><div class="form-grid"><label class="field">Из ДЦ<select id="fromDc"></select></label><label class="field">В ДЦ<select id="toDc"></select></label></div><div class="transfer-preview"><div class="preview">Доступно в источнике: <b id="transferAvailable"></b></div><div class="preview">Количество: <input id="transferAmount" type="number" min="1" style="width:130px"></div></div><div class="err" id="transferErr"></div><div class="dialog-actions"><button class="btn" data-close="transferDialog">Отмена</button><button class="btn primary" id="applyTransfer">Перенести</button></div></dialog>
+<dialog id="addDialog" class="dialog"><h3>Добавить продукт</h3><p>Задайте продукт и точное количество ядер по каждому ДЦ.</p><div class="form-grid"><label class="field">Продукт<input id="newProduct"></label><label class="field">Категория<input id="newCategory" value="Коммунальный"></label></div><div class="dc-inputs" id="newDcInputs"></div><div class="total-line"><span>Всего</span><b id="newTotal">0</b></div><div class="err" id="addErr"></div><div class="dialog-actions"><button class="btn" data-close="addDialog">Отмена</button><button class="btn primary" id="saveProduct">Добавить</button></div></dialog>
+<dialog id="generalDialog" class="dialog"><h3>Общие данные по ДЦ</h3><p>По каждому ДЦ: сейчас, прирост потребности до конца 2026, дополнительная мощность и итоговая разница.</p><div class="general-summary" id="generalSummary"></div><div class="general-chart"><div class="map-scroll"><div class="bars" id="generalBars"></div></div></div><div class="general-table-wrap"><table class="general-table"><thead><tr><th>ДЦ</th><th>Сейчас</th><th>Прирост</th><th>Доп. мощность</th><th>Мощность − прирост</th><th>Ёмкость 2026</th><th>Свободно после плана</th></tr></thead><tbody id="generalBody"></tbody></table></div><div class="dialog-actions"><button class="btn" data-close="generalDialog">Закрыть</button></div></dialog>
+<dialog id="journalDialog" class="dialog"><h3>Журнал переносов</h3><p>Каждый перенос можно отменить. Отмена восстанавливает исходное состояние продукта и карты.</p><div class="table-scroll"><table class="journal-table"><thead><tr><th>Время</th><th>Продукт</th><th>Источник до → после</th><th>Цель до → после</th><th>Количество</th><th>Действие</th></tr></thead><tbody id="journalBody"></tbody></table></div><div class="dialog-actions"><button class="btn" id="clearJournal">Очистить</button><button class="btn" data-close="journalDialog">Закрыть</button></div></dialog>
+<dialog id="importDialog" class="dialog"><h3>Импорт данных</h3><p>CSV: Продукт, Категория, затем 12 ДЦ.</p><input type="file" id="csvFile" accept=".csv,text/csv"><div class="err" id="importErr"></div><div class="dialog-actions"><button class="btn" data-close="importDialog">Отмена</button><button class="btn primary" id="applyImport">Импортировать</button></div></dialog>
+<dialog id="freeImportDialog" class="dialog"><h3>Загрузка свободных ядер</h3><p>CSV: ДЦ, Свободно сейчас. Загрузка полностью заменяет ранее загруженные значения.</p><input type="file" id="freeCsvFile" accept=".csv,text/csv"><div class="err" id="freeImportErr"></div><div class="dialog-actions"><button class="btn" data-close="freeImportDialog">Отмена</button><button class="btn primary" id="applyFreeImport">Загрузить</button></div></dialog>
+
+<div id="v12Tip"></div>
+<dialog id="powerDialog" class="dialog">
+  <h3>Новые мощности к концу 2026</h3>
+  <p>Измените планируемый прирост мощности по каждому ДЦ. Все показатели загрузки, свободной ёмкости и блок «Общие данные» пересчитаются автоматически.</p>
+  <div class="power-grid" id="powerGrid"></div>
+  <div class="power-dynamic-note" id="powerTotalNote"></div>
+  <div class="power-actions"><button class="btn" data-close="powerDialog">Отмена</button><button class="btn primary" id="savePower">Сохранить мощности</button></div>
+</dialog>
+<script>
+const SOURCE={"dcs":["M100 · EC","MEDV · PC","UDOM · UC","PHR1 · HC","PHR2 · RC","PHR3 · KC","PHR4 · DC","ICVA · IC","ICVS · CC","GZNK · ZC","SDNХ · NC","OSTN · SC"],"now_rows":[["Discovery Feature Engineering","Коммунальный",[12,3193,3668,3902,5563,3864,2814,15,2246,0,0,32]],["ML-infra","Коммунальный",[3331,16261,6839,6454,11349,10768,11175,239,0,0,0,1294]],["Discovery – Запас","Без категории",[8750,2279,1213,16020,797,75,229,79,450,0,0,17]],["ЕКП Общие Рекомы","Продукт коммунальный",[77,5188,7360,6703,553,110,982,538,587,477,0,0]],["ЕКП Дзен","Дзен",[6494,15725,4466,7008,9421,0,10389,0,2150,0,0,8]],["Service Host","Коммунальный",[323,243,189,475,164,97,106,80,73,80,80,0]],["Поиск","Коммунальный",[373,2013,614,3436,2262,3617,758,524,396,0,0,0]],["Поиск по MAX","Max",[1713,62,2163,206,4610,4582,3608,38,100,0,0,0]],["Поиск Единое Видео","VK Видео",[10336,392,11160,8289,14935,14344,11658,0,3018,0,0,0]],["Поиск - блендер","Коммунальный",[190,0,249,90,355,428,433,122,0,0,0,0]],["Core-технологии поиска","Коммунальный",[343,10,36,60,116,443,351,0,0,0,0,0]],["Запросные сервисы","Коммунальный",[94,40,432,89,665,503,424,276,200,0,0,0]],["Поиск по социальным связям","Коммунальный",[3279,144,3780,407,4317,4456,4664,150,50,0,0,0]],["Поиск - резерв ресурсов","Коммунальный",[4003,0,2223,12698,429,118,178,2484,950,0,0,0]],["ЕКП","Коммунальный",[0,1936,370,842,361,837,0,0,270,0,0,0]],["Контент-система","Коммунальный",[0,961,2769,4456,2916,2762,28,0,4448,0,0,13]],["Discovery Рекомендации","Без категории",[0,1754,2165,1696,1392,648,404,40,1097,0,0,48]],["ЕКП VK Видео (ProfileStream)","VK Видео",[0,2792,6572,840,2460,9814,80,916,840,0,0,0]],["ЕКП VK Видео","VK Видео",[0,24852,24542,29175,3329,6310,2832,0,766,0,0,138]],["ЕКП VK Музыка - ProfileStream","VK Музыка",[0,583,2108,2422,128,1487,199,148,0,0,0,0]],["ЕКП VK Музыка","VK Музыка",[0,696,715,3953,816,30,22,2651,1705,2910,0,0]],["ЕКП Лента ВКонтакте (ProfileStream)","Лента VK",[0,124,7752,1226,480,7789,7496,83,0,0,0,0]],["ЕКП Лента ВКонтакте","Лента VK",[0,4210,3905,37118,2665,822,1902,32587,2156,35743,374,0]],["ЕКП Дзен ProfileStream","Дзен",[0,612,3371,0,3587,1937,245,0,0,0,0,0]],["ЕКП VK Клипы ProfileStream","VK Клипы",[0,871,8852,0,740,13265,0,0,170,0,0,0]],["ЕКП VK Клипы","VK Клипы",[0,38873,38200,38368,2639,485,1248,640,282,470,846,0]],["ЕКП Реклама Profile Stream","Реклама",[0,893,3813,4,941,1293,30,2567,0,0,0,0]],["ЕКП Реклама","Реклама",[0,27783,573,2482,32610,8201,2031,0,1003,0,29747,0]],["ЕКП Реклама Ecom - ProfileStream","Реклама Ecom",[0,1329,0,0,195,1402,1517,0,0,0,0,0]],["ЕКП Реклама Ecom","Реклама Ecom",[0,8022,1881,1807,18435,11398,9875,0,746,0,14241,0]],["ЕКП Лента Одноклассники Profile Stream","OK",[0,903,1694,712,1596,1042,44,0,0,0,0,0]],["ЕКП Лента Одноклассники","OK",[0,2875,3056,9140,1161,543,0,5582,486,5582,0,0]],["ЕКП Реком Core","Коммунальный",[0,2264,1244,12900,102,0,0,0,9160,0,0,0]],["ЕКП Инфра","Коммунальный",[0,6082,4623,3650,2092,1097,338,576,0,208,208,1]],["Виртуалки","Коммунальный",[0,1200,497,1110,372,1876,0,0,0,0,0,0]],["ЕКП Recom Wizard","Коммунальный",[0,255,227,483,93,196,0,0,443,0,0,0]],["ЕКП Экспериментальные технологии","Коммунальный",[0,12,102,760,0,133,218,0,0,0,0,0]],["Отдел исследований","Коммунальный",[0,256,88,9,0,0,0,0,0,0,0,0]],["ЕКП Рекомендательные технологии","Коммунальный",[0,4,2,92,0,0,0,0,0,0,0,0]],["Поиск по RuStore","Rustore",[0,23,65,0,647,331,344,450,60,0,0,0]],["Поиск по людям","VK",[0,282,282,1133,26,64,0,2000,0,0,0,0]],["Поиск по ОК Видео","OK",[0,50,16,48,1540,1004,1146,225,42,0,0,0]],["Поиск по Дзен Видео","Дзен",[0,6,138,6,2927,1840,1395,2028,10,0,0,0]],["Поиск по товарам","VK",[0,6,6,0,4165,3290,4751,5021,0,0,0,0]],["Поиск по аудио контенту","VK Музыка",[0,296,306,164,12340,10491,4462,9749,236,0,0,0]],["Поиск - Интеграции","Коммунальный",[0,8,0,29,0,20,0,0,0,0,0,0]],["Поиск - S3","Коммунальный",[0,586,258,662,0,365,0,0,0,0,0,0]],["Поиск по постам","Коммунальный",[0,90,126,1048,9019,7838,12441,7962,114,0,0,0]],["ЕКП Общие Рекомы - ProfileStream","Продукт коммунальный",[0,0,1114,0,972,0,0,0,0,0,0,0]],["Инфраструктура разработки","Коммунальный",[0,0,60,0,494,508,54,54,0,0,0,0]],["ЕКП Поиск","Коммунальный",[0,0,0,581,2293,3276,2056,2044,0,0,0,0]],["Внутренние поисковые сервисы","Коммунальный",[0,0,0,39,272,178,289,0,0,0,0,0]],["Поиск по играм и сервисам","VK",[0,0,0,0,337,300,104,165,0,0,0,0]],["Поиск по авторам","VK",[0,0,0,0,929,788,1030,175,0,0,0,0]],["Поиск по своим Видео","VK",[0,0,0,0,2420,2943,5976,0,0,0,0,0]]],"y26_rows":[["Discovery Feature Engineering","Коммунальный",[12,3193,3668,3902,5563,3864,2814,15,2246,0,0,32]],["ML-infra","Коммунальный",[3331,16261,6839,6454,11349,10768,11175,239,0,0,0,1294]],["Discovery – Запас","Без категории",[8750,2279,1213,16020,797,75,229,79,450,0,0,17]],["ЕКП Общие Рекомы","Продукт коммунальный",[77,5188,7360,6703,553,110,982,538,587,477,0,0]],["ЕКП Дзен","Дзен",[6494,15725,4466,7008,9421,0,10389,0,2150,0,0,8]],["Service Host","Коммунальный",[323,243,189,475,164,97,106,80,73,80,80,0]],["Поиск","Коммунальный",[373,2013,614,3436,2262,3617,758,524,396,0,0,0]],["Поиск по MAX","Max",[1713,62,2163,206,4610,4582,3608,38,100,0,0,0]],["Поиск Единое Видео","VK Видео",[10336,392,11160,8289,14935,14344,11658,0,3018,0,0,0]],["Поиск - блендер","Коммунальный",[190,0,249,90,355,428,433,122,0,0,0,0]],["Core-технологии поиска","Коммунальный",[343,10,36,60,116,443,351,0,0,0,0,0]],["Запросные сервисы","Коммунальный",[94,40,432,89,665,503,424,276,200,0,0,0]],["Поиск по социальным связям","Коммунальный",[3279,144,3780,407,4317,4456,4664,150,50,0,0,0]],["Поиск - резерв ресурсов","Коммунальный",[4003,0,2223,12698,429,118,178,2484,950,0,0,0]],["Выдача 2026 · ЕКП Инфра","План выдачи 2026",[2056,2908,2276,3668,368,0,0,1328,0,1328,368,0]],["Выдача 2026 · Поиск Единое Видео","План выдачи 2026",[12000,0,12000,0,0,12000,0,0,0,0,0,0]],["ЕКП","Коммунальный",[0,1936,370,842,361,837,0,0,270,0,0,0]],["Контент-система","Коммунальный",[0,961,2769,4456,2916,2762,28,0,4448,0,0,13]],["Discovery Рекомендации","Без категории",[0,1754,2165,1696,1392,648,404,40,1097,0,0,48]],["ЕКП VK Видео (ProfileStream)","VK Видео",[0,2792,6572,840,2460,9814,80,916,840,0,0,0]],["ЕКП VK Видео","VK Видео",[0,24852,24542,29175,3329,6310,2832,0,766,0,0,138]],["ЕКП VK Музыка - ProfileStream","VK Музыка",[0,583,2108,2422,128,1487,199,148,0,0,0,0]],["ЕКП VK Музыка","VK Музыка",[0,696,715,3953,816,30,22,2651,1705,2910,0,0]],["ЕКП Лента ВКонтакте (ProfileStream)","Лента VK",[0,124,7752,1226,480,7789,7496,83,0,0,0,0]],["ЕКП Лента ВКонтакте","Лента VK",[0,4210,3905,37118,2665,822,1902,32587,2156,35743,374,0]],["ЕКП Дзен ProfileStream","Дзен",[0,612,3371,0,3587,1937,245,0,0,0,0,0]],["ЕКП VK Клипы ProfileStream","VK Клипы",[0,871,8852,0,740,13265,0,0,170,0,0,0]],["ЕКП VK Клипы","VK Клипы",[0,38873,38200,38368,2639,485,1248,640,282,470,846,0]],["ЕКП Реклама Profile Stream","Реклама",[0,893,3813,4,941,1293,30,2567,0,0,0,0]],["ЕКП Реклама","Реклама",[0,27783,573,2482,32610,8201,2031,0,1003,0,29747,0]],["ЕКП Реклама Ecom - ProfileStream","Реклама Ecom",[0,1329,0,0,195,1402,1517,0,0,0,0,0]],["ЕКП Реклама Ecom","Реклама Ecom",[0,8022,1881,1807,18435,11398,9875,0,746,0,14241,0]],["ЕКП Лента Одноклассники Profile Stream","OK",[0,903,1694,712,1596,1042,44,0,0,0,0,0]],["ЕКП Лента Одноклассники","OK",[0,2875,3056,9140,1161,543,0,5582,486,5582,0,0]],["ЕКП Реком Core","Коммунальный",[0,2264,1244,12900,102,0,0,0,9160,0,0,0]],["ЕКП Инфра","Коммунальный",[0,6082,4623,3650,2092,1097,338,576,0,208,208,1]],["Виртуалки","Коммунальный",[0,1200,497,1110,372,1876,0,0,0,0,0,0]],["ЕКП Recom Wizard","Коммунальный",[0,255,227,483,93,196,0,0,443,0,0,0]],["ЕКП Экспериментальные технологии","Коммунальный",[0,12,102,760,0,133,218,0,0,0,0,0]],["Отдел исследований","Коммунальный",[0,256,88,9,0,0,0,0,0,0,0,0]],["ЕКП Рекомендательные технологии","Коммунальный",[0,4,2,92,0,0,0,0,0,0,0,0]],["Поиск по RuStore","Rustore",[0,23,65,0,647,331,344,450,60,0,0,0]],["Поиск по людям","VK",[0,282,282,1133,26,64,0,2000,0,0,0,0]],["Поиск по ОК Видео","OK",[0,50,16,48,1540,1004,1146,225,42,0,0,0]],["Поиск по Дзен Видео","Дзен",[0,6,138,6,2927,1840,1395,2028,10,0,0,0]],["Поиск по товарам","VK",[0,6,6,0,4165,3290,4751,5021,0,0,0,0]],["Поиск по аудио контенту","VK Музыка",[0,296,306,164,12340,10491,4462,9749,236,0,0,0]],["Поиск - Интеграции","Коммунальный",[0,8,0,29,0,20,0,0,0,0,0,0]],["Поиск - S3","Коммунальный",[0,586,258,662,0,365,0,0,0,0,0,0]],["Поиск по постам","Коммунальный",[0,90,126,1048,9019,7838,12441,7962,114,0,0,0]],["Выдача 2026 · Discovery Feature Engineering","План выдачи 2026",[0,2000,1500,400,1500,0,3000,3000,600,0,0,0]],["Выдача 2026 · ЕКП VK Видео без ProfileStream","План выдачи 2026",[0,6200,6200,6200,0,0,0,0,0,0,0,0]],["Выдача 2026 · ЕКП Общие Рекомы без ProfileStream","План выдачи 2026",[0,6667,6667,6667,0,0,0,0,0,0,0,0]],["Выдача 2026 · ЕКП Реклама без Profile Stream","План выдачи 2026",[0,10000,0,0,10000,0,0,0,0,0,10000,0]],["Выдача 2026 · ЕКП Реклама Ecom без ProfileStream","План выдачи 2026",[0,5000,0,0,5000,0,0,0,0,0,5000,0]],["ЕКП Общие Рекомы - ProfileStream","Продукт коммунальный",[0,0,1114,0,972,0,0,0,0,0,0,0]],["Инфраструктура разработки","Коммунальный",[0,0,60,0,494,508,54,54,0,0,0,0]],["ЕКП Поиск","Коммунальный",[0,0,0,581,2293,3276,2056,2044,0,0,0,0]],["Внутренние поисковые сервисы","Коммунальный",[0,0,0,39,272,178,289,0,0,0,0,0]],["Выдача 2026 · ЕКП Лента Одноклассники без ProfileStream","План выдачи 2026",[0,0,0,2100,0,0,0,2100,0,2100,0,0]],["Поиск по играм и сервисам","VK",[0,0,0,0,337,300,104,165,0,0,0,0]],["Поиск по авторам","VK",[0,0,0,0,929,788,1030,175,0,0,0,0]],["Поиск по своим Видео","VK",[0,0,0,0,2420,2943,5976,0,0,0,0,0]],["Выдача 2026 · Поиск по людям","План выдачи 2026",[0,0,0,0,0,4000,0,4000,0,4000,0,0]],["Выдача 2026 · Поиск по Дзен","План выдачи 2026",[0,0,0,0,0,1000,0,1000,0,1000,0,0]],["Выдача 2026 · Поиск по товарам","План выдачи 2026",[0,0,0,0,0,2000,0,2000,0,2000,0,0]]],"capacity2026":{"ICVS · CC":34254,"PHR4 · DC":110326,"PHR1 · HC":222792,"ICVA · IC":111382,"PHR3 · KC":150008,"SDNХ · NC":45496,"MEDV · PC":176635,"PHR2 · RC":173027,"OSTN · SC":1551,"UDOM · UC":165884,"GZNK · ZC":75470,"M100 · EC":39722},"new_power":{"PHR2 · RC":32400,"PHR4 · DC":29300,"ICVA · IC":40000,"GZNK · ZC":30000},"colors":["#6b91ff","#f2ad52","#47caa0","#bf84f3","#ee6f8e","#4bb6d0","#d9904a","#9ebd63","#da78b0","#809be3","#d4b96c","#65bcb3"],"source_current_capacity":1418000};
+const STORAGE='capacity_clean_v11';
+const nf=new Intl.NumberFormat('ru-RU');
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function cloneRows(rows){return rows.map(r=>[r[0],r[1],Array.from(r[2])])}
+const state={nowRows:cloneRows(SOURCE.now_rows),planRows:cloneRows(SOURCE.y26_rows),filters:{category:[],product:[],geo:[],dc:[]},selection:[],theme:localStorage.getItem(STORAGE+'-theme')==='dark'};
+function dcs(){return SOURCE.dcs} function idx(d){return dcs().indexOf(d)}
+function geo(d){if(/^PHR/.test(d))return 'PAHR';if(/^ICV/.test(d))return 'ICVA';if(/^M100|MEDV/.test(d))return 'MSK';if(/^UDOM/.test(d))return 'UDML';return d.split('·')[0].trim()}
+function color(p){const keys=Object.keys(SOURCE.colors||{});return (SOURCE.colors||{})[p]||((SOURCE.colors||{})[keys[0]])||'#5d8eea'}
+function dcTotal(rows,i){return rows.reduce((s,r)=>s+Number(r[2][i]||0),0)}
+function filterValues(k){if(k==='category')return [...new Set(state.planRows.map(r=>r[1]))].sort();if(k==='product')return [...new Set(state.planRows.map(r=>r[0]))].sort();if(k==='geo')return [...new Set(dcs().map(geo))].sort();return dcs()}
+function filterLabel(k){const a=state.filters[k],all=filterValues(k);return a.includes('__NONE__')?'0':(!a.length||a.length===all.length?'Все':a.length+' выбрано')}
+function filteredDcs(){const f=state.filters;return dcs().filter(d=>(!f.dc.length||f.dc.includes(d))&&(!f.geo.length||f.geo.includes(geo(d))));}
+function baseRows(){const f=state.filters;return state.planRows.filter(r=>!f.category.includes('__NONE__')&&!f.product.includes('__NONE__')&&!f.geo.includes('__NONE__')&&!f.dc.includes('__NONE__')&&(!f.category.length||f.category.includes(r[1]))&&(!f.product.length||f.product.includes(r[0])))}
+function rowsForMap(){const r=baseRows();return state.selection.length?r.filter(x=>state.selection.includes(x[0])):r}
+function renderFilters(){const defs=[['category','Категория'],['product','Продукт'],['geo','Все гео'],['dc','ДЦ']];const f=$('#filters');f.innerHTML=defs.map(([k,t])=>`<div class="filter" data-k="${k}"><button>${t}: <b>${filterLabel(k)}</b> ▾</button><div class="menu"><input class="search" placeholder="Поиск"><div class="menu-actions"><button data-all>Все</button><button data-none>Сбросить</button></div><div class="opts"></div></div></div>`).join('')+`<div class="metrics"><div class="metric"><span>Емкость сейчас</span><b>${nf.format(SOURCE.source_current_capacity/1000)}к</b></div><div class="metric free"><span>Свободно сейчас</span><b id="freeNow">—</b></div><div class="metric"><span>Емкость к концу 2026</span><b id="cap26">—</b></div></div>`;f.querySelectorAll('.filter').forEach(box=>{const k=box.dataset.k,vals=filterValues(k),opts=box.querySelector('.opts');opts.innerHTML=vals.map(v=>`<label class="opt"><input type="checkbox" value="${esc(v)}" ${state.filters[k].includes(v)?'checked':''}><span>${esc(v)}</span></label>`).join('');box.querySelector(':scope > button').onclick=e=>{e.stopPropagation();f.querySelectorAll('.filter.open').forEach(x=>x!==box&&x.classList.remove('open'));box.classList.toggle('open')};opts.querySelectorAll('input').forEach(i=>i.onchange=()=>{state.filters[k]=[...opts.querySelectorAll('input:checked')].map(x=>x.value);state.selection=[];renderAll()});box.querySelector('[data-all]').onclick=()=>{state.filters[k]=[];state.selection=[];renderAll()};box.querySelector('[data-none]').onclick=()=>{state.filters[k]=['__NONE__'];state.selection=[];renderAll()};box.querySelector('.search').oninput=e=>{const t=e.target.value.toLowerCase();opts.querySelectorAll('.opt').forEach(o=>o.style.display=o.textContent.toLowerCase().includes(t)?'flex':'none')}})}
+document.addEventListener('click',e=>{if(!e.target.closest('.filter'))$$('.filter.open').forEach(x=>x.classList.remove('open'))});
+function renderQuick(){const ds=filteredDcs(),used=ds.reduce((s,d)=>s+dcTotal(state.nowRows,idx(d)),0),cap26=ds.reduce((s,d)=>s+(SOURCE.capacity2026[d]||0),0),plan=ds.reduce((s,d)=>s+dcTotal(baseRows(),idx(d)),0);$('#freeNow').textContent=nf.format(Math.max(0,SOURCE.source_current_capacity-used))+' vCPU';$('#cap26').textContent=nf.format(cap26/1000)+'к';$('#quick').innerHTML=`<div class="quick-card"><span>Сейчас</span><b>${nf.format(used)}</b><small>vCPU</small></div><div class="quick-card"><span>План 2026</span><b>${nf.format(plan)}</b><small>vCPU</small></div><div class="quick-card"><span>Прирост / мощность</span><b>${nf.format(Math.max(0,plan-used))} / +${nf.format(ds.reduce((s,d)=>s+(SOURCE.new_power[d]||0),0))}</b><small>разница по выбранным ДЦ</small></div>`}
+function renderMap(){const ds=filteredDcs(),rows=rowsForMap(),totals=ds.map(d=>dcTotal(rows,idx(d))),max=Math.max(1,...totals),groups={};ds.forEach(d=>(groups[geo(d)]??=[]).push(d));$('#map').innerHTML=Object.entries(groups).map(([g,arr])=>`<div class="geo-group"><span class="geo-label">${esc(g)}</span>${arr.map(d=>{const i=idx(d),tot=dcTotal(rows,i),cap=SOURCE.capacity2026[d]||0;return `<div class="dc"><div class="dc-head"><b>${esc(d)}</b><span>${nf.format(tot)}</span></div><div class="vessel" data-dc="${esc(d)}">${rows.filter(r=>Number(r[2][i]||0)>0).map(r=>`<div class="seg" draggable="true" data-p="${esc(r[0])}" data-from="${esc(d)}" style="height:${Number(r[2][i]||0)/max*100}%;background:${color(r[0])}" title="${esc(r[0])} · ${nf.format(r[2][i])} vCPU"></div>`).join('')}</div><div class="dc-bar"><i style="width:${cap?Math.min(100,tot/cap*100):0}%;background:${cap&&tot>cap?'var(--bad)':'var(--accent)'}"></i></div><div class="dc-foot">${cap?Math.round(tot/cap*100)+'% · свободно '+nf.format(Math.max(0,cap-tot))+' vCPU':'—'}</div></div>`}).join('')}</div>`).join('');bindMap();renderLegend()}
+function bindMap(){let drag=null;$$('#map .seg').forEach(s=>{s.ondblclick=()=>openTransfer(s.dataset.p,s.dataset.from,null);s.ondragstart=e=>{drag={p:s.dataset.p,from:s.dataset.from};e.dataTransfer.setData('text/plain',s.dataset.p)};s.ondragend=()=>drag=null});$$('#map .vessel').forEach(v=>{v.ondragover=e=>{e.preventDefault();v.classList.add('drop')};v.ondragleave=()=>v.classList.remove('drop');v.ondrop=e=>{e.preventDefault();v.classList.remove('drop');if(drag&&drag.from!==v.dataset.dc)openTransfer(drag.p,drag.from,v.dataset.dc)}})}
+function renderLegend(){const ps=[...new Set(baseRows().map(r=>r[0]))].sort();$('#legend').innerHTML=`<span class="legend-title">Легенда / мультивыбор:</span><span class="legend-pill ${state.selection.length?'':'selected'}" id="legendAll">Все</span>`+ps.map(p=>`<span class="legend-pill ${state.selection.includes(p)?'selected':''}" data-leg="${esc(p)}"><i class="legend-dot" style="background:${color(p)}"></i>${esc(p)}</span>`).join('');$('#legendAll').onclick=()=>{state.selection=[];renderAll()};$$('#legend [data-leg]').forEach(b=>b.onclick=()=>{const p=b.dataset.leg;if(state.selection.includes(p))state.selection=state.selection.filter(x=>x!==p);else state.selection.push(p);renderAll()})}
+function renderTable(){const ds=filteredDcs(),rows=baseRows(),max=Math.max(1,...rows.flatMap(r=>ds.map(d=>Number(r[2][idx(d)]||0))));$('#prodHead').innerHTML='<tr><th>☑</th><th>Продукт</th><th>Категория</th>'+ds.map(d=>`<th class="num">${esc(d)}</th>`).join('')+'<th class="num">Всего</th></tr>';$('#prodBody').innerHTML=rows.map(r=>{const active=state.selection.includes(r[0]),total=ds.reduce((s,d)=>s+Number(r[2][idx(d)]||0),0);return `<tr class="${active?'selected':''}" data-p="${esc(r[0])}"><td><input type="checkbox" data-pick="${esc(r[0])}" ${active?'checked':''}></td><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td>${ds.map(d=>{const v=Number(r[2][idx(d)]||0),p=v/max;return `<td class="num"><span class="heat" style="background:${p>=.75?'rgba(200,61,73,.15)':p>=.4?'rgba(197,138,43,.15)':'rgba(22,146,103,.12)'};color:${p>=.75?'var(--bad)':p>=.4?'var(--warn)':'var(--good)'}">${nf.format(v)}</span></td>`}).join('')}<td class="num"><b>${nf.format(total)}</b></td></tr>`}).join('');$$('#prodBody [data-pick]').forEach(c=>c.onchange=e=>{e.stopPropagation();toggleSelection(c.dataset.pick,c.checked)});$$('#prodBody tr[data-p]').forEach(tr=>tr.onclick=e=>{if(e.target.matches('input'))return;toggleSelection(tr.dataset.p,!state.selection.includes(tr.dataset.p))})}
+function toggleSelection(p,on){if(on){if(!state.selection.includes(p))state.selection.push(p)}else state.selection=state.selection.filter(x=>x!==p);renderAll()}
+function renderLoad(){const ds=filteredDcs(),rows=baseRows();$('#loadBoard').innerHTML=`<div style="font-weight:700;margin-bottom:10px">Загрузка ДЦ</div><div class="load-grid">${ds.map(d=>{const i=idx(d),cur=dcTotal(state.nowRows,i),plan=dcTotal(rows,i),cap=SOURCE.capacity2026[d]||0,pct=cap?plan/cap*100:0,add=Math.max(0,plan-cur),c=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';return `<div class="load-card"><div class="load-top"><span>${esc(d)}</span><b style="color:${c}">${pct.toFixed(0)}%</b></div><div class="track"><i style="width:${Math.min(100,pct)}%;background:${c}"></i></div><div class="load-meta"><span>сейчас ${nf.format(cur)}</span><span>план ${nf.format(plan)}</span></div><div class="load-meta"><span>свободно ${nf.format(Math.max(0,cap-plan))}</span><span class="add">+${nf.format(add)}</span></div></div>`}).join('')}</div>`}
+function generalRows(){return dcs().map((d,i)=>{const cur=dcTotal(state.nowRows,i),plan=dcTotal(state.planRows,i),add=Math.max(0,plan-cur),power=SOURCE.new_power[d]||0,cap=SOURCE.capacity2026[d]||0;return{d,cur,plan,add,power,diff:power-add,cap,free:cap-plan}})}
+function renderGeneral(){const rs=generalRows(),sum=k=>rs.reduce((s,r)=>s+r[k],0),max=Math.max(1,...rs.map(r=>Math.max(r.cur,r.add,r.power)));$('#generalSummary').innerHTML=`<div class="gcard"><span>Сейчас</span><b>${nf.format(sum('cur'))} vCPU</b></div><div class="gcard"><span>Прирост до конца 2026</span><b>+${nf.format(sum('add'))} vCPU</b></div><div class="gcard"><span>Доп. мощность</span><b>+${nf.format(sum('power'))} vCPU</b></div><div class="gcard"><span>Мощность − прирост</span><b style="color:${sum('power')-sum('add')>=0?'var(--good)':'var(--bad)'}">${sum('power')-sum('add')>=0?'+':''}${nf.format(Math.abs(sum('power')-sum('add')))} vCPU</b></div>`;$('#generalBars').innerHTML=rs.map(r=>`<div class="barcol"><div class="barstack"><div class="barseg now" style="height:${r.cur/max*195}px"></div><div class="barseg add" style="height:${r.add/max*195}px"></div><div class="barseg power" style="height:${r.power/max*195}px"></div>${r.diff<0?'<div class="diffline" style="bottom:8px"></div>':''}</div><div class="barlabel">${esc(r.d)}</div><div class="barlabel" style="color:${r.diff<0?'var(--bad)':'var(--good)'}">${r.diff>=0?'+':''}${nf.format(r.diff)}</div></div>`).join('');$('#generalBody').innerHTML=rs.map(r=>`<tr><td>${esc(r.d)}</td><td>${nf.format(r.cur)}</td><td>${nf.format(r.add)}</td><td>+${nf.format(r.power)}</td><td class="${r.diff<0?'v-bad':'v-good'}">${r.diff>=0?'+':''}${nf.format(r.diff)}</td><td>${nf.format(r.cap)}</td><td class="${r.free<0?'v-bad':r.free<r.cap*.1?'v-warn':'v-good'}">${nf.format(r.free)}</td></tr>`).join('');$('#generalDialog').showModal()}
+function logRead(){return JSON.parse(localStorage.getItem(STORAGE+'-journal')||'[]')}function logWrite(a){localStorage.setItem(STORAGE+'-journal',JSON.stringify(a))}
+function renderJournal(){const a=logRead().slice().reverse();$('#journalBody').innerHTML=a.length?a.map(x=>{const fc=SOURCE.capacity2026[x.from]||0,tc=SOURCE.capacity2026[x.to]||0,f0=x.before.from,t0=x.before.to,f1=x.after.from,t1=x.after.to,fp0=fc?f0/fc*100:null,tp0=tc?t0/tc*100:null,fp1=fc?f1/fc*100:null,tp1=tc?t1/tc*100:null;return `<tr class="${x.undone?'undone':''}"><td>${esc(x.time)}</td><td><b>${esc(x.product)}</b></td><td>${esc(x.from)}<br>до ${nf.format(f0)} · ${fp0==null?'—':fp0.toFixed(1)+'%'}<br><span style="color:var(--bad)">−${nf.format(x.amount)}</span><br>после ${nf.format(f1)} · ${fp1==null?'—':fp1.toFixed(1)+'%'}</td><td>${esc(x.to)}<br>до ${nf.format(t0)} · ${tp0==null?'—':tp0.toFixed(1)+'%'}<br><span style="color:var(--good)">+${nf.format(x.amount)}</span><br>после ${nf.format(t1)} · ${tp1==null?'—':tp1.toFixed(1)+'%'}</td><td><b>${nf.format(x.amount)}</b></td><td><button class="undo" data-id="${esc(x.id)}" ${x.undone?'disabled':''}>${x.undone?'Отменено':'Отменить перенос'}</button></td></tr>`}).join(''):'<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:22px">Переносов пока нет.</td></tr>';
+$$('#journalBody [data-id]').forEach(b=>b.onclick=()=>undoTransfer(b.dataset.id));$('#journalDialog').showModal()}
+function undoTransfer(id){const j=logRead(),x=j.find(z=>z.id===id);if(!x||x.undone)return;const r=state.planRows.find(z=>z[0]===x.product);if(!r)return;const fi=idx(x.from),ti=idx(x.to);if(Number(r[2][ti]||0)<Number(x.amount))return alert('Нельзя отменить: в целевом ДЦ уже недостаточно текущих ядер.');r[2][fi]+=x.amount;r[2][ti]-=x.amount;x.undone=true;x.undoneTime=new Date().toLocaleString('ru-RU');save();logWrite(j);state.selection=[];renderAll();renderJournal()}
+function openTransfer(product,from,to){const r=state.planRows.find(x=>x[0]===product);if(!r)return;$('#transferMeta').textContent=product;$('#fromDc').innerHTML=dcs().map(d=>`<option value="${esc(d)}" ${d===from?'selected':''}>${esc(d)}</option>`).join('');$('#toDc').innerHTML=dcs().map(d=>`<option value="${esc(d)}" ${d===to?'selected':''}>${esc(d)}</option>`).join('');const sync=()=>{const a=r[2][idx($('#fromDc').value)]||0;$('#transferAvailable').textContent=nf.format(a)+' vCPU';$('#transferAmount').max=a};$('#fromDc').onchange=sync;sync();$('#transferAmount').value='';$('#transferErr').textContent='';$('#applyTransfer').onclick=()=>{const f=$('#fromDc').value,t=$('#toDc').value,a=Math.floor(Number($('#transferAmount').value)),fi=idx(f),ti=idx(t),av=r[2][fi]||0;if(f===t||!Number.isFinite(a)||a<1||a>av){$('#transferErr').textContent='Количество должно быть от 1 до '+nf.format(av)+' vCPU, а ДЦ должны различаться.';return}const beforeF=dcTotal(state.planRows,fi),beforeT=dcTotal(state.planRows,ti),beforePF=r[2][fi],beforePT=r[2][ti];r[2][fi]-=a;r[2][ti]+=a;const afterF=dcTotal(state.planRows,fi),afterT=dcTotal(state.planRows,ti);const j=logRead();j.push({id:'m-'+Date.now()+'-'+Math.random().toString(16).slice(2),time:new Date().toLocaleString('ru-RU'),product,from:f,to:t,amount:a,before:{from:beforeF,to:beforeT,productFrom:beforePF,productTo:beforePT},after:{from:afterF,to:afterT,productFrom:r[2][fi],productTo:r[2][ti]}});save();logWrite(j);$('#transferDialog').close();state.selection=[];renderAll()};$('#transferDialog').showModal()}
+function save(){localStorage.setItem(STORAGE+'-plan',JSON.stringify(state.planRows))}function load(){try{const p=JSON.parse(localStorage.getItem(STORAGE+'-plan')||'null');if(Array.isArray(p))state.planRows=p}catch(e){}}
+function renderAll(){renderFilters();renderQuick();renderMap();renderLoad();renderTable()}
+$('#theme').onclick=()=>{state.theme=!state.theme;document.body.classList.toggle('dark',state.theme);localStorage.setItem(STORAGE+'-theme',state.theme?'dark':'light')};if(state.theme)document.body.classList.add('dark');
+$$('[data-close]').forEach(b=>b.onclick=()=>$('#'+b.dataset.close).close());$('#generalBtn').onclick=renderGeneral;$('#journalBtn').onclick=renderJournal;
+$('#addBtn').onclick=()=>{$('#newDcInputs').innerHTML=dcs().map(d=>`<div class="dc-input"><b>${esc(d)}</b><input type="number" min="0" value="0"></div>`).join('');$('#newProduct').value='';$('#newCategory').value='Коммунальный';$('#addErr').textContent='';$('#newTotal').textContent='0';$$('#newDcInputs input').forEach(i=>i.oninput=()=>$('#newTotal').textContent=nf.format($$('#newDcInputs input').reduce((s,x)=>s+Number(x.value||0),0)));$('#addDialog').showModal()};
+$('#saveProduct').onclick=()=>{const p=$('#newProduct').value.trim(),c=$('#newCategory').value.trim()||'Без категории',vals=$$('#newDcInputs input').map(i=>Number(i.value)||0);if(!p||state.planRows.some(r=>r[0]===p)){$('#addErr').textContent='Укажите новое название продукта.';return}if(!vals.some(v=>v>0)){$('#addErr').textContent='Укажите количество vCPU хотя бы в одном ДЦ.';return}state.planRows.push([p,c,vals]);save();$('#addDialog').close();state.selection=[p];renderAll()};
+$('#importBtn').onclick=()=>$('#importDialog').showModal();$('#applyImport').onclick=()=>{const file=$('#csvFile').files[0];if(!file){$('#importErr').textContent='Выберите CSV-файл.';return}const rd=new FileReader();rd.onload=()=>{try{const lines=String(rd.result).trim().split(/\r?\n/).filter(Boolean),sep=lines[0].includes(';')?';':',',head=lines[0].split(sep).map(x=>x.trim()),dcIdx=dcs().map(d=>head.findIndex(h=>h===d));if(dcIdx.some(x=>x<0))throw Error('Не найдены все 12 ДЦ в заголовке CSV.');const rows=lines.slice(1).map(line=>{const a=line.split(sep),p=a[0]?.trim(),c=a[1]?.trim()||'Без категории',vals=dcIdx.map(i=>Number(String(a[i]||0).replace(/\s/g,'').replace(',','.'))||0);return p?[p,c,vals]:null}).filter(Boolean);if(!rows.length)throw Error('В CSV нет строк продуктов.');const merged=new Map();rows.forEach(r=>{const key=r[0]+'\u0000'+r[1];if(!merged.has(key))merged.set(key,[r[0],r[1],r[2].slice()]);else{const x=merged.get(key);x[2]=x[2].map((v,i)=>v+(r[2][i]||0))}});state.planRows=[...merged.values()];save();$('#importDialog').close();state.selection=[];renderAll()}catch(e){$('#importErr').textContent=e.message}};rd.readAsText(file,'utf-8')};
+$('#clearJournal').onclick=()=>{if(confirm('Очистить журнал переносов?')){localStorage.removeItem(STORAGE+'-journal');renderJournal()}};
+load();renderAll();
+</script>
+<script id="v12-controller">
+(function(){
+  const $v=s=>document.querySelector(s), $$v=s=>[...document.querySelectorAll(s)], escv=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])), nfv=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0)), ST='capacity_clean_v11';
+  const powerKey=ST+'-power';
+  const powerDefault=Object.assign({},SOURCE.new_power||{});
+  state.power={...powerDefault};
+  try{const saved=JSON.parse(localStorage.getItem(powerKey)||'null');if(saved&&typeof saved==='object')state.power={...powerDefault,...saved}}catch(e){}
+
+  function currentTotal(i){return dcTotal(state.nowRows,i)}
+  function planTotal(i){return dcTotal(state.planRows,i)}
+  function growth(i){return Math.max(0,planTotal(i)-currentTotal(i))}
+  function power(d){return Math.max(0,Number(state.power[d]||0))}
+  function endCap(d){const i=idx(d);return currentTotal(i)+power(d)}
+  function loadPct(d){const c=endCap(d),p=planTotal(idx(d));return c?p/c*100:0}
+  function geoCount(dlist){return dlist.length}
+  function filterValuesV12(k){
+    if(k==='category') return [...new Set(state.planRows.map(r=>r[1]))].sort();
+    if(k==='product') return [...new Set(state.planRows.map(r=>r[0]))].sort();
+    if(k==='geo') return [...new Set(dcs().map(geo))].sort();
+    return dcs();
+  }
+  function filterLabelV12(k){const chosen=state.filters[k]||[],all=filterValuesV12(k);return chosen.includes('__NONE__')?'0':(!chosen.length||chosen.length===all.length?'Все':chosen.length+' выбрано')}
+  function filteredDcsV12(){const f=state.filters;return dcs().filter(d=>(!f.dc.length||f.dc.includes(d))&&(!f.geo.length||f.geo.includes(geo(d))));}
+  function baseRowsV12(){const f=state.filters;return state.planRows.filter(r=>!f.category.includes('__NONE__')&&!f.product.includes('__NONE__')&&!f.geo.includes('__NONE__')&&!f.dc.includes('__NONE__')&&(!f.category.length||f.category.includes(r[1]))&&(!f.product.length||f.product.includes(r[0])))}
+  function rowsForMapV12(){const r=baseRowsV12();return state.selection.length?r.filter(x=>state.selection.includes(x[0])):r}
+
+  function renderFiltersV12(){
+    const f=$v('#filters');
+    f.innerHTML=[['category','Категория'],['product','Продукт'],['geo','Все гео'],['dc','ДЦ']].map(([k,t])=>`<div class="filter" data-k="${k}"><button type="button">${t}: <b>${filterLabelV12(k)}</b> ▾</button><div class="menu"><input class="search" placeholder="Поиск"><div class="menu-actions"><button type="button" data-all>Все</button><button type="button" data-none>Сбросить</button></div><div class="opts"></div></div></div>`).join('')+
+      `<div class="metrics"><div class="metric"><span>Емкость сейчас</span><b>${nfv(SOURCE.source_current_capacity/1000)}к</b></div><div class="metric free"><span>Свободно сейчас</span><b id="freeNow">—</b></div><div class="metric"><span>Емкость к концу 2026</span><b id="cap26">—</b></div><button class="power-config" type="button" id="powerBtn">Изменить мощности</button></div>`;
+    f.querySelectorAll('.filter').forEach(box=>{
+      const k=box.dataset.k,opts=box.querySelector('.opts');
+      const build=()=>{
+        const vals=filterValuesV12(k),chosen=state.filters[k]||[];
+        opts.innerHTML=vals.map(v=>`<label class="opt"><input type="checkbox" value="${escv(v)}" ${chosen.includes(v)?'checked':''}><span>${escv(v)}</span></label>`).join('');
+        opts.querySelectorAll('input').forEach(inp=>inp.onchange=()=>{
+          state.filters[k]=[...opts.querySelectorAll('input:checked')].map(x=>x.value);
+          box.querySelector('b').textContent=filterLabelV12(k);
+          renderDataV12();
+        });
+      };
+      build();
+      box.querySelector(':scope > button').onclick=e=>{e.stopPropagation();f.querySelectorAll('.filter.open').forEach(x=>x!==box&&x.classList.remove('open'));box.classList.toggle('open')};
+      box.querySelector('[data-all]').onclick=e=>{e.preventDefault();state.filters[k]=[];box.querySelector('b').textContent='Все';build();renderDataV12()};
+      box.querySelector('[data-none]').onclick=e=>{e.preventDefault();state.filters[k]=['__NONE__'];box.querySelector('b').textContent='0';build();renderDataV12()};
+      box.querySelector('.search').oninput=e=>{const t=e.target.value.toLowerCase();opts.querySelectorAll('.opt').forEach(o=>o.style.display=o.textContent.toLowerCase().includes(t)?'flex':'none')};
+    });
+    $v('#powerBtn').onclick=openPowerDialogV12;
+  }
+  document.addEventListener('click',e=>{if(!e.target.closest('#filters'))$$v('#filters .filter.open').forEach(x=>x.classList.remove('open'))},{capture:true});
+
+  function updateQuickV12(){
+    const allUsed=dcs().reduce((s,d)=>s+currentTotal(idx(d)),0);
+    const allEndCap=dcs().reduce((s,d)=>s+endCap(d),0);
+    $v('#freeNow').textContent=nfv(Math.max(0,Number(SOURCE.source_current_capacity||0)-allUsed))+' vCPU';
+    $v('#cap26').textContent=nfv(allEndCap/1000)+'к';
+  }
+  function renderQuickV12(){
+    updateQuickV12();
+    const ds=filteredDcsV12(),rows=baseRowsV12();
+    const usedNow=ds.reduce((s,d)=>s+currentTotal(idx(d)),0);
+    const plan=ds.reduce((s,d)=>s+dcTotal(rows,idx(d)),0);
+    const pwr=ds.reduce((s,d)=>s+power(d),0);
+    $v('#quick').innerHTML=`<div class="quick-card"><span>Сейчас</span><b>${nfv(usedNow)}</b><small>vCPU</small></div><div class="quick-card"><span>План 2026</span><b>${nfv(plan)}</b><small>vCPU</small></div><div class="quick-card"><span>Прирост / мощность</span><b>${nfv(Math.max(0,plan-usedNow))} / +${nfv(pwr)}</b><small>по выбранным ДЦ</small></div>`;
+  }
+
+  function showMapTipV12(seg,e){
+    const p=seg.dataset.p||'',d=seg.dataset.from||'',amount=Number(seg.dataset.n||0),i=idx(d),dcT=dcTotal(rowsForMapV12(),i),share=dcT?amount/dcT*100:0;
+    const cat=(state.planRows.find(r=>r[0]===p)||[])[1]||'';
+    const tip=$v('#v12Tip'); tip.innerHTML=`<b>${escv(p)}</b><span>${escv(cat)}</span><br><span>${nfv(amount)} vCPU · ${share.toFixed(1)}% ДЦ ${escv(d)}</span>`;tip.style.display='block';tip.style.left=Math.min(innerWidth-340,e.clientX+14)+'px';tip.style.top=Math.max(8,e.clientY-8)+'px';
+  }
+
+  function renderMapV12(){
+    const ds=filteredDcsV12(),rows=rowsForMapV12(),totals=ds.map(d=>dcTotal(rows,idx(d))),max=Math.max(1,...totals);const groups={};ds.forEach(d=>(groups[geo(d)]??=[]).push(d));
+    let html='';
+    Object.entries(groups).forEach(([g,arr])=>{
+      html+=`<div class="geo-group" style="grid-column:span ${arr.length};--geo-count:${arr.length}"><span class="geo-label">${escv(g)}</span>`;
+      arr.forEach(d=>{
+        const i=idx(d),tot=dcTotal(rows,i),pct=loadPct(d),cur=currentTotal(i),plan=dcTotal(state.planRows,i),grow=plan-cur,pow=power(d),cap=endCap(d),free=cap-plan;
+        const col=pct>100?'var(--bad)':pct>=80?'var(--warn)':'var(--blue)';
+        const status=pct>100?`Перелимит: −${nfv(Math.abs(free))} vCPU`:free>=0?`Свободно: ${nfv(free)} vCPU`:'Перелимит';
+        const classes=pct>100?'over':pct>=80?'warn':'good';
+        const segs=rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{const active=!state.selection.length||state.selection.includes(r[0]);return `<div class="seg ${active?'selected-seg':'dim'}" draggable="true" data-p="${escv(r[0])}" data-from="${escv(d)}" data-n="${Number(r[2][i]||0)}" style="height:${Number(r[2][i]||0)/max*100}%;background:${color(r[0])}" title="${escv(r[0])} · ${nfv(r[2][i])} vCPU"></div>`}).join('');
+        html+=`<div class="dc"><div class="dc-head"><b title="${escv(d)}">${escv(d)}</b><span>${nfv(tot)}</span></div><div class="vessel" data-dc="${escv(d)}">${segs}</div><div class="dc-load ${classes}"><div class="row"><span>Загрузка ДЦ</span><b style="color:${col}">${pct.toFixed(0)}%</b></div><div class="track"><i style="width:${Math.min(100,pct)}%;background:${col}"></i></div><div class="row numbers"><span>${nfv(cur/1000)}к → ${nfv(plan/1000)}к</span><span>${grow>=0?'+':''}${nfv(grow/1000)}к</span></div><div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${status}</div>${pow?`<div class="newpower" style="color:var(--good)">Новые мощности: +${nfv(pow)} vCPU</div>`:'<div class="newpower" style="color:var(--muted)">Новые мощности: не планируются</div>'}</div></div>`;
+      });
+      html+='</div>';
+    });
+    $v('#map').innerHTML=html;
+    bindMapV12();
+    renderLegendV12();
+  }
+
+  function bindMapV12(){
+    let drag=null;const map=$v('#map'),tip=$v('#v12Tip');
+    map.onpointermove=e=>{const seg=e.target.closest('.seg');if(seg){showMapTipV12(seg,e)}else tip.style.display='none'};
+    map.onpointerleave=()=>tip.style.display='none';
+    map.querySelectorAll('.seg').forEach(s=>{
+      s.ondblclick=()=>openTransfer(s.dataset.p,s.dataset.from,null);
+      s.ondragstart=e=>{drag={p:s.dataset.p,from:s.dataset.from};e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',s.dataset.p)};
+      s.ondragend=()=>drag=null;
+    });
+    map.querySelectorAll('.vessel').forEach(v=>{v.ondragover=e=>{e.preventDefault();v.classList.add('drop')};v.ondragleave=()=>v.classList.remove('drop');v.ondrop=e=>{e.preventDefault();v.classList.remove('drop');if(drag&&drag.from!==v.dataset.dc)openTransfer(drag.p,drag.from,v.dataset.dc)}});
+  }
+
+  function renderLegendV12(){
+    const ps=[...new Set(baseRowsV12().map(r=>r[0]))].sort();
+    $v('#legend').innerHTML=`<span class="legend-title">Легенда / мультивыбор:</span><span class="legend-pill ${state.selection.length?'':'selected'}" id="legendAllV12">Все</span>`+ps.map(p=>`<span class="legend-pill ${state.selection.includes(p)?'selected':''}" data-leg-v12="${escv(p)}"><i class="legend-dot" style="background:${color(p)}"></i>${escv(p)}</span>`).join('');
+    $v('#legendAllV12').onclick=()=>{state.selection=[];renderDataV12()};
+    $$('#legend [data-leg-v12]').forEach(b=>b.onclick=()=>{const p=b.dataset.legV12;if(state.selection.includes(p))state.selection=state.selection.filter(x=>x!==p);else state.selection.push(p);renderDataV12()});
+  }
+
+  function renderLoadV12(){ /* load cards are attached to each glass in renderMapV12 */ }
+
+  function generalRowsV12(){return dcs().map((d,i)=>{const cur=currentTotal(i),plan=planTotal(i),add=Math.max(0,plan-cur),pwr=power(d),cap=cur+pwr,free=cap-plan;return{d,cur,plan,add,power:pwr,diff:pwr-add,cap,free}})}
+  function renderGeneralV12(){
+    const rs=generalRowsV12(),sum=k=>rs.reduce((s,r)=>s+r[k],0),max=Math.max(1,...rs.map(r=>Math.max(r.cur,r.add,r.power)));
+    $v('#generalSummary').innerHTML=`<div class="gcard"><span>Сейчас</span><b>${nfv(sum('cur'))} vCPU</b></div><div class="gcard"><span>Прирост до конца 2026</span><b>+${nfv(sum('add'))} vCPU</b></div><div class="gcard"><span>Доп. мощность</span><b>+${nfv(sum('power'))} vCPU</b></div><div class="gcard"><span>Мощность − прирост</span><b style="color:${sum('power')-sum('add')>=0?'var(--good)':'var(--bad)'}">${sum('power')-sum('add')>=0?'+':'−'}${nfv(Math.abs(sum('power')-sum('add')))} vCPU</b></div>`;
+    $v('#generalBars').innerHTML=rs.map(r=>`<div class="barcol"><div class="barstack"><div class="barseg now" style="height:${r.cur/max*195}px"></div><div class="barseg add" style="height:${r.add/max*195}px"></div><div class="barseg power" style="height:${r.power/max*195}px"></div>${r.diff<0?'<div class="diffline" style="bottom:8px"></div>':''}</div><div class="barlabel">${escv(r.d)}</div><div class="barlabel" style="color:${r.diff<0?'var(--bad)':'var(--good)'}">${r.diff>=0?'+':''}${nfv(r.diff)}</div></div>`).join('');
+    $v('#generalBody').innerHTML=rs.map(r=>`<tr><td>${escv(r.d)}</td><td>${nfv(r.cur)}</td><td>${nfv(r.add)}</td><td>+${nfv(r.power)}</td><td class="${r.diff<0?'v-bad':'v-good'}">${r.diff>=0?'+':''}${nfv(r.diff)}</td><td>${nfv(r.cap)}</td><td class="${r.free<0?'v-bad':r.free<r.cap*.1?'v-warn':'v-good'}">${r.free<0?'−':''}${nfv(Math.abs(r.free))}</td></tr>`).join('');
+    $v('#generalDialog').showModal();
+  }
+
+  function renderTableV12(){
+    const ds=filteredDcsV12(),rows=baseRowsV12(),max=Math.max(1,...rows.flatMap(r=>ds.map(d=>Number(r[2][idx(d)]||0))));
+    $v('#prodHead').innerHTML='<tr><th>☑</th><th>Продукт</th><th>Категория</th>'+ds.map(d=>`<th class="num">${escv(d)}</th>`).join('')+'<th class="num">Всего</th></tr>';
+    $v('#prodBody').innerHTML=rows.map(r=>{const active=state.selection.includes(r[0]),total=ds.reduce((s,d)=>s+Number(r[2][idx(d)]||0),0);return `<tr class="${active?'selected':''}" data-p="${escv(r[0])}"><td><input type="checkbox" data-pick="${escv(r[0])}" ${active?'checked':''}></td><td><b>${escv(r[0])}</b></td><td>${escv(r[1])}</td>${ds.map(d=>{const v=Number(r[2][idx(d)]||0),p=v/max;return `<td class="num"><span class="heat" style="background:${p>=.75?'rgba(200,61,73,.15)':p>=.4?'rgba(197,138,43,.15)':'rgba(22,146,103,.12)'};color:${p>=.75?'var(--bad)':p>=.4?'var(--warn)':'var(--good)'}">${nfv(v)}</span></td>`}).join('')}<td class="num"><b>${nfv(total)}</b></td></tr>`}).join('');
+    $v('#prodBody').querySelectorAll('[data-pick]').forEach(c=>c.onchange=e=>{e.stopPropagation();toggleSelectionV12(c.dataset.pick,c.checked)});
+    $v('#prodBody').querySelectorAll('tr[data-p]').forEach(tr=>tr.onclick=e=>{if(e.target.matches('input'))return;toggleSelectionV12(tr.dataset.p,!state.selection.includes(tr.dataset.p))});
+  }
+  function toggleSelectionV12(p,on){if(on){if(!state.selection.includes(p))state.selection.push(p)}else state.selection=state.selection.filter(x=>x!==p);renderDataV12()}
+
+  function renderDataV12(){renderQuickV12();renderMapV12();renderTableV12();}
+  function renderAllV12(){renderFiltersV12();renderDataV12();}
+  renderAll=renderAllV12; renderFilters=renderFiltersV12; renderMap=renderMapV12; renderGeneral=renderGeneralV12;
+
+  /* Update power persistence */
+  function saveV12(){localStorage.setItem(ST+'-plan',JSON.stringify(state.planRows));localStorage.setItem(powerKey,JSON.stringify(state.power))}
+  save=saveV12;
+  function loadV12(){try{const p=JSON.parse(localStorage.getItem(ST+'-plan')||'null');if(Array.isArray(p))state.planRows=p}catch(e){}try{const p=JSON.parse(localStorage.getItem(powerKey)||'null');if(p&&typeof p==='object')state.power={...powerDefault,...p}}catch(e){}}
+  loadV12();
+
+  /* Power editor */
+  function openPowerDialogV12(){
+    const g=$v('#powerGrid');g.innerHTML=dcs().map(d=>`<div class="power-item"><label>${escv(d)}</label><input type="number" min="0" step="1" value="${power(d)}" data-power-dc="${escv(d)}"></div>`).join('');
+    const update=()=>{const total=[...g.querySelectorAll('input')].reduce((s,i)=>s+Math.max(0,Number(i.value)||0),0);$v('#powerTotalNote').textContent='Всего дополнительной мощности: +'+nfv(total)+' vCPU';};
+    g.querySelectorAll('input').forEach(i=>i.oninput=update);update();$v('#powerDialog').showModal();
+  }
+  $v('#savePower').onclick=()=>{
+    $v('#powerGrid').querySelectorAll('input[data-power-dc]').forEach(i=>state.power[i.dataset.powerDc]=Math.max(0,Math.floor(Number(i.value)||0)));
+    saveV12();$v('#powerDialog').close();renderDataV12();
+  };
+  // Separate import for free capacity; values are stored by DC and never inferred from plan.
+  window.__freeNowByDc=window.__freeNowByDc||{};
+  $v('#freeImportBtn').onclick=()=>{$v('#freeImportDialog').showModal()};
+  $v('#applyFreeImport').onclick=()=>{
+    const file=$v('#freeCsvFile').files[0]; if(!file){$v('#freeImportErr').textContent='Выберите CSV-файл.';return;}
+    const rd=new FileReader(); rd.onload=()=>{try{
+      const lines=String(rd.result).trim().split(/\r?\n/).filter(Boolean); if(lines.length<2) throw Error('В CSV нет строк данных.');
+      const sep=lines[0].includes(';')?';':','; const head=lines[0].split(sep).map(x=>x.trim().replace(/^\"|\"$/g,''));
+      const dcI=head.findIndex(h=>/^дц$/i.test(h)||/^dc$/i.test(h));
+      const valI=head.findIndex(h=>/свобод/i.test(h)||/free/i.test(h));
+      if(dcI<0||valI<0) throw Error('Нужны колонки: ДЦ и Свободно сейчас.');
+      const out={};
+      for(const line of lines.slice(1)){const a=line.split(sep); const dc=(a[dcI]||'').trim().replace(/^\"|\"$/g,''); const val=Number(String(a[valI]||'0').replace(/\s/g,'').replace(',','.')); if(dc) out[dc]=Number.isFinite(val)?Math.max(0,val):0;}
+      const missing=dcs4().filter(d=>!(d in out)); if(missing.length) throw Error('Не найдены ДЦ: '+missing.join(', '));
+      window.__freeNowByDc=out; localStorage.setItem('capacity_v14_free_now',JSON.stringify(out)); $v('#freeImportErr').textContent=''; $v('#freeImportDialog').close(); renderAll();
+    }catch(e){$v('#freeImportErr').textContent=e.message}}; rd.readAsText(file,'utf-8');
+  };
+  try{const fr=JSON.parse(localStorage.getItem('capacity_v14_free_now')||'null');if(fr&&typeof fr==='object')window.__freeNowByDc=fr}catch(e){}
+
+  /* Replace existing render handlers with V12-safe versions */
+  $v('#generalBtn').onclick=renderGeneralV12;
+  $v('#theme').onclick=()=>{state.theme=!state.theme;document.body.classList.toggle('dark',state.theme);localStorage.setItem(ST+'-theme',state.theme?'dark':'light')};
+  if(state.theme)document.body.classList.add('dark');
+
+  $v('#addBtn').onclick=()=>{$v('#newDcInputs').innerHTML=dcs().map(d=>`<div class="dc-input"><b>${escv(d)}</b><input type="number" min="0" value="0"></div>`).join('');$v('#newProduct').value='';$v('#newCategory').value='Коммунальный';$v('#addErr').textContent='';$v('#newTotal').textContent='0';$$v('#newDcInputs input').forEach(i=>i.oninput=()=>$v('#newTotal').textContent=nfv($$v('#newDcInputs input').reduce((s,x)=>s+Number(x.value||0),0)));$v('#addDialog').showModal()};
+  $v('#saveProduct').onclick=()=>{const p=$v('#newProduct').value.trim(),c=$v('#newCategory').value.trim()||'Без категории',vals=$$v('#newDcInputs input').map(i=>Number(i.value)||0);if(!p||state.planRows.some(r=>r[0]===p)){$v('#addErr').textContent='Укажите новое название продукта.';return}if(!vals.some(v=>v>0)){$v('#addErr').textContent='Укажите количество vCPU хотя бы в одном ДЦ.';return}state.planRows.push([p,c,vals]);saveV12();$v('#addDialog').close();state.selection=[p];renderAllV12()};
+  $v('#applyTransfer').onclick=$v('#applyTransfer').onclick; /* keep existing modal logic; it invokes renderAll dynamically */
+
+  /* Plan note uses live new-power values */
+  const note=document.querySelector('.plan-note');if(note){note.innerHTML='<b>План до конца 2026</b><span class="line">серый фон — ёмкость ДЦ на 31/12/2026;</span><span class="line">оранжевый фон — плановая нагрузка;</span><span class="line">зелёный — свободные vCPU;</span><span class="line"><b>Новые мощности:</b> <span id="powerNoteLive"></span></span>'}
+  function renderPowerNote(){const arr=dcs().filter(d=>power(d)>0).map(d=>`${escv(d.split(' · ')[0])} + ${nfv(power(d))}`).join('; ');const el=$v('#powerNoteLive');if(el)el.innerHTML=arr||'не планируются'}
+  const oldRenderData=renderDataV12;
+  renderDataV12=function(){renderQuickV12();renderMapV12();renderTableV12();renderPowerNote()};
+
+  /* Close dialog after save power should keep focus clean */
+  $$v('[data-close]').forEach(b=>{b.onclick=()=>{const id=b.dataset.close;$v('#'+id)?.close()}});
+
+  /* Initial render */
+  renderAllV12();
+})();
+</script>
+
+<style id="v14-style">
+/* ===== V14 final data / visual layer ===== */
+:root{
+  --v14-red:#d63c4e;
+  --v14-orange:#dd9a35;
+  --v14-green:#228b63;
+  --v14-blue:#4f82dc;
+}
+.products-palette-note{font-size:11px;color:var(--muted);margin-left:auto}
+.quick{display:grid;grid-template-columns:repeat(6,minmax(145px,1fr));gap:9px}
+@media(max-width:1200px){.quick{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.quick{grid-template-columns:repeat(2,1fr)}}
+.quick-card{min-height:74px}
+.power-config-inline{
+  align-self:stretch;display:inline-flex;align-items:center;justify-content:center;
+  padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);
+  color:var(--text);cursor:pointer;font-weight:650
+}
+.v14-note{font-size:11px;color:var(--muted);margin-top:8px}
+.v14-clarify{font-size:11px;color:var(--v14-orange);margin-top:8px}
+.general-table tfoot td{font-weight:800;border-top:2px solid var(--line);background:var(--panel2)}
+.general-table .limit-cell{position:relative}
+.general-table .limit-line{
+  display:block;margin-top:5px;height:3px;background:var(--v14-red);border-radius:4px;position:relative
+}
+.general-table .limit-line span{
+  position:absolute;right:0;top:-15px;font-size:9px;color:var(--v14-red);font-weight:750
+}
+.barstack{position:relative!important}
+.barseg{position:relative;z-index:1}
+.v14-red-line{
+  position:absolute;left:0;right:0;height:3px;background:var(--v14-red);
+  z-index:5;border-radius:2px;box-shadow:0 0 0 1px #fff7
+}
+.v14-red-label{
+  position:absolute;right:0;top:-15px;color:var(--v14-red);font-size:9px;font-weight:800;z-index:6
+}
+.v14-total-row td{font-weight:800;background:var(--panel2)}
+.v14-clarify-box{
+  margin-top:10px;padding:9px 11px;border-radius:8px;
+  border:1px solid rgba(221,154,53,.35);background:rgba(221,154,53,.08);
+  color:var(--muted);font-size:11px;line-height:1.45
+}
+.v14-power-summary{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px
+}
+.v14-power-summary .mini{
+  padding:8px;border:1px solid var(--line);border-radius:7px;background:var(--panel2)
+}
+.v14-power-summary .mini span{display:block;color:var(--muted);font-size:10px}
+.v14-power-summary .mini b{display:block;font-size:14px;margin-top:3px}
+@media(max-width:700px){.v14-power-summary{grid-template-columns:1fr}}
+
+.v14-segment-tip{
+  position:fixed;z-index:50000;display:none;pointer-events:none;
+  background:#0a1018;color:#fff;border:1px solid #4d627d;border-radius:8px;
+  padding:9px 11px;font-size:12px;line-height:1.45;box-shadow:0 10px 28px #0006
+}
+.v14-segment-tip b{display:block}.v14-segment-tip span{color:#b9c8d9}
+
+.v14-metric-row{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+</style>
+
+<script id="v14-controller">
+(function(){
+  if(typeof state==='undefined') return;
+  const $v=s=>document.querySelector(s), $$v=s=>[...document.querySelectorAll(s)];
+  const nf4=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0));
+  const esc4=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const V14={
+    currentCapacity:1245373,
+    reserve:52992,
+    order2026:203200,
+    baseEndCapacity:1377073,
+    defaultPower:{
+      'PHR2 · RC':32400,
+      'PHR4 · DC':29300,
+      'ICVA · IC':31174,
+      'GZNK · ZC':30000
+    },
+    powerKey:'capacity_v14_power'
+  };
+
+  /* Product palette: deterministic, distinct, and stable between rerenders. */
+  const palette=[
+    '#4F83D8','#E26D83','#4DB6A5','#C39A45','#8E6BD1','#49A9C7','#D27B4A','#78A85A',
+    '#C65D9A','#5F88C9','#D0A94F','#5DA9A0','#E0705E','#7D71C8','#4A9A77','#B86C51',
+    '#5E9FD5','#C85E72','#6CAE83','#A17ACB','#D09A61','#4F9B9C','#D96A8A','#7593D1'
+  ];
+  const colorMap=new Map();
+  const sourceProducts=[...(SOURCE.now_rows||[]),...(SOURCE.y26_rows||[])].map(r=>r[0]);
+  [...new Set(sourceProducts)].forEach((p,i)=>colorMap.set(p,palette[i%palette.length]));
+  if(typeof color!=='undefined'){
+    try{
+      color=function(p){
+        if(!colorMap.has(p)) colorMap.set(p,palette[colorMap.size%palette.length]);
+        return colorMap.get(p);
+      };
+    }catch(e){}
+  }
+
+  /* Fresh V14 power defaults; editable afterward. */
+  let savedPower=null;
+  try{savedPower=JSON.parse(localStorage.getItem(V14.powerKey)||'null')}catch(e){}
+  if(savedPower && typeof savedPower==='object'){
+    state.power={...V14.defaultPower,...savedPower};
+  }else{
+    state.power={...V14.defaultPower};
+    localStorage.setItem(V14.powerKey,JSON.stringify(state.power));
+  }
+
+  function dcs4(){return dcs()}
+  function idx4(d){return dcs4().indexOf(d)}
+  function totalRows4(rows,i){return (rows||[]).reduce((s,r)=>s+Number(r[2]?.[i]||0),0)}
+  function cur4(i){return totalRows4(state.nowRows,i)}
+  function plan4(i){return totalRows4(state.planRows,i)}
+  function power4(d){return Math.max(0,Math.floor(Number(state.power[d]||0)))}
+  function orderDetail4(i){return Math.max(0,plan4(i)-cur4(i))}
+  function endPowerTotal4(){return dcs4().reduce((s,d)=>s+power4(d),0)}
+  function margin4(){return V14.reserve+endPowerTotal4()-V14.order2026}
+  function geo4(d){return geo(d)}
+
+  /* ---------- Top metrics beside filters ---------- */
+  window.renderFilters = function(){
+    const f=$v('#filters');
+    const defs=[['category','Категория'],['product','Продукт'],['geo','Все гео'],['dc','ДЦ']];
+    f.innerHTML=defs.map(([k,t])=>{
+      const vals=filterValues(k),chosen=state.filters[k]||[];
+      const label=chosen.includes('__NONE__')?'0':(!chosen.length||chosen.length===vals.length?'Все':chosen.length+' выбрано');
+      return `<div class="filter" data-k="${k}">
+        <button type="button">${t}: <b>${label}</b> ▾</button>
+        <div class="menu">
+          <input class="search" placeholder="Поиск">
+          <div class="menu-actions"><button type="button" data-all>Все</button><button type="button" data-none>Сбросить</button></div>
+          <div class="opts"></div>
+        </div>
+      </div>`;
+    }).join('')+`
+      <div class="metrics v14-metric-row">
+        <div class="metric"><span>Емкость сейчас</span><b id="v14CurrentCap">1 245,4к</b></div>
+        <div class="metric"><span>Запас vCPU (Реком + Поиск)</span><b>53,0к</b></div>
+        <div class="metric free"><span>Свободно сейчас</span><b id="freeNow">—</b></div>
+        <div class="metric"><span>Емкость к концу 2026</span><b id="cap26">1 377,1к</b></div>
+        <button class="power-config-inline" id="freeImportBtn" type="button">Загрузить свободные ядра</button><button class="power-config-inline" id="v14PowerBtn" type="button">Изменить мощности</button>
+      </div>`;
+    f.querySelectorAll('.filter').forEach(box=>{
+      const k=box.dataset.k, vals=filterValues(k), opts=box.querySelector('.opts');
+      const build=()=>{
+        const chosen=state.filters[k]||[];
+        opts.innerHTML=vals.map(v=>`<label class="opt"><input type="checkbox" value="${esc4(v)}" ${chosen.includes(v)?'checked':''}><span>${esc4(v)}</span></label>`).join('');
+        opts.querySelectorAll('input').forEach(inp=>inp.onchange=ev=>{
+          ev.stopPropagation();
+          state.filters[k]=[...opts.querySelectorAll('input:checked')].map(x=>x.value);
+          state.selection=[];
+          renderAll();
+        });
+      };
+      build();
+      box.querySelector(':scope > button').onclick=e=>{
+        e.preventDefault();e.stopPropagation();
+        f.querySelectorAll('.filter.open').forEach(x=>{if(x!==box)x.classList.remove('open')});
+        box.classList.toggle('open');
+      };
+      box.querySelector('[data-all]').onclick=e=>{e.preventDefault();e.stopPropagation();state.filters[k]=[];state.selection=[];build();renderAll()};
+      box.querySelector('[data-none]').onclick=e=>{e.preventDefault();e.stopPropagation();state.filters[k]=['__NONE__'];state.selection=[];build();renderAll()};
+      box.querySelector('.search').oninput=e=>{
+        const t=e.target.value.toLowerCase();
+        opts.querySelectorAll('.opt').forEach(o=>o.style.display=o.textContent.toLowerCase().includes(t)?'flex':'none');
+      };
+    });
+    $v('#v14PowerBtn').onclick=openPower4;
+  };
+
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#filters')) $$('#filters .filter.open').forEach(x=>x.classList.remove('open'));
+  },{capture:true});
+
+  /* ---------- Quick summary: keep "free now" intentionally empty ---------- */
+  window.renderQuick = function(){
+    const ds=filteredDcs();
+    const rows=baseRows();
+    const used=ds.reduce((s,d)=>s+cur4(idx4(d)),0);
+    const order=ds.reduce((s,d)=>s+Math.max(0,plan4(idx4(d))-cur4(idx4(d))),0);
+    const pwr=ds.reduce((s,d)=>s+power4(d),0);
+    const selectedCap=ds.length===dcs4().length?V14.currentCapacity:ds.reduce((s,d)=>s+cur4(idx4(d)),0);
+    const freeNow=window.__freeNowByDc||{};
+    const selectedFree=ds.reduce((s,d)=>s+Number(freeNow[d]||0),0);
+    const endCapacity=V14.currentCapacity+endPowerTotal4();
+    $v('#freeNow')?.replaceChildren(document.createTextNode(nf4(selectedFree)+' vCPU'));
+    $v('#cap26')?.replaceChildren(document.createTextNode(nf4(endCapacity/1000)+'к'));
+    $v('#quick').innerHTML=`
+      <div class="quick-card"><span>Сейчас</span><b>${nf4(used)}</b><small>vCPU</small></div>
+      <div class="quick-card"><span>Заказ на 2026</span><b>+${nf4(V14.order2026)}</b><small>всего</small></div>
+      <div class="quick-card"><span>Запас + доп. мощности</span><b>${nf4(V14.reserve+pwr)}</b><small>52 992 + ${nf4(pwr)}</small></div>
+      <div class="quick-card"><span>Свободно сейчас</span><b></b><small>данные ожидаются</small></div>
+      <div class="quick-card"><span>Емкость к концу 2026</span><b>${nf4(endCapacity/1000)}к</b><small>${nf4(V14.currentCapacity/1000)}к + ${nf4(endPowerTotal4()/1000)}к</small></div>
+      <div class="quick-card"><span>Мощность прирост</span><b style="color:${margin4()<0?'var(--bad)':'var(--good)'}">${margin4()>=0?'+':'−'}${nf4(Math.abs(margin4()))}</b><small>запас + доп. мощности − заказ</small></div>`;
+  };
+
+  /* ---------- Allocation Map: stable product colors + exact tooltip ---------- */
+  window.renderMap=function(){
+    const ds=filteredDcs(),rows=rowsForMap();
+    const totals=ds.map(d=>totalRows4(rows,idx4(d)));
+    const max=Math.max(1,...totals);
+    const groups={};ds.forEach(d=>(groups[geo4(d)]??=[]).push(d));
+    let html='';
+    Object.entries(groups).forEach(([g,arr])=>{
+      html+=`<div class="geo-group" style="--geo-count:${arr.length};grid-column:span ${arr.length}">
+        <span class="geo-label">${esc4(g)}</span>`;
+      arr.forEach(d=>{
+        const i=idx4(d),tot=totalRows4(rows,i),cur=cur4(i),plan=plan4(i),pwr=power4(d);
+        const baseCap=cur+pwr;
+        const pct=baseCap?plan/baseCap*100:0;
+        const stateClass=pct>100?'over':pct>80?'warn':'good';
+        const col=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+        const free=baseCap-plan;
+        const grow=plan-cur;
+        const segs=rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{
+          const amount=Number(r[2][i]||0);
+          const active=!state.selection.length||state.selection.includes(r[0]);
+          return `<div class="seg ${active?'selected-seg':'dim'}" draggable="true"
+            data-p="${esc4(r[0])}" data-from="${esc4(d)}" data-n="${amount}"
+            style="height:${amount/max*100}%;background:${color(r[0])}"
+            title="${esc4(r[0])} · ${nf4(amount)} vCPU"></div>`;
+        }).join('');
+        html+=`<div class="dc">
+          <div class="dc-head"><b title="${esc4(d)}">${esc4(d)}</b><span>${nf4(tot)}</span></div>
+          <div class="vessel" data-dc="${esc4(d)}">${segs}</div>
+          <div class="dc-load ${stateClass}">
+            <div class="row"><span>Загрузка ДЦ</span><b style="color:${col}">${pct.toFixed(0)}%</b></div>
+            <div class="track"><i style="width:${Math.min(100,pct)}%;background:${col}"></i></div>
+            <div class="row numbers"><span>${nf4(cur/1000)}к → ${nf4(plan/1000)}к</span><span>${grow>=0?'+':''}${nf4(grow/1000)}к</span></div>
+            <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${free<0?`Перелимит: −${nf4(Math.abs(free))} vCPU`:`Свободно: ${nf4(free)} vCPU`}</div>
+            ${pwr?`<div class="newpower" style="color:var(--good)">Новые мощности: +${nf4(pwr)} vCPU</div>`:`<div class="newpower" style="color:var(--muted)">Новые мощности: не планируются</div>`}
+          </div>
+        </div>`;
+      });
+      html+='</div>';
+    });
+    $v('#map').innerHTML=html;
+    bindMap4();
+    renderLegend();
+  };
+
+  let tip4=$v('#v14SegmentTip');
+  if(!tip4){
+    tip4=document.createElement('div');tip4.id='v14SegmentTip';tip4.className='v14-segment-tip';document.body.appendChild(tip4);
+  }
+  function bindMap4(){
+    const map=$v('#map');
+    let drag=null;
+    map.onpointermove=e=>{
+      const seg=e.target.closest('.seg');
+      if(!seg){tip4.style.display='none';return}
+      const p=seg.dataset.p,d=seg.dataset.from,amount=Number(seg.dataset.n||0),row=state.planRows.find(r=>r[0]===p),cat=row?.[1]||'';
+      const i=idx4(d),dcTotalValue=totalRows4(rowsForMap(),i),share=dcTotalValue?amount/dcTotalValue*100:0;
+      tip4.innerHTML=`<b>${esc4(p)}</b><span>${esc4(cat)}</span><br><span>${nf4(amount)} vCPU · ${share.toFixed(1)}% ДЦ ${esc4(d)}</span>`;
+      tip4.style.display='block';tip4.style.left=Math.min(innerWidth-330,e.clientX+14)+'px';tip4.style.top=Math.max(8,e.clientY-10)+'px';
+    };
+    map.onpointerleave=()=>tip4.style.display='none';
+    map.querySelectorAll('.seg').forEach(s=>{
+      s.ondblclick=()=>openTransfer(s.dataset.p,s.dataset.from,null);
+      s.ondragstart=e=>{drag={p:s.dataset.p,from:s.dataset.from};e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',s.dataset.p)};
+      s.ondragend=()=>{drag=null};
+    });
+    map.querySelectorAll('.vessel').forEach(v=>{
+      v.ondragover=e=>{e.preventDefault();v.classList.add('drop')};
+      v.ondragleave=()=>v.classList.remove('drop');
+      v.ondrop=e=>{e.preventDefault();v.classList.remove('drop');if(drag&&drag.from!==v.dataset.dc)openTransfer(drag.p,drag.from,v.dataset.dc)};
+    });
+  }
+
+  /* ---------- Load cards use editable power ---------- */
+  window.renderLoad=function(){
+    const ds=filteredDcs(),rows=baseRows();
+    $v('#loadBoard').innerHTML=`
+      <div style="font-weight:700;margin-bottom:10px">Загрузка ДЦ</div>
+      <div class="load-grid">${ds.map(d=>{
+        const i=idx4(d),cur=cur4(i),plan=totalRows4(rows,i),pwr=power4(d),cap=cur+pwr,pct=cap?plan/cap*100:0,order=plan-cur;
+        const c=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+        return `<div class="load-card">
+          <div class="load-top"><span>${esc4(d)}</span><b style="color:${c}">${pct.toFixed(0)}%</b></div>
+          <div class="track"><i style="width:${Math.min(100,pct)}%;background:${c}"></i></div>
+          <div class="load-meta"><span>сейчас ${nf4(cur)}</span><span>план ${nf4(plan)}</span></div>
+          <div class="load-meta"><span>свободно ${nf4(Math.max(0,cap-plan))}</span><span class="add">+${nf4(Math.max(0,order))}</span></div>
+          <div class="load-meta"><span>доп. мощность</span><span class="add">+${nf4(pwr)}</span></div>
+        </div>`;
+      }).join('')}</div>`;
+  };
+
+  /* ---------- General Data: red line at current cores, new labels, total row ---------- */
+  window.renderGeneral=function(){
+    const ds=dcs4();
+    const rs=ds.map((d,i)=>({
+      d,cur:cur4(i),plan:plan4(i),order:orderDetail4(i),power:power4(d),
+      diff:power4(d)-orderDetail4(i),endCap:cur4(i)+power4(d),free:cur4(i)+power4(d)-plan4(i)
+    }));
+    const totalCurrent=rs.reduce((s,r)=>s+r.cur,0);
+    const detailOrder=rs.reduce((s,r)=>s+r.order,0);
+    const totalPower=rs.reduce((s,r)=>s+r.power,0)+V14.reserve;
+    const totalDiff=totalPower-V14.order2026;
+    const max=Math.max(1,...rs.map(r=>Math.max(r.cur,r.order,r.power)));
+    $v('#generalSummary').innerHTML=`
+      <div class="gcard"><span>Сейчас</span><b>${nf4(totalCurrent)} vCPU</b></div>
+      <div class="gcard"><span>Заказ на 2026</span><b>+${nf4(V14.order2026)} vCPU</b></div>
+      <div class="gcard"><span>Запасы vCPU + доп. мощности</span><b>+${nf4(totalPower)} vCPU</b><small>52 992 + ${nf4(totalPower-V14.reserve)}</small></div>
+      <div class="gcard"><span>Мощность прирост</span><b style="color:${totalDiff<0?'var(--bad)':'var(--good)'}">${totalDiff>=0?'+':'−'}${nf4(Math.abs(totalDiff))} vCPU</b></div>
+    `;
+    $v('#generalBars').innerHTML=rs.map(r=>{
+      const curH=r.cur/max*195,orderH=r.order/max*195,powerH=r.power/max*195;
+      const lineBottom=Math.max(0,Math.min(194,curH-1));
+      return `<div class="barcol" title="${esc4(r.d)}">
+        <div class="barstack">
+          <div class="barseg now" style="height:${curH}px"></div>
+          <div class="barseg add" style="height:${orderH}px"></div>
+          <div class="barseg power" style="height:${powerH}px"></div>
+          <div class="v14-red-line" style="bottom:${lineBottom}px"></div>
+          <div class="v14-red-label" style="bottom:${Math.max(0,lineBottom+3)}px">${nf4(r.cur)}</div>
+        </div>
+        <div class="barlabel">${esc4(r.d)}</div>
+        <div class="barlabel" style="color:${r.diff<0?'var(--bad)':'var(--good)'}">${r.diff>=0?'+':''}${nf4(r.diff)}</div>
+      </div>`;
+    }).join('');
+
+    const body=rs.map(r=>`<tr>
+      <td>${esc4(r.d)}</td>
+      <td>${nf4(r.cur)}</td>
+      <td>${nf4(r.order)}</td>
+      <td>+${nf4(r.power)}</td>
+      <td class="${r.diff<0?'v-bad':'v-good'}">${r.diff>=0?'+':''}${nf4(r.diff)}</td>
+      <td>${nf4(r.endCap)}</td>
+      <td class="${r.free<0?'v-bad':r.free<r.endCap*.1?'v-warn':'v-good'}">${r.free<0?'−':''}${nf4(Math.abs(r.free))}</td>
+    </tr>`).join('');
+    $v('#generalBody').innerHTML=body+`
+      <tr class="v14-total-row">
+        <td>Итого</td>
+        <td>${nf4(totalCurrent)}</td>
+        <td>${nf4(V14.order2026)}</td>
+        <td>+${nf4(totalPower)}</td>
+        <td class="${totalDiff<0?'v-bad':'v-good'}">${totalDiff>=0?'+':'−'}${nf4(Math.abs(totalDiff))}</td>
+        <td>${nf4(V14.baseEndCapacity)}</td>
+        <td>—</td>
+      </tr>`;
+    let clarify=$v('#v14GeneralClarify');
+    if(!clarify){
+      clarify=document.createElement('div');clarify.id='v14GeneralClarify';clarify.className='v14-clarify-box';
+      $v('#generalDialog .general-table-wrap')?.insertAdjacentElement('afterend',clarify);
+    }
+    const detailGap=V14.order2026-detailOrder;
+    clarify.innerHTML=`<b>Проверка согласованности данных:</b>
+      общий «Заказ на 2026» = ${nf4(V14.order2026)} vCPU, а сумма текущей детализации по плановым строкам = ${nf4(detailOrder)} vCPU.
+      ${detailGap!==0?`Разница ${nf4(Math.abs(detailGap))} vCPU пока не распределена по ДЦ.`:'Данные совпадают.'}`;
+    $v('#generalDialog').showModal();
+  };
+
+  /* ---------- Power editor: corrected defaults + live formulas ---------- */
+  window.openPower4=function(){
+    const g=$v('#powerGrid');
+    g.innerHTML=dcs4().map(d=>`<div class="power-item"><label>${esc4(d)}</label><input type="number" min="0" step="1" value="${power4(d)}" data-power-dc="${esc4(d)}"></div>`).join('');
+    const update=()=>{
+      const p=[...g.querySelectorAll('input')].reduce((s,i)=>s+Math.max(0,Number(i.value)||0),0);
+      const margin=V14.reserve+p-V14.order2026;
+      $v('#powerTotalNote').innerHTML=`Всего доп. мощности: <b>+${nf4(p)} vCPU</b> · запас 52 992 · мощность прирост: <b style="color:${margin<0?'var(--bad)':'var(--good)'}">${margin>=0?'+':'−'}${nf4(Math.abs(margin))}</b>`;
+    };
+    g.querySelectorAll('input').forEach(i=>i.oninput=update);update();$v('#powerDialog').showModal();
+  };
+  $v('#savePower').onclick=()=>{
+    $v('#powerGrid').querySelectorAll('[data-power-dc]').forEach(i=>state.power[i.dataset.powerDc]=Math.max(0,Math.floor(Number(i.value)||0)));
+    localStorage.setItem(V14.powerKey,JSON.stringify(state.power));
+    $v('#powerDialog').close();
+    renderAll();
+  };
+
+  /* ---------- Plan note updated with exact power defaults ---------- */
+  const note=$v('.plan-note');
+  if(note){
+    note.innerHTML=`<b>План до конца 2026</b>
+      <span class="line">серый фон — ёмкость ДЦ на 31/12/2026;</span>
+      <span class="line">оранжевый фон — плановая нагрузка;</span>
+      <span class="line">зелёный — свободные vCPU;</span>
+      <span class="line"><b>Новые мощности:</b> PHR2 + 32 400; PHR4 + 29 300; ICVA + 31 174; GZNK + 30 000 vCPU.</span>`;
+  }
+
+  /* Unified render for V14. */
+  window.renderAll=function(){
+    renderFilters();
+    renderQuick();
+    renderMap();
+    renderLoad();
+    renderTable();
+  };
+
+  /* Button bindings */
+  $v('#generalBtn').onclick=renderGeneral;
+  $v('#v14PowerBtn') && ($v('#v14PowerBtn').onclick=openPower4);
+
+  /* Re-render once now so all corrections are visible immediately. */
+  renderAll();
+})();
+</script>
+
+
+<style id="v23-layout">
+#map.v23-map{
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  grid-auto-rows:auto!important;
+  gap:8px!important;
+  width:100%!important;
+  overflow:visible!important;
+  position:relative!important;
+  align-items:end!important;
+  min-width:0!important;
+}
+.v23-frame{
+  position:relative!important;
+  grid-row:1!important;
+  align-self:stretch!important;
+  border:1px dashed #8090a5!important;
+  border-radius:10px!important;
+  min-width:0!important;
+  pointer-events:none!important;
+  z-index:0!important;
+  margin-top:2px!important;
+  padding-top:22px!important;
+}
+.v23-label{
+  position:absolute!important;
+  top:-9px!important;
+  left:10px!important;
+  background:var(--panel)!important;
+  border:1px dashed #8090a5!important;
+  border-radius:7px!important;
+  padding:2px 8px!important;
+  color:var(--muted)!important;
+  font-size:11px!important;
+  font-weight:750!important;
+  white-space:nowrap!important;
+}
+.v23-dc{
+  grid-row:1!important;
+  min-width:0!important;
+  position:relative!important;
+  z-index:1!important;
+  align-self:end!important;
+}
+.v23-geo-plan{
+  margin-left:6px;color:var(--text);font-weight:750;font-size:10px;
+}
+@media(max-width:900px){
+  #map.v23-map{grid-template-columns:repeat(12,minmax(72px,1fr))!important;min-width:960px!important}
+}
+</style>
+<script id="v23-controller">
+(function(){
+  if(typeof state==='undefined') return;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const nf=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0));
+  window.renderMap=function(){
+    const ds=filteredDcs();
+    const rows=rowsForMap();
+    const totalNow=ds.map(d=>dcTotal(state.nowRows,idx(d)));
+    const totalMap=ds.map(d=>dcTotal(rows,idx(d)));
+    const maxNow=Math.max(1,...totalNow), maxMap=Math.max(1,...totalMap);
+    const groups={}; ds.forEach((d,i)=>{(groups[geo(d)]??=[]).push({d,i})});
+    const map=document.querySelector('#map');
+    map.className='map v23-map';
+    let html='';
+
+    /* Geo frames are grid overlays; DCs are direct children of the same 12-column grid. */
+    let starts=0;
+    Object.entries(groups).forEach(([g,items])=>{
+      const start=ds.indexOf(items[0].d)+1;
+      const span=items.length;
+      const planGeo=items.reduce((s,x)=>s+dcTotal(state.planRows,idx(x.d)),0);
+      html+=`<div class="v23-frame" style="grid-column:${start} / span ${span}">
+        <div class="v23-label">${esc(g)} <span class="v23-geo-plan">${nf(planGeo)} vCPU · план 2026</span></div>
+      </div>`;
+    });
+
+    ds.forEach((d,k)=>{
+      const i=idx(d), current=totalNow[k], visible=totalMap[k];
+      const plan=dcTotal(state.planRows,i), cap=(SOURCE.capacity2026||{})[d]||0;
+      const pct=cap?plan/cap*100:0;
+      const c=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+      const growth=Math.max(0,plan-current);
+      const power=(state.power||{})[d]||0;
+      const free=cap-plan;
+      const h=75+(240*(current/maxNow));
+      const segs=rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{
+        const n=Number(r[2][i]||0);
+        const active=!state.selection.length||state.selection.includes(r[0]);
+        return `<div class="seg ${active?'':'dim'}" draggable="true" data-p="${esc(r[0])}" data-from="${esc(d)}" data-n="${n}" style="height:${n/maxMap*100}%;background:${color(r[0])}" title="${esc(r[0])} · ${nf(n)} vCPU"></div>`;
+      }).join('');
+      html+=`<div class="v23-dc" style="grid-column:${k+1}">
+        <div class="dc-head"><b title="${esc(d)}">${esc(d)}</b><span>${nf(visible)}</span></div>
+        <div class="vessel v18-vessel" data-dc="${esc(d)}" style="height:${h.toFixed(1)}px">${segs}</div>
+        <div class="dc-load ${pct>100?'over':pct>=80?'warn':'good'}">
+          <div class="row"><span>Загрузка ДЦ</span><b style="color:${c}">${pct.toFixed(0)}%</b></div>
+          <div class="track"><i style="width:${Math.min(100,pct)}%;background:${c}"></i></div>
+          <div class="row numbers"><span>${nf(current)} → ${nf(plan)}</span><span>+${nf(growth)}</span></div>
+          <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${free<0?'Перелимит: −'+nf(Math.abs(free))+' vCPU':'Свободно: '+nf(free)+' vCPU'}</div>
+          <div class="newpower" style="color:${power?'var(--good)':'var(--muted)'}">${power?'Новые мощности: +'+nf(power)+' vCPU':'Новые мощности: не планируются'}</div>
+        </div>
+      </div>`;
+    });
+    map.innerHTML=html;
+    if(typeof bindMap==='function') bindMap();
+    if(typeof renderLegend==='function') renderLegend();
+    let tip=document.querySelector('#v22MapTip');
+    if(!tip){tip=document.createElement('div');tip.id='v22MapTip';tip.className='v22-map-tip';document.body.appendChild(tip)}
+    map.onpointermove=e=>{
+      const seg=e.target.closest('.seg');
+      if(!seg){tip.style.display='none';return}
+      const p=seg.dataset.p,d=seg.dataset.from,n=Number(seg.dataset.n||0),r=rows.find(x=>x[0]===p),tot=dcTotal(rows,idx(d));
+      tip.innerHTML=`<b>${esc(p)}</b><span>${esc(r?.[1]||'')}</span><br><span>${nf(n)} vCPU · ${(tot?n/tot*100:0).toFixed(1)}% ДЦ ${esc(d)}</span>`;
+      tip.style.display='block'; tip.style.left=Math.min(innerWidth-320,e.clientX+14)+'px'; tip.style.top=Math.max(8,e.clientY-8)+'px';
+    };
+    map.onpointerleave=()=>tip.style.display='none';
+  };
+  renderMap();
+})();
+</script>
+
+</body></html>
+<style id="v16-style">
+/* V16: variable-height glasses and clarified 2026 growth figures */
+#map{align-items:end!important}
+#map .dc{align-self:end!important;display:flex;flex-direction:column;min-width:0}
+#map .vessel.v16-variable{height:var(--v16-height)!important;min-height:54px!important;transition:height .18s ease}
+#map .dc-load{margin-top:7px}
+</style>
+<script id="v16-controller">
+(function(){
+  if(typeof state==='undefined') return;
+  const $=s=>document.querySelector(s);
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const nf=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0));
+  const dclist=()=>dcs();
+  const ix=d=>dclist().indexOf(d);
+  const rowsNow=()=>state.nowRows;
+  const rowsPlan=()=>state.planRows;
+  const total=(rows,i)=>rows.reduce((s,r)=>s+Number(r[2]?.[i]||0),0);
+  const cur=(i)=>total(rowsNow(),i);
+  const plan=(i)=>total(rowsPlan(),i);
+  const power=(d)=>Math.max(0,Math.floor(Number((state.power||{})[d]||0)));
+
+  /* User-provided 2026 growth values for the General Data section. */
+  const GROWTH_OVERRIDE={
+    'MEDV · PC':32775,
+    'UDOM · UC':38643,
+    'GZNK · ZC':40428
+  };
+  const growth=(d,i)=>Object.prototype.hasOwnProperty.call(GROWTH_OVERRIDE,d)
+    ? GROWTH_OVERRIDE[d]
+    : Math.max(0,plan(i)-cur(i));
+
+  /* 1) Allocation Map: glass height is proportional to current load, while width stays fixed. */
+  window.renderMap=function(){
+    const ds=filteredDcs();
+    const rows=rowsForMap();
+    const totals=ds.map(d=>total(rows,ix(d)));
+    const maxLoad=Math.max(1,...totals);
+    const MIN_H=125, MAX_H=335;
+    const groups={};
+    ds.forEach(d=>(groups[geo(d)]??=[]).push(d));
+
+    $('#map').innerHTML=Object.entries(groups).map(([g,arr])=>`<div class="geo-group">`+
+      `<span class="geo-label">${esc(g)}</span>`+
+      arr.map(d=>{
+        const i=ix(d), t=total(rows,i), h=MIN_H+(MAX_H-MIN_H)*(t/maxLoad);
+        const cap2026=SOURCE.capacity2026[d]||0;
+        const p=cap2026?t/cap2026*100:0;
+        const cls=p>100?'over':p>80?'warn':'good';
+        const col=p>100?'var(--bad)':p>80?'var(--warn)':'var(--accent)';
+        const grow=growth(d,i);
+        const pwr=power(d);
+        const free=cap2026-t;
+        const segs=rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{
+          const n=Number(r[2][i]||0);
+          const selected=!state.selection.length||state.selection.includes(r[0]);
+          return `<div class="seg ${selected?'':'dim'}" draggable="true" data-p="${esc(r[0])}" data-from="${esc(d)}" data-n="${n}" style="height:${n/maxLoad*100}%;background:${color(r[0])}" title="${esc(r[0])} · ${nf(n)} vCPU"></div>`;
+        }).join('');
+        return `<div class="dc">
+          <div class="dc-head"><b title="${esc(d)}">${esc(d)}</b><span>${nf(t)}</span></div>
+          <div class="vessel v16-variable" style="--v16-height:${h.toFixed(1)}px" data-dc="${esc(d)}">${segs}</div>
+          <div class="dc-load ${cls}">
+            <div class="row"><span>Загрузка ДЦ</span><b style="color:${col}">${p.toFixed(0)}%</b></div>
+            <div class="track"><i style="width:${Math.min(100,p)}%;background:${col}"></i></div>
+            <div class="row numbers"><span>${nf(cur(i))} → ${nf(plan(i))}</span><span>${grow>=0?'+':''}${nf(grow)}</span></div>
+            <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${free<0?`Перелимит: −${nf(Math.abs(free))} vCPU`:`Свободно: ${nf(free)} vCPU`}</div>
+            <div class="newpower" style="color:${pwr?'var(--good)':'var(--muted)'}">${pwr?`Новые мощности: +${nf(pwr)} vCPU`:'Новые мощности: не планируются'}</div>
+          </div>
+        </div>`;
+      }).join('')+
+      `</div>`).join('');
+    bindMap();
+    renderLegend();
+  };
+
+  /* 2) General Data: MEDV/UDOM/GZNK growth overrides and total row. */
+  window.renderGeneral=function(){
+    const ds=dclist();
+    const rs=ds.map((d,i)=>({
+      d,cur:cur(i),add:growth(d,i),power:power(d),
+      diff:power(d)-growth(d,i),
+      cap:cur(i)+power(d),
+      free:cur(i)+power(d)-plan(i)
+    }));
+    const sum=k=>rs.reduce((s,r)=>s+r[k],0);
+    const totalCur=sum('cur'), totalAdd=sum('add'), totalPower=sum('power'), totalDiff=sum('diff');
+    const max=Math.max(1,...rs.map(r=>Math.max(r.cur,r.add,r.power)));
+
+    $('#generalSummary').innerHTML=`
+      <div class="gcard"><span>Сейчас</span><b>${nf(totalCur)} vCPU</b></div>
+      <div class="gcard"><span>Заказ на 2026</span><b>+${nf(203200)} vCPU</b></div>
+      <div class="gcard"><span>Запасы vCPU + доп. мощности</span><b>+${nf(52992+totalPower)} vCPU</b><small>52 992 + ${nf(totalPower)}</small></div>
+      <div class="gcard"><span>Мощность прирост</span><b style="color:${totalDiff<0?'var(--bad)':'var(--good)'}">${totalDiff>=0?'+':'−'}${nf(Math.abs(totalDiff))} vCPU</b></div>`;
+
+    $('#generalBars').innerHTML=rs.map(r=>{
+      const curH=r.cur/max*195, addH=r.add/max*195, powerH=r.power/max*195;
+      const limitBottom=Math.max(0,Math.min(194,curH-1));
+      return `<div class="barcol" title="${esc(r.d)}">
+        <div class="barstack">
+          <div class="barseg now" style="height:${curH}px"></div>
+          <div class="barseg add" style="height:${addH}px"></div>
+          <div class="barseg power" style="height:${powerH}px"></div>
+          <div class="v14-red-line" style="bottom:${limitBottom}px"></div>
+          <div class="v14-red-label" style="bottom:${Math.max(0,limitBottom+3)}px">${nf(r.cur)}</div>
+        </div>
+        <div class="barlabel">${esc(r.d)}</div>
+        <div class="barlabel" style="color:${r.diff<0?'var(--bad)':'var(--good)'}">${r.diff>=0?'+':'−'}${nf(Math.abs(r.diff))}</div>
+      </div>`;
+    }).join('');
+
+    $('#generalBody').innerHTML=rs.map(r=>`<tr>
+      <td>${esc(r.d)}</td><td>${nf(r.cur)}</td><td>${nf(r.add)}</td><td>+${nf(r.power)}</td>
+      <td class="${r.diff<0?'v-bad':'v-good'}">${r.diff>=0?'+':'−'}${nf(Math.abs(r.diff))}</td>
+      <td>${nf(r.cap)}</td><td class="${r.free<0?'v-bad':r.free<r.cap*.1?'v-warn':'v-good'}">${r.free<0?'−':''}${nf(Math.abs(r.free))}</td>
+    </tr>`).join('')+
+      `<tr class="v14-total-row"><td>Итого</td><td>${nf(totalCur)}</td><td>${nf(203200)}</td><td>+${nf(totalPower)}</td><td class="${totalDiff<0?'v-bad':'v-good'}">${totalDiff>=0?'+':'−'}${nf(Math.abs(totalDiff))}</td><td>${nf(totalCur+totalPower)}</td><td>—</td></tr>`;
+
+    let clarify=$('#v14GeneralClarify');
+    if(clarify){
+      clarify.innerHTML='<b>Обновлённые значения прироста:</b> MEDV 32 775 · UDOM 38 643 · GZNK 40 428 vCPU.';
+    }
+    $('#generalDialog').showModal();
+  };
+
+  /* 3) Keep the filter-side "Свободно сейчас" explicitly visible as a dash. */
+  const freeNow=$('#freeNow');
+  if(freeNow) freeNow.textContent='—';
+
+  /* 4) Ensure the final renderer uses the new map immediately. */
+  const oldRenderAll=window.renderAll;
+  window.renderAll=function(){
+    renderFilters();
+    renderQuick();
+    window.renderMap();
+    renderLoad();
+    renderTable();
+    const f=$('#freeNow'); if(f) f.textContent='—';
+  };
+  window.renderAll();
+})();
+</script>
+
+<style id="v22-style">
+/* V22: single clean UI patch for geo frames, proportional glasses, import split, and upload dialog */
+#map{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:10px!important;
+  width:100%!important;
+  overflow:visible!important;
+}
+.v22-geo-row{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:6px;
+  padding:24px 4px 8px;
+  border:1px dashed #8090a5;
+  border-radius:10px;
+  width:100%;
+}
+.v22-geo-label{
+  position:absolute;left:10px;top:-9px;padding:2px 8px;
+  background:var(--panel);color:var(--muted);
+  border:1px dashed #8090a5;border-radius:7px;
+  font-size:11px;font-weight:750;z-index:2;
+}
+.v22-geo-total{
+  font-size:10px;color:var(--text);font-weight:750;margin-left:6px;
+}
+.v22-geo-dc{min-width:0}
+.v22-vessel{
+  width:100%;
+  min-height:70px;
+  max-height:315px;
+  display:flex;
+  flex-direction:column-reverse;
+  overflow:hidden;
+  border:1px solid #506076;
+  border-radius:5px 5px 10px 10px;
+  background:#0f151e;
+  transition:height .15s ease;
+}
+.v22-seg{min-height:1px;border-top:1px solid #fff3;cursor:grab}
+.v22-seg:hover{filter:brightness(1.18);outline:1px solid #fff;z-index:3}
+.v22-map-tip{
+  position:fixed;z-index:40000;display:none;pointer-events:none;
+  background:#0a1018;color:#fff;border:1px solid #4d627d;border-radius:8px;
+  padding:9px 11px;font-size:12px;line-height:1.45;box-shadow:0 10px 28px #0006;
+}
+.v22-map-tip b{display:block}
+.v22-map-tip span{color:#b9c8d9}
+#v22ImportDialog{
+  width:min(760px,calc(100% - 28px));max-height:85vh;overflow:auto;
+  border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);
+  padding:18px;
+}
+#v22ImportDialog::backdrop{background:#0008}
+.v22-import-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.v22-upload-card{
+  border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--panel2)
+}
+.v22-upload-card h4{margin:0 0 6px;font-size:14px}
+.v22-upload-card p{margin:0 0 10px;color:var(--muted);font-size:11px;line-height:1.45}
+.v22-upload-card input[type=file]{width:100%}
+.v22-file-status{margin-top:8px;font-size:11px;color:var(--muted);min-height:16px}
+.v22-import-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.v22-import-error{min-height:18px;color:var(--bad);font-size:12px}
+.v22-import-hint{
+  margin-top:12px;padding:10px;border:1px dashed var(--line);
+  border-radius:8px;color:var(--muted);font-size:11px;line-height:1.5
+}
+@media(max-width:1100px){
+  .v22-geo-row{grid-template-columns:repeat(6,minmax(0,1fr))}
+}
+@media(max-width:650px){
+  .v22-geo-row{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .v22-import-grid{grid-template-columns:1fr}
+}
+</style>
+
+<script id="v22-controller">
+(function(){
+  if(typeof state==='undefined') return;
+
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const nf=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0));
+
+  const GROWTH_OVERRIDE = {
+    'MEDV · PC': 32775,
+    'UDOM · UC': 38643,
+    'GZNK · ZC': 40428
+  };
+
+  /* ---------- Import: split into Current and End-2026 ---------- */
+  const oldImport = document.querySelector('#import') || [...document.querySelectorAll('button')].find(b=>/импорт данных/i.test(b.textContent||''));
+  if(oldImport){
+    oldImport.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      openImport();
+    };
+  }
+
+  let importDialog=document.querySelector('#v22ImportDialog');
+  if(!importDialog){
+    importDialog=document.createElement('dialog');
+    importDialog.id='v22ImportDialog';
+    importDialog.innerHTML=`
+      <h3 style="margin:0 0 4px">Импорт данных</h3>
+      <p style="margin:0;color:var(--muted);font-size:12px">Загрузите текущие показатели и плановые показатели на конец 2026 отдельно.</p>
+      <div class="v22-import-grid" style="margin-top:14px">
+        <div class="v22-upload-card">
+          <h4>Сейчас</h4>
+          <p>CSV с текущим распределением ядер по ДЦ и продуктам.</p>
+          <input id="v22CurrentFile" type="file" accept=".csv,text/csv">
+          <div id="v22CurrentStatus" class="v22-file-status">Файл не выбран</div>
+        </div>
+        <div class="v22-upload-card">
+          <h4>Конец 2026</h4>
+          <p>CSV с плановым распределением на конец 2026. Обновляет только план.</p>
+          <input id="v22PlanFile" type="file" accept=".csv,text/csv">
+          <div id="v22PlanStatus" class="v22-file-status">Файл не выбран</div>
+        </div>
+      </div>
+      <div class="v22-import-hint">
+        Формат CSV: <b>Продукт</b>, <b>Категория</b>, затем колонки ДЦ. Разделитель запятая или точка с запятой.
+        Для текущего файла обновляется только текущее состояние. Для файла конца 2026 — только план.
+      </div>
+      <div id="v22ImportError" class="v22-import-error"></div>
+      <div class="v22-import-actions">
+        <button type="button" id="v22ImportCancel">Отмена</button>
+        <button type="button" id="v22ImportApply" class="primary">Импортировать</button>
+      </div>
+    `;
+    document.body.appendChild(importDialog);
+  }
+
+  function detectDelimiter(text){
+    const first=text.split(/\r?\n/).find(x=>x.trim())||'';
+    const commas=(first.match(/,/g)||[]).length;
+    const semis=(first.match(/;/g)||[]).length;
+    return semis>commas?';':',';
+  }
+  function parseCsvV22(text){
+    const delim=detectDelimiter(text);
+    const lines=text.split(/\r?\n/).filter(x=>x.trim().length);
+    if(!lines.length) throw new Error('CSV пустой');
+    const parseLine=line=>{
+      const out=[];let cur='',q=false;
+      for(let i=0;i<line.length;i++){
+        const ch=line[i];
+        if(ch==='"'){
+          if(q && line[i+1]==='"'){cur+='"';i++} else q=!q;
+        } else if(ch===delim && !q){out.push(cur.trim());cur=''}
+        else cur+=ch;
+      }
+      out.push(cur.trim()); return out;
+    };
+    const headers=parseLine(lines[0]).map(x=>x.replace(/^\uFEFF/,''));
+    const productIdx=headers.findIndex(h=>/^(продукт|product|наименование)$/i.test(h));
+    const categoryIdx=headers.findIndex(h=>/^(категория|category)$/i.test(h));
+    if(productIdx<0) throw new Error('Не найдена колонка «Продукт»');
+    const dcHeaders=headers.map((h,i)=>({h,i})).filter(x=>x.h && x.h!=='Продукт' && x.h!=='Категория' && !/емкость|capacity/i.test(x.h));
+    const rows=[];
+    for(let li=1;li<lines.length;li++){
+      const cells=parseLine(lines[li]); if(!cells.length) continue;
+      const product=cells[productIdx]||''; if(!product) continue;
+      const category=categoryIdx>=0?cells[categoryIdx]||'Без категории':'Без категории';
+      const vals=dcHeaders.map(x=>{
+        const raw=(cells[x.i]||'').replace(/\s/g,'').replace(',','.');
+        const n=parseFloat(raw); return Number.isFinite(n)?n:0;
+      });
+      rows.push([product,category,vals]);
+    }
+    return {dcs:dcHeaders.map(x=>x.h),rows};
+  }
+
+  function applyDataset(parsed,target){
+    const allowed=dcs();
+    const map=new Map(parsed.dcs.map((d,i)=>[d,i]));
+    const rows=parsed.rows.map(r=>{
+      const vals=allowed.map(d=>{
+        const j=map.get(d); return j==null?0:Number(r[2][j]||0);
+      });
+      return [r[0],r[1],vals];
+    });
+    if(target==='now') state.nowRows=rows;
+    else state.planRows=rows;
+    try{localStorage.setItem('capacity-v22-'+target,JSON.stringify({dcs:allowed,rows}))}catch(e){}
+  }
+
+  function openImport(){
+    const cur=document.querySelector('#v22CurrentFile'), plan=document.querySelector('#v22PlanFile');
+    const cs=document.querySelector('#v22CurrentStatus'), ps=document.querySelector('#v22PlanStatus');
+    const err=document.querySelector('#v22ImportError');
+    cur.value=''; plan.value=''; cs.textContent='Файл не выбран'; ps.textContent='Файл не выбран'; err.textContent='';
+    const close=()=>{try{importDialog.close()}catch(e){importDialog.removeAttribute('open')}};
+    cur.onchange=()=>{cs.textContent=cur.files[0]?cur.files[0].name:'Файл не выбран'};
+    plan.onchange=()=>{ps.textContent=plan.files[0]?plan.files[0].name:'Файл не выбран'};
+    document.querySelector('#v22ImportCancel').onclick=close;
+    document.querySelector('#v22ImportApply').onclick=async()=>{
+      err.textContent='';
+      try{
+        if(cur.files[0]){
+          applyDataset(parseCsvV22(await cur.files[0].text()),'now');
+        }
+        if(plan.files[0]){
+          applyDataset(parseCsvV22(await plan.files[0].text()),'plan');
+        }
+        renderAll();
+        close();
+      }catch(e){
+        err.textContent=e.message||'Ошибка импорта';
+      }
+    };
+    try{importDialog.showModal()}catch(e){importDialog.setAttribute('open','')}
+  }
+
+  /* ---------- Allocation map: 12 DCs full width, but grouped by geo with dashed frames ---------- */
+  window.renderMap=function(){
+    const ds=filteredDcs();
+    const rows=rowsForMap();
+    const currentTotals=ds.map(d=>dcTotal(state.nowRows,idx(d)));
+    const mapTotals=ds.map(d=>dcTotal(rows,idx(d)));
+    const maxCurrent=Math.max(1,...currentTotals);
+    const maxVisible=Math.max(1,...mapTotals);
+
+    const groups={};
+    ds.forEach((d,k)=>{
+      (groups[geo(d)]??=[]).push({d,k});
+    });
+
+    let html='';
+    for(const [g,items] of Object.entries(groups)){
+      const geoTotal=items.reduce((s,x)=>s+currentTotals[x.k],0);
+      html+=`<div class="v22-geo-row" style="grid-template-columns:repeat(${items.length},minmax(0,1fr))">
+        <div class="v22-geo-label">${esc(g)} <span class="v22-geo-total">${nf(geoTotal)} vCPU</span></div>`;
+      for(const {d,k} of items){
+        const i=idx(d), current=currentTotals[k], plan=dcTotal(state.planRows,i), cap=(SOURCE.capacity2026||{})[d]||0;
+        const pct=cap?plan/cap*100:0;
+        const loadColor=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+        const h=75+(240*(current/maxCurrent));
+        const pwr=(state.power||{})[d]||0;
+        const free=cap-plan;
+        const growth=Object.prototype.hasOwnProperty.call(GROWTH_OVERRIDE,d)?GROWTH_OVERRIDE[d]:Math.max(0,plan-current);
+        html+=`<div class="v22-geo-dc">
+          <div class="dc-head"><b title="${esc(d)}">${esc(d)}</b><span>${nf(mapTotals[k])}</span></div>
+          <div class="v22-vessel" data-dc="${esc(d)}" style="height:${h.toFixed(1)}px">
+            ${rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{
+              const amount=Number(r[2][i]||0);
+              const active=!state.selection.length||state.selection.includes(r[0]);
+              return `<div class="v22-seg ${active?'':'dim'}" draggable="true"
+                data-p="${esc(r[0])}" data-from="${esc(d)}" data-n="${amount}"
+                style="height:${amount/maxVisible*100}%;background:${color(r[0])}"></div>`;
+            }).join('')}
+          </div>
+          <div class="dc-load ${pct>100?'over':pct>=80?'warn':'good'}">
+            <div class="row"><span>Загрузка ДЦ</span><b style="color:${loadColor}">${pct.toFixed(0)}%</b></div>
+            <div class="track"><i style="width:${Math.min(100,pct)}%;background:${loadColor}"></i></div>
+            <div class="row numbers"><span>${nf(current)} → ${nf(plan)}</span><span>+${nf(growth)}</span></div>
+            <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${free<0?'Перелимит: −'+nf(Math.abs(free))+' vCPU':'Свободно: '+nf(free)+' vCPU'}</div>
+            <div class="newpower" style="color:${pwr?'var(--good)':'var(--muted)'}">${pwr?'Новые мощности: +'+nf(pwr)+' vCPU':'Новые мощности: не планируются'}</div>
+          </div>
+        </div>`;
+      }
+      html+=`</div>`;
+    }
+    document.querySelector('#map').innerHTML=html;
+    if(typeof bindMap==='function') bindMap();
+    if(typeof renderLegend==='function') renderLegend();
+
+    let tip=document.querySelector('#v22MapTip');
+    if(!tip){tip=document.createElement('div');tip.id='v22MapTip';tip.className='v22-map-tip';document.body.appendChild(tip)}
+    const map=document.querySelector('#map');
+    map.onpointermove=e=>{
+      const seg=e.target.closest('.v22-seg');
+      if(!seg){tip.style.display='none';return}
+      const product=seg.dataset.p, dcName=seg.dataset.from, amount=Number(seg.dataset.n||0);
+      const r=rows.find(x=>x[0]===product), cat=r?.[1]||'';
+      const total=dcTotal(rows,idx(dcName));
+      tip.innerHTML=`<b>${esc(product)}</b><span>${esc(cat)}</span><br><span>${nf(amount)} vCPU · ${total?((amount/total)*100).toFixed(1):0}% ДЦ ${esc(dcName)}</span>`;
+      tip.style.display='block';tip.style.left=Math.min(innerWidth-320,e.clientX+14)+'px';tip.style.top=Math.max(8,e.clientY-10)+'px';
+    };
+    map.onpointerleave=()=>tip.style.display='none';
+  };
+
+  /* ---------- General data: current as red line; requested growth overrides ---------- */
+  window.renderGeneral=function(){
+    const ds=dcs();
+    const rows=ds.map((d,i)=>{
+      const cur=dcTotal(state.nowRows,i), plan=dcTotal(state.planRows,i);
+      const add=Object.prototype.hasOwnProperty.call(GROWTH_OVERRIDE,d)?GROWTH_OVERRIDE[d]:Math.max(0,plan-cur);
+      const power=Math.max(0,Number((state.power||{})[d]||0));
+      return {d,cur,plan,add,power,diff:power-add,cap:cur+power,free:cur+power-plan};
+    });
+    const totalCur=rows.reduce((s,r)=>s+r.cur,0);
+    const totalAdd=rows.reduce((s,r)=>s+r.add,0);
+    const totalPower=rows.reduce((s,r)=>s+r.power,0);
+    const totalDiff=rows.reduce((s,r)=>s+r.diff,0);
+    const max=Math.max(1,...rows.map(r=>Math.max(r.cur,r.add,r.power)));
+
+    document.querySelector('#generalSummary').innerHTML=`
+      <div class="gcard"><span>Сейчас</span><b>${nf(totalCur)} vCPU</b></div>
+      <div class="gcard"><span>Заказ на 2026</span><b>+203 200 vCPU</b></div>
+      <div class="gcard"><span>Запасы vCPU + доп. мощности</span><b>+${nf(52992+totalPower)} vCPU</b><small>52 992 + ${nf(totalPower)}</small></div>
+      <div class="gcard"><span>Мощность прирост</span><b style="color:${totalDiff<0?'var(--bad)':'var(--good)'}">${totalDiff>=0?'+':'−'}${nf(Math.abs(totalDiff))} vCPU</b></div>`;
+    document.querySelector('#generalBars').innerHTML=rows.map(r=>{
+      const curH=r.cur/max*195, addH=r.add/max*195, powerH=r.power/max*195;
+      return `<div class="barcol" title="${esc(r.d)}">
+        <div class="barstack">
+          <div class="barseg now" style="height:${curH}px"></div>
+          <div class="barseg add" style="height:${addH}px"></div>
+          <div class="barseg power" style="height:${powerH}px"></div>
+          <div class="v14-red-line" style="bottom:${Math.max(0,curH-1)}px"></div>
+          <div class="v14-red-label" style="bottom:${Math.max(3,curH+2)}px">${nf(r.cur)}</div>
+        </div>
+        <div class="barlabel">${esc(r.d)}</div>
+        <div class="barlabel" style="color:${r.diff<0?'var(--bad)':'var(--good)'}">${r.diff>=0?'+':'−'}${nf(Math.abs(r.diff))}</div>
+      </div>`;
+    }).join('');
+    document.querySelector('#generalBody').innerHTML=rows.map(r=>`<tr>
+      <td>${esc(r.d)}</td><td>${nf(r.cur)}</td><td>${nf(r.add)}</td><td>+${nf(r.power)}</td>
+      <td class="${r.diff<0?'v-bad':'v-good'}">${r.diff>=0?'+':'−'}${nf(Math.abs(r.diff))}</td>
+      <td>${nf(r.cap)}</td><td class="${r.free<0?'v-bad':r.free<r.cap*.1?'v-warn':'v-good'}">${r.free<0?'−':''}${nf(Math.abs(r.free))}</td>
+    </tr>`).join('')+
+    `<tr class="v14-total-row"><td>Итого</td><td>${nf(totalCur)}</td><td>${nf(totalAdd)}</td><td>+${nf(totalPower)}</td><td class="${totalDiff<0?'v-bad':'v-good'}">${totalDiff>=0?'+':'−'}${nf(Math.abs(totalDiff))}</td><td>${nf(totalCur+totalPower)}</td><td>—</td></tr>`;
+
+    const clar=document.querySelector('#v14GeneralClarify');
+    if(clar) clar.innerHTML='<b>Прирост:</b> MEDV 32 775 · UDOM 38 643 · GZNK 40 428 vCPU.';
+    document.querySelector('#generalDialog').showModal();
+  };
+
+  /* final renderer, preserving V15 look */
+  window.renderAll=function(){
+    renderFilters();
+    renderQuick();
+    renderMap();
+    renderLoad();
+    renderTable();
+    const f=document.querySelector('#freeNow'); if(f) f.textContent='—';
+  };
+
+  renderAll();
+})();
+</script>
+
+<style id="v24-geo-layout">
+/* V24: one global 12-column grid; geo frames span the same columns */
+#map.v24-map{
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  gap:7px!important;
+  align-items:end!important;
+  position:relative!important;
+  overflow:visible!important;
+}
+.v24-group{
+  grid-column:span var(--span)!important;
+  display:grid!important;
+  grid-template-columns:repeat(var(--span),minmax(0,1fr))!important;
+  gap:7px!important;
+  position:relative!important;
+  padding:24px 4px 7px!important;
+  border:1px dashed #8090a5!important;
+  border-radius:10px!important;
+  min-width:0!important;
+  align-self:end!important;
+}
+.v24-group-label{
+  position:absolute!important;
+  left:8px;top:-10px;
+  padding:2px 7px;
+  background:var(--panel);
+  border:1px dashed #8090a5;
+  border-radius:6px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:750;
+  white-space:nowrap;
+  z-index:5;
+}
+.v24-group-plan{
+  color:var(--text);
+  font-weight:800;
+  margin-left:6px;
+}
+.v24-dc{
+  min-width:0!important;
+  align-self:end!important;
+}
+.v24-dc .v24-vessel{
+  width:100%;
+  display:flex;
+  flex-direction:column-reverse;
+  overflow:hidden;
+  border:1px solid #506076;
+  border-radius:5px 5px 10px 10px;
+  background:#0f151e;
+  min-height:70px;
+  max-height:320px;
+}
+.v24-seg{
+  min-height:1px;
+  border-top:1px solid #ffffff22;
+  cursor:grab;
+}
+.v24-seg:hover{
+  filter:brightness(1.2);
+  outline:1px solid white;
+  z-index:3;
+}
+@media(max-width:900px){
+  #map.v24-map{
+    min-width:980px!important;
+  }
+}
+</style>
+
+<script id="v24-geo-render">
+(function(){
+  if(typeof state==='undefined') return;
+
+  const esc24=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const nf24=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0));
+
+  /* Requested growth overrides remain unchanged from the agreed version. */
+  const GROWTH24={
+    'MEDV · PC':32775,
+    'UDOM · UC':38643,
+    'GZNK · ZC':40428
+  };
+
+  window.renderMap=function(){
+    const ds=filteredDcs();
+    const rows=rowsForMap();
+
+    /* Current values control glass height. */
+    const currentByDc=ds.map(d=>dcTotal(state.nowRows,idx(d)));
+    const visibleByDc=ds.map(d=>dcTotal(rows,idx(d)));
+    const maxCurrent=Math.max(1,...currentByDc);
+    const maxVisible=Math.max(1,...visibleByDc);
+
+    /* Plan-2026 values control the geo total shown in the dashed header. */
+    const planByDc=ds.map(d=>dcTotal(state.planRows,idx(d)));
+
+    const groups={};
+    ds.forEach((d,k)=>{
+      const g=geo(d);
+      (groups[g]??=[]).push({d,k});
+    });
+
+    let html='';
+    for(const [g,items] of Object.entries(groups)){
+      const geoPlanTotal=items.reduce((s,x)=>s+planByDc[x.k],0);
+
+      html += `<div class="v24-group" style="--span:${items.length}">
+        <div class="v24-group-label">
+          ${esc24(g)}
+          <span class="v24-group-plan">${nf24(geoPlanTotal)} vCPU · план 2026</span>
+        </div>`;
+
+      for(const {d,k} of items){
+        const i=idx(d);
+        const current=currentByDc[k];
+        const visible=visibleByDc[k];
+        const plan=planByDc[k];
+        const cap=(SOURCE.capacity2026||{})[d]||0;
+        const pct=cap?plan/cap*100:0;
+        const colorLoad=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+        const power=Math.max(0,Number((state.power||{})[d]||0));
+        const growth=Object.prototype.hasOwnProperty.call(GROWTH24,d)
+          ? GROWTH24[d]
+          : Math.max(0,plan-current);
+        const free=cap-plan;
+
+        /* Proportional glass height: high current load = tall glass. */
+        const height=78 + 242*(current/maxCurrent);
+
+        const segs=rows
+          .filter(r=>Number(r[2][i]||0)>0)
+          .map(r=>{
+            const amount=Number(r[2][i]||0);
+            const active=!state.selection.length||state.selection.includes(r[0]);
+            return `<div class="v24-seg ${active?'':'dim'}"
+              draggable="true"
+              data-p="${esc24(r[0])}"
+              data-from="${esc24(d)}"
+              data-n="${amount}"
+              style="height:${(amount/maxVisible*100).toFixed(4)}%;background:${color(r[0])}"
+              title="${esc24(r[0])} · ${nf24(amount)} vCPU"></div>`;
+          }).join('');
+
+        html += `<div class="v24-dc">
+          <div class="dc-head">
+            <b title="${esc24(d)}">${esc24(d)}</b>
+            <span>${nf24(visible)}</span>
+          </div>
+          <div class="v24-vessel" data-dc="${esc24(d)}" style="height:${height.toFixed(1)}px">
+            ${segs}
+          </div>
+          <div class="dc-load ${pct>100?'over':pct>=80?'warn':'good'}">
+            <div class="row">
+              <span>Загрузка ДЦ</span>
+              <b style="color:${colorLoad}">${pct.toFixed(0)}%</b>
+            </div>
+            <div class="track">
+              <i style="width:${Math.min(100,pct)}%;background:${colorLoad}"></i>
+            </div>
+            <div class="row numbers">
+              <span>${nf24(current)} → ${nf24(plan)}</span>
+              <span>+${nf24(growth)}</span>
+            </div>
+            <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">
+              ${free<0?'Перелимит: −'+nf24(Math.abs(free))+' vCPU':'Свободно: '+nf24(free)+' vCPU'}
+            </div>
+            <div class="newpower" style="color:${power?'var(--good)':'var(--muted)'}">
+              ${power?'Новые мощности: +'+nf24(power)+' vCPU':'Новые мощности: не планируются'}
+            </div>
+          </div>
+        </div>`;
+      }
+      html += `</div>`;
+    }
+
+    const map=document.querySelector('#map');
+    map.classList.remove('v24-map');
+    map.classList.add('v24-map');
+    map.innerHTML=html;
+
+    if(typeof bindMap==='function') bindMap();
+    if(typeof renderLegend==='function') renderLegend();
+
+    /* Restore hover tooltip on the newly-rendered segments. */
+    let tip=document.querySelector('#v24MapTip');
+    if(!tip){
+      tip=document.createElement('div');
+      tip.id='v24MapTip';
+      tip.style.cssText='position:fixed;z-index:40000;display:none;pointer-events:none;background:#0a1018;color:#fff;border:1px solid #4d627d;border-radius:8px;padding:9px 11px;font-size:12px;line-height:1.45;box-shadow:0 10px 28px #0006;';
+      document.body.appendChild(tip);
+    }
+    map.onpointermove=e=>{
+      const seg=e.target.closest('.v24-seg');
+      if(!seg){tip.style.display='none';return}
+      const p=seg.dataset.p,dcName=seg.dataset.from,n=Number(seg.dataset.n||0);
+      const row=rows.find(r=>r[0]===p);
+      const total=dcTotal(rows,idx(dcName));
+      tip.innerHTML='<b>'+esc24(p)+'</b><span style="color:#b9c8d9">'+esc24(row?.[1]||'')+'</span><br><span style="color:#b9c8d9">'+nf24(n)+' vCPU · '+(total?(n/total*100).toFixed(1):0)+'% ДЦ '+esc24(dcName)+'</span>';
+      tip.style.display='block';
+      tip.style.left=Math.min(innerWidth-320,e.clientX+14)+'px';
+      tip.style.top=Math.max(8,e.clientY-10)+'px';
+    };
+    map.onpointerleave=()=>tip.style.display='none';
+  };
+
+  window.renderAll=function(){
+    renderFilters();
+    renderQuick();
+    window.renderMap();
+    renderLoad();
+    renderTable();
+    const free=document.querySelector('#freeNow');
+    if(free) free.textContent='—';
+  };
+
+  window.renderAll();
+})();
+</script>
+
+<style id="v25-style">
+#map.v25-map{width:100%!important;display:flex!important;flex-direction:column!important;gap:10px!important;overflow:visible!important}
+.v25-geo-row{position:relative;display:grid;grid-template-columns:repeat(var(--geo-span),minmax(0,1fr));gap:7px;padding:24px 4px 7px;border:1px dashed #8090a5;border-radius:10px;min-width:0}
+.v25-geo-label{position:absolute;left:8px;top:-10px;padding:2px 8px;background:var(--panel);border:1px dashed #8090a5;border-radius:6px;color:var(--muted);font-size:11px;font-weight:750;white-space:nowrap;z-index:4}
+.v25-geo-total{margin-left:7px;color:var(--text);font-weight:800}
+.v25-dc{min-width:0;align-self:end}
+.v25-vessel{width:100%;display:flex;flex-direction:column-reverse;overflow:hidden;border:1px solid #506076;border-radius:5px 5px 10px 10px;background:#0f151e}
+</style>
+<script id="v25-controller">
+(function(){
+  if(typeof state==='undefined') return;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const nf=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0));
+  /* FIX: this block used to replace whole product rows (baseline + plan combined)
+     with addition-only figures from a CSV, which silently deleted each product's
+     baseline allocation from the end-2026 total. The corrected, additive version
+     of this update now lives in v27-controller below, so this block is a no-op. */
+
+  window.renderMap=function(){
+    const ds=filteredDcs(), rows=rowsForMap();
+    const current=ds.map(d=>dcTotal(state.nowRows,idx(d)));
+    const visible=ds.map(d=>dcTotal(rows,idx(d)));
+    const plan=ds.map(d=>dcTotal(state.planRows,idx(d)));
+    const maxC=Math.max(1,...current), maxV=Math.max(1,...visible);
+    const groups={};ds.forEach((d,k)=>(groups[geo(d)]??=[]).push({d,k}));
+    let html='';
+    for(const [g,items] of Object.entries(groups)){
+      const geoPlan=items.reduce((s,x)=>s+plan[x.k],0);
+      html+=`<div class="v25-geo-row" style="--geo-span:${items.length}">
+        <div class="v25-geo-label">${esc(g)} <span class="v25-geo-total">${nf(geoPlan)} vCPU</span></div>`;
+      for(const {d,k} of items){
+        const i=idx(d),c=current[k],p=plan[k],cap=(SOURCE.capacity2026||{})[d]||0;
+        const pct=cap?p/cap*100:0,lc=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+        const power=Math.max(0,Number((state.power||{})[d]||0)),free=cap-p,growth=Math.max(0,p-c),h=75+242*(c/maxC);
+        html+=`<div class="v25-dc">
+          <div class="dc-head"><b title="${esc(d)}">${esc(d)}</b><span>${nf(visible[k])}</span></div>
+          <div class="v25-vessel" style="height:${h.toFixed(1)}px" data-dc="${esc(d)}">
+            ${rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{
+              const n=Number(r[2][i]||0),active=!state.selection.length||state.selection.includes(r[0]);
+              return `<div class="seg ${active?'':'dim'}" draggable="true" data-p="${esc(r[0])}" data-from="${esc(d)}" data-n="${n}" style="height:${(n/maxV*100).toFixed(4)}%;background:${color(r[0])}" title="${esc(r[0])} · ${nf(n)} vCPU"></div>`;
+            }).join('')}
+          </div>
+          <div class="dc-load ${pct>100?'over':pct>=80?'warn':'good'}">
+            <div class="row"><span>Загрузка ДЦ</span><b style="color:${lc}">${pct.toFixed(0)}%</b></div>
+            <div class="track"><i style="width:${Math.min(100,pct)}%;background:${lc}"></i></div>
+            <div class="row numbers"><span>${nf(c)} → ${nf(p)}</span><span>+${nf(growth)}</span></div>
+            <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${free<0?'Перелимит: −'+nf(Math.abs(free))+' vCPU':'Свободно: '+nf(free)+' vCPU'}</div>
+            <div class="newpower" style="color:${power?'var(--good)':'var(--muted)'}">${power?'Новые мощности: +'+nf(power)+' vCPU':'Новые мощности: не планируются'}</div>
+          </div>
+        </div>`;
+      }
+      html+=`</div>`;
+    }
+    const map=document.querySelector('#map');map.innerHTML=html;
+    if(typeof bindMap==='function') bindMap();
+    if(typeof renderLegend==='function') renderLegend();
+  };
+  window.renderAll=function(){
+    renderFilters();renderQuick();window.renderMap();renderLoad();renderTable();
+    const free=document.querySelector('#freeNow');if(free)free.textContent='—';
+  };
+  window.renderAll();
+})();
+</script>
+
+
+
+
+
+<style id="v27-style">
+/* V27 — show both current and end-2026 plan in Allocation Map */
+#map.v27-map{
+  width:100%!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  gap:7px!important;
+}
+.v27-group{
+  grid-column:span var(--span)!important;
+  display:grid!important;
+  grid-template-columns:repeat(var(--span),minmax(0,1fr))!important;
+  gap:7px!important;
+  position:relative!important;
+  padding:24px 4px 7px!important;
+  border:1px dashed #8090a5!important;
+  border-radius:10px!important;
+  min-width:0!important;
+}
+.v27-group-label{
+  position:absolute!important;left:8px;top:-10px;padding:2px 8px;
+  background:var(--panel);border:1px dashed #8090a5;border-radius:6px;
+  color:var(--muted);font-size:11px;font-weight:750;white-space:nowrap;z-index:5;
+}
+.v27-group-plan{color:var(--text);font-weight:800;margin-left:6px}
+.v27-dc{min-width:0!important;align-self:end!important}
+.v27-vessel{
+  width:100%;display:flex;flex-direction:column-reverse;overflow:hidden;
+  border:1px solid #b9c6d5;border-radius:5px 5px 10px 10px;
+  background:linear-gradient(180deg,#fbfdff,#eef3f7);min-height:70px;
+}
+.v27-seg-now{min-height:1px;border-top:1px solid #ffffff66;cursor:pointer}
+.v27-seg-plan{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;
+  pointer-events:none;border-top:2px solid #e39a36;
+}
+.v27-plan-line{
+  position:absolute;left:0;right:0;z-index:4;border-top:2px dashed #e39a36;
+}
+.v27-plan-label{
+  position:absolute;right:2px;z-index:5;color:#9a6110;background:#fff9;
+  font-size:9px;font-weight:800;padding:1px 3px;border-radius:3px;
+}
+.v27-current-chip,.v27-plan-chip{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:10px;margin-top:4px;padding:3px 6px;border-radius:5px;
+}
+.v27-current-chip{background:#edf3ff;color:#4169a7}
+.v27-plan-chip{background:#fff4df;color:#9a6110}
+.v27-map-legend{
+  display:flex;flex-wrap:wrap;gap:9px;margin-top:12px;padding-top:10px;
+  border-top:1px solid var(--line);font-size:11px;color:var(--muted)
+}
+.v27-map-legend span{display:inline-flex;align-items:center;gap:5px}
+.v27-dot{width:9px;height:9px;border-radius:2px;display:inline-block}
+</style>
+
+<script id="v27-controller">
+(function(){
+  if(typeof state==='undefined') return;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const nf=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0));
+
+  /* The uploaded CSV remains authoritative for the END-2026 product set.
+     Current data stays untouched and is shown together with the plan. */
+  const CSV_PLAN_ROWS = [
+    ["Discovery Feature Engineering","Без категории",[600,300,1500,0,3000,3000,2000,0,1500,0,0,0]],
+    ["ЕКП VK Видео","Без категории",[0,5500,0,0,0,0,5500,0,5500,0,0,0]],
+    ["ЕКП Общие Рекомы","Без категории",[500,5000,2850,0,2750,0,5000,0,5000,0,0,0]],
+    ["ЕКП Реклама","Без категории",[0,0,5000,0,0,0,6800,0,0,0,0,5000]],
+    ["ЕКП Реклама Ecom","Без категории",[0,0,0,0,0,0,10000,0,0,0,0,0]],
+    ["ЕКП Лента Одноклассники","Без категории",[0,2250,0,0,0,2250,0,0,0,2250,0,0]],
+    ["ЕКП Пуши Одноклассники","Без категории",[0,200,0,0,0,200,0,0,0,200,0,0]],
+    ["ЕКП Инфра","Без категории",[0,4388,368,0,0,1328,3628,0,2996,1328,0,368]],
+    ["Поиск по людям","Без категории",[0,0,0,4000,0,4000,0,0,0,4000,0,0]],
+    ["Поиск по Дзен","Без категории",[0,0,0,1000,0,1000,0,0,0,1000,0,0]],
+    ["Поиск по товарам","Без категории",[0,0,0,2000,0,2000,0,0,0,2000,0,0]],
+    ["Поиск Единое Видео","Без категории",[0,0,0,12000,0,0,0,0,12000,0,12000,0]],
+    ["Поиск","Без категории",[0,0,0,0,0,0,0,0,0,30000,0,0]]
+  ];
+  /* FIX: state.planRows must represent the FULL end-2026 total (current baseline
+     + planned additions) for every product, not just these 13. The old code
+     replaced the entire dataset with only this list, which zeroed out every
+     other product's contribution to the end-2026 total and broke "Итого к 2026"
+     for almost every ДЦ. Instead, we remove only the older placeholder
+     "Выдача 2026 · X" delta rows that this update supersedes, and add the new
+     ones back as additions — everything else (baseline rows, unrelated deltas)
+     stays exactly as it was. */
+  const SUPERSEDED_DELTA_ROWS = [
+    'Выдача 2026 · Discovery Feature Engineering',
+    'Выдача 2026 · ЕКП VK Видео без ProfileStream',
+    'Выдача 2026 · ЕКП Общие Рекомы без ProfileStream',
+    'Выдача 2026 · ЕКП Реклама без Profile Stream',
+    'Выдача 2026 · ЕКП Реклама Ecom без ProfileStream',
+    'Выдача 2026 · ЕКП Лента Одноклассники без ProfileStream',
+    'Выдача 2026 · ЕКП Инфра',
+    'Выдача 2026 · Поиск по людям',
+    'Выдача 2026 · Поиск по Дзен',
+    'Выдача 2026 · Поиск по товарам',
+    'Выдача 2026 · Поиск Единое Видео'
+  ];
+  state.planRows = state.planRows
+    .filter(r=>!SUPERSEDED_DELTA_ROWS.includes(r[0]))
+    .map(r=>[r[0],r[1],Array.from(r[2])]);
+  for(const [name,, vals] of CSV_PLAN_ROWS){
+    state.planRows.push(['Выдача 2026 · '+name,'План выдачи 2026',Array.from(vals)]);
+  }
+  if(typeof SOURCE!=='undefined') SOURCE.y26_rows = state.planRows.map(r=>[r[0],r[1],Array.from(r[2])]);
+  try{localStorage.setItem('capacity-v27-plan',JSON.stringify(state.planRows))}catch(e){}
+
+  /* Сейчас = state.nowRows (current cores).
+     Итого к 2026 = state.planRows (current baseline + planned additions above).
+     План = Итого к 2026 − Сейчас. No hardcoded overrides needed once the
+     underlying end-2026 dataset above is correct. */
+  function renderMapV27(){
+    const ds=filteredDcs();
+    const rows=rowsForMap();
+    const curr=ds.map(d=>dcTotal(state.nowRows,idx(d)));
+    const plan=ds.map(d=>dcTotal(state.planRows,idx(d)));
+    const vis=ds.map(d=>dcTotal(rows,idx(d)));
+    const maxCurr=Math.max(1,...curr);
+    const maxVis=Math.max(1,...vis);
+
+    const groups={};
+    ds.forEach((d,k)=>(groups[geo(d)]??=[]).push({d,k}));
+    let html='';
+
+    for(const [g,items] of Object.entries(groups)){
+      const geoPlan=items.reduce((s,x)=>s+plan[x.k],0);
+      html+=`<div class="v27-group" style="--span:${items.length}">
+        <div class="v27-group-label">${esc(g)} <span class="v27-group-plan">${nf(geoPlan)} vCPU</span></div>`;
+      for(const {d,k} of items){
+        const i=idx(d), current=curr[k], planned=plan[k], visible=vis[k];
+        const cap=(SOURCE.capacity2026||{})[d]||0;
+        const pct=cap?planned/cap*100:0;
+        const loadColor=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+        const power=Math.max(0,Number((state.power||{})[d]||0));
+        const free=cap-planned;
+        const grow=Math.max(0,planned-current);
+        const h=78+235*(current/maxCurr);
+        const planLevel=Math.min(100,(planned/Math.max(1,maxCurr))*100);
+
+        const segs=rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{
+          const amount=Number(r[2][i]||0);
+          const active=!state.selection.length||state.selection.includes(r[0]);
+          return `<div class="v27-seg-now ${active?'':'dim'}"
+            data-p="${esc(r[0])}" data-from="${esc(d)}" data-n="${amount}"
+            style="height:${(amount/maxVis*100).toFixed(4)}%;background:${color(r[0])}"
+            title="${esc(r[0])} · ${nf(amount)} vCPU"></div>`;
+        }).join('');
+
+        html+=`<div class="v27-dc">
+          <div class="dc-head"><b title="${esc(d)}">${esc(d)}</b><span>${nf(visible)} сейчас</span></div>
+          <div class="v27-vessel" data-dc="${esc(d)}" style="height:${h.toFixed(1)}px;position:relative">
+            ${segs}
+            <div class="v27-plan-line" style="bottom:${Math.min(100,planLevel)}%;border-color:${loadColor}"></div>
+            <div class="v27-plan-label" style="bottom:${Math.min(100,planLevel)}%">план ${nf(planned)}</div>
+          </div>
+          <div class="v27-current-chip"><span>Сейчас</span><b>${nf(current)}</b></div>
+          <div class="v27-plan-chip"><span>План 2026</span><b>${nf(planned)}</b></div>
+          <div class="dc-load ${pct>100?'over':pct>=80?'warn':'good'}">
+            <div class="row"><span>Загрузка ДЦ</span><b style="color:${loadColor}">${pct.toFixed(0)}%</b></div>
+            <div class="track"><i style="width:${Math.min(100,pct)}%;background:${loadColor}"></i></div>
+            <div class="row numbers"><span>${nf(current)} → ${nf(planned)}</span><span>+${nf(grow)}</span></div>
+            <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${free<0?'Перелимит: −'+nf(Math.abs(free))+' vCPU':'Свободно: '+nf(free)+' vCPU'}</div>
+            <div class="newpower" style="color:${power?'var(--good)':'var(--muted)'}">${power?'Новые мощности: +'+nf(power)+' vCPU':'Новые мощности: не планируются'}</div>
+          </div>
+        </div>`;
+      }
+      html+=`</div>`;
+    }
+
+    const map=document.querySelector('#map');
+    map.classList.add('v27-map');
+    map.innerHTML=html;
+    if(typeof bindMap==='function') bindMap();
+    if(typeof renderLegend==='function') renderLegend();
+
+    /* precise product tooltip */
+    let tip=document.querySelector('#v27MapTip');
+    if(!tip){
+      tip=document.createElement('div');
+      tip.id='v27MapTip';
+      tip.className='v22-map-tip';
+      document.body.appendChild(tip);
+    }
+    map.onpointermove=e=>{
+      const seg=e.target.closest('.v27-seg-now');
+      if(!seg){tip.style.display='none';return}
+      const r=rows.find(x=>x[0]===seg.dataset.p);
+      const total=dcTotal(rows,idx(seg.dataset.from));
+      tip.innerHTML=`<b>${esc(seg.dataset.p)}</b><span>${esc(r?.[1]||'')}</span><br><span>${nf(Number(seg.dataset.n))} vCPU · ${total?(Number(seg.dataset.n)/total*100).toFixed(1):0}% ДЦ ${esc(seg.dataset.from)}</span>`;
+      tip.style.display='block';
+      tip.style.left=Math.min(innerWidth-320,e.clientX+14)+'px';
+      tip.style.top=Math.max(8,e.clientY-10)+'px';
+    };
+    map.onpointerleave=()=>tip.style.display='none';
+  }
+
+  window.renderMap=renderMapV27;
+  window.renderAll=function(){
+    renderFilters();
+    renderQuick();
+    renderMapV27();
+    renderLoad();
+    renderTable();
+    const f=document.querySelector('#freeNow'); if(f) f.textContent='—';
+  };
+  renderAll();
+})();
+</script>
+
+<style id="v28-plan-semantics">
+.v28-plan-add{color:#9a6110;font-weight:800}
+.v28-end-total{color:var(--muted);font-size:10px;margin-top:2px}
+</style>
+<script id="v28-plan-semantics">
+(function(){
+  if(typeof state==='undefined') return;
+
+  const nf28=n=>new Intl.NumberFormat('ru-RU').format(Math.round(Number(n)||0));
+  const esc28=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+  /* The 2026 plan is an ADDITION to the current state.
+     End-2026 total = current + plan-addition. */
+  function planAddition28(d,i){
+    const current=dcTotal(state.nowRows,i);
+    const endPlan=dcTotal(state.planRows,i);
+    return Math.max(0,endPlan-current);
+  }
+
+  function renderMap28(){
+    const ds=filteredDcs();
+    const rows=rowsForMap();
+    const current=ds.map(d=>dcTotal(state.nowRows,idx(d)));
+    const add=ds.map(d=>planAddition28(d,idx(d)));
+    const end=ds.map((d,k)=>current[k]+add[k]);
+    const vis=ds.map(d=>dcTotal(rows,idx(d)));
+    const maxCurrent=Math.max(1,...current);
+    const maxVis=Math.max(1,...vis);
+
+    const groups={};
+    ds.forEach((d,k)=>(groups[geo(d)]??=[]).push({d,k}));
+
+    let html='';
+    for(const [g,items] of Object.entries(groups)){
+      const geoAdd=items.reduce((s,x)=>s+add[x.k],0);
+      html+=`<div class="v27-group" style="--span:${items.length}">
+        <div class="v27-group-label">${esc28(g)} <span class="v27-group-plan v28-plan-add">+${nf28(geoAdd)} vCPU</span></div>`;
+
+      for(const {d,k} of items){
+        const i=idx(d), c=current[k], a=add[k], e=end[k];
+        const cap=(SOURCE.capacity2026||{})[d]||0;
+        const pct=cap?e/cap*100:0;
+        const loadColor=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+        const power=Math.max(0,Number((state.power||{})[d]||0));
+        const free=cap-e;
+        const h=78+235*(c/maxCurrent);
+
+        const segs=rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{
+          const amount=Number(r[2][i]||0);
+          const active=!state.selection.length||state.selection.includes(r[0]);
+          return `<div class="v27-seg-now ${active?'':'dim'}"
+            data-p="${esc28(r[0])}" data-from="${esc28(d)}" data-n="${amount}"
+            style="height:${(amount/maxVis*100).toFixed(4)}%;background:${color(r[0])}"></div>`;
+        }).join('');
+
+        html+=`<div class="v27-dc">
+          <div class="dc-head"><b title="${esc28(d)}">${esc28(d)}</b><span>${nf28(vis[k])}</span></div>
+          <div class="v27-vessel" data-dc="${esc28(d)}" style="height:${h.toFixed(1)}px;position:relative">
+            ${segs}
+          </div>
+          <div class="v27-current-chip"><span>Сейчас</span><b>${nf28(c)}</b></div>
+          <div class="v27-plan-chip"><span>План</span><b class="v28-plan-add">+${nf28(a)}</b><div class="v28-end-total">Итого к 2026: ${nf28(e)}</div></div>
+          <div class="dc-load ${pct>100?'over':pct>=80?'warn':'good'}">
+            <div class="row"><span>Загрузка ДЦ</span><b style="color:${loadColor}">${pct.toFixed(0)}%</b></div>
+            <div class="track"><i style="width:${Math.min(100,pct)}%;background:${loadColor}"></i></div>
+            <div class="row numbers"><span>${nf28(c)} → ${nf28(e)}</span><span>+${nf28(a)}</span></div>
+            <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${free<0?'Перелимит: −'+nf28(Math.abs(free))+' vCPU':'Свободно: '+nf28(free)+' vCPU'}</div>
+            <div class="newpower" style="color:${power?'var(--good)':'var(--muted)'}">${power?'Новые мощности: +'+nf28(power)+' vCPU':'Новые мощности: не планируются'}</div>
+          </div>
+        </div>`;
+      }
+      html+=`</div>`;
+    }
+
+    const map=document.querySelector('#map');
+    map.innerHTML=html;
+    if(typeof bindMap==='function') bindMap();
+    if(typeof renderLegend==='function') renderLegend();
+  }
+
+  window.renderMap=renderMap28;
+  window.renderAll=function(){
+    renderFilters();
+    renderQuick();
+    renderMap28();
+    renderLoad();
+    renderTable();
+    const f=document.querySelector('#freeNow'); if(f) f.textContent='—';
+  };
+  renderAll();
+})();
+</script>
+
+<style id="v29-fixes">
+/* V29 fixes: persistent multi-select filters, thousand-based display, clean allocation map and reliable drag/drop */
+.v29-seg{min-height:2px;border-top:1px solid #ffffff44;cursor:grab;user-select:none;-webkit-user-drag:element}
+.v29-seg:active{cursor:grabbing}
+.v29-seg:hover{filter:brightness(1.12);outline:1px solid #fff;z-index:3}
+.v29-filter-count{font-variant-numeric:tabular-nums}
+.v29-k-input-note{font-size:10px;color:var(--muted);margin-top:3px}
+</style>
+<script id="v29-fixes-controller">
+(function(){
+  if(typeof state==='undefined') return;
+
+  const esc29=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const nfk29=new Intl.NumberFormat('ru-RU',{minimumFractionDigits:1,maximumFractionDigits:1});
+  const nf29=n=>nfk29.format((Number(n)||0)/1000)+'k';
+  const nf29signed=n=>(Number(n)||0)>=0?'+'+nf29(n):'−'+nf29(Math.abs(Number(n)||0));
+  const raw29=n=>Math.round(Number(n)||0);
+
+  function filterValues29(k){
+    if(k==='category') return [...new Set(state.planRows.map(r=>r[1]))].sort();
+    if(k==='product') return [...new Set(state.planRows.map(r=>r[0]))].sort();
+    if(k==='geo') return [...new Set(dcs().map(geo))].sort();
+    return dcs();
+  }
+  function filterLabel29(k){
+    const chosen=state.filters[k]||[], all=filterValues29(k);
+    if(chosen.includes('__NONE__')) return '0';
+    return (!chosen.length||chosen.length===all.length)?'Все':chosen.length+' выбрано';
+  }
+  function filteredDcs29(){
+    const f=state.filters;
+    return dcs().filter(d=>(!f.dc.length||f.dc.includes(d))&&(!f.geo.length||f.geo.includes(geo(d))));
+  }
+  function baseRows29(){
+    const f=state.filters;
+    return state.planRows.filter(r=>
+      !f.category.includes('__NONE__')&&!f.product.includes('__NONE__')&&
+      !f.geo.includes('__NONE__')&&!f.dc.includes('__NONE__')&&
+      (!f.category.length||f.category.includes(r[1]))&&
+      (!f.product.length||f.product.includes(r[0]))
+    );
+  }
+  function rowsForMap29(){
+    const r=baseRows29();
+    return state.selection.length?r.filter(x=>state.selection.includes(x[0])):r;
+  }
+  function current29(i){return dcTotal(state.nowRows,i)}
+  function end29(i){return dcTotal(state.planRows,i)}
+  function add29(i){return Math.max(0,end29(i)-current29(i))}
+  function power29(d){return Math.max(0,Number((state.power||{})[d]||0))}
+  function cap29(d,i){return current29(i)+power29(d)}
+  function free29(d,i){return cap29(d,i)-end29(i)}
+
+  /* Keep the filter popup open while checking/unchecking options.
+     Only the data area is re-rendered; the popup DOM is not replaced. */
+  window.renderFilters=function(){
+    const f=document.querySelector('#filters');
+    if(!f) return;
+    f.innerHTML=[['category','Категория'],['product','Продукт'],['geo','Все гео'],['dc','ДЦ']]
+      .map(([k,t])=>`<div class="filter" data-k="${k}">
+        <button type="button">${t}: <b class="v29-filter-count">${esc29(filterLabel29(k))}</b> ▾</button>
+        <div class="menu">
+          <input class="search" placeholder="Поиск">
+          <div class="menu-actions">
+            <button type="button" data-all>Все</button>
+            <button type="button" data-none>Сбросить</button>
+          </div>
+          <div class="opts"></div>
+        </div>
+      </div>`).join('')+
+      `<div class="metrics">
+        <div class="metric"><span>Емкость сейчас</span><b>${nf29(SOURCE.source_current_capacity)}</b></div>
+        <div class="metric free"><span>Свободно сейчас</span><b id="freeNow">—</b></div>
+        <div class="metric"><span>Емкость к концу 2026</span><b id="cap26">—</b></div>
+        <button class="power-config" type="button" id="powerBtn">Изменить мощности</button>
+      </div>`;
+
+    f.querySelectorAll('.filter').forEach(box=>{
+      const k=box.dataset.k, opts=box.querySelector('.opts'), search=box.querySelector('.search');
+      const build=()=>{
+        const vals=filterValues29(k), chosen=state.filters[k]||[];
+        opts.innerHTML=vals.map(v=>`<label class="opt">
+          <input type="checkbox" value="${esc29(v)}" ${chosen.includes(v)?'checked':''}>
+          <span>${esc29(v)}</span>
+        </label>`).join('');
+        opts.querySelectorAll('input').forEach(inp=>{
+          inp.onchange=()=>{
+            state.filters[k]=[...opts.querySelectorAll('input:checked')].map(x=>x.value);
+            box.querySelector('b').textContent=filterLabel29(k);
+            state.selection=[];
+            renderData29();
+          };
+        });
+      };
+      build();
+      box.querySelector(':scope > button').onclick=e=>{
+        e.preventDefault();e.stopPropagation();
+        f.querySelectorAll('.filter.open').forEach(x=>{if(x!==box)x.classList.remove('open')});
+        box.classList.toggle('open');
+      };
+      box.querySelector('[data-all]').onclick=e=>{
+        e.preventDefault();e.stopPropagation();
+        state.filters[k]=[];state.selection=[];
+        box.querySelector('b').textContent='Все';
+        build();renderData29();
+        box.classList.add('open');
+      };
+      box.querySelector('[data-none]').onclick=e=>{
+        e.preventDefault();e.stopPropagation();
+        state.filters[k]=['__NONE__'];state.selection=[];
+        box.querySelector('b').textContent='0';
+        build();renderData29();
+        box.classList.add('open');
+      };
+      search.oninput=e=>{
+        const t=e.target.value.toLowerCase();
+        opts.querySelectorAll('.opt').forEach(o=>o.style.display=o.textContent.toLowerCase().includes(t)?'flex':'none');
+      };
+    });
+    const pb=document.querySelector('#powerBtn');
+    if(pb) pb.onclick=typeof openPowerDialogV12==='function'?openPowerDialogV12:()=>{};
+  };
+
+  window.renderMap=function(){
+    const ds=filteredDcs29(), rows=rowsForMap29();
+    const curr=ds.map(d=>current29(idx(d)));
+    const end=ds.map(d=>end29(idx(d)));
+    const vis=ds.map(d=>dcTotal(rows,idx(d)));
+    const maxCurr=Math.max(1,...curr), maxVis=Math.max(1,...vis);
+    const groups={};
+    ds.forEach((d,k)=>(groups[geo(d)]??=[]).push({d,k}));
+
+    let html='';
+    for(const [g,items] of Object.entries(groups)){
+      const geoEnd=items.reduce((s,x)=>s+end[x.k],0);
+      html+=`<div class="v27-group" style="--span:${items.length}">
+        <div class="v27-group-label">${esc29(g)} <span class="v27-group-plan">${nf29(geoEnd)}</span></div>`;
+      for(const {d,k} of items){
+        const i=idx(d), c=curr[k], e=end[k], visible=vis[k], a=add29(i), power=power29(d), cap=cap29(d,i), free=free29(d,i);
+        const pct=cap?e/cap*100:0;
+        const lc=pct>100?'var(--bad)':pct>80?'var(--warn)':'var(--accent)';
+        const h=78+235*(c/maxCurr);
+        const segs=rows.filter(r=>Number(r[2][i]||0)>0).map(r=>{
+          const n=Number(r[2][i]||0), active=!state.selection.length||state.selection.includes(r[0]);
+          return `<div class="v29-seg ${active?'':'dim'}"
+            draggable="true" data-p="${esc29(r[0])}" data-from="${esc29(d)}" data-n="${n}"
+            style="height:${(n/maxVis*100).toFixed(4)}%;background:${color(r[0])}"
+            title="${esc29(r[0])} · ${nf29(n)}"></div>`;
+        }).join('');
+        html+=`<div class="v27-dc">
+          <div class="dc-head"><b title="${esc29(d)}">${esc29(d)}</b><span>${nf29(visible)}</span></div>
+          <div class="v27-vessel v29-vessel" data-dc="${esc29(d)}" style="height:${h.toFixed(1)}px;position:relative">
+            ${segs}
+          </div>
+          <div class="dc-load ${pct>100?'over':pct>=80?'warn':'good'}">
+            <div class="row"><span>Загрузка ДЦ</span><b style="color:${lc}">${pct.toFixed(0)}%</b></div>
+            <div class="track"><i style="width:${Math.min(100,pct)}%;background:${lc}"></i></div>
+            <div class="row numbers"><span>${nf29(c)} → ${nf29(e)}</span><span>${nf29signed(a)}</span></div>
+            <div class="status" style="color:${free<0?'var(--bad)':'var(--good)'}">${free<0?'Перелимит: −'+nf29(Math.abs(free)):'Свободно: '+nf29(free)}</div>
+            <div class="newpower" style="color:${power?'var(--good)':'var(--muted)'}">${power?'Новые мощности: +'+nf29(power):'Новые мощности: не планируются'}</div>
+          </div>
+        </div>`;
+      }
+      html+='</div>';
+    }
+    const map=document.querySelector('#map');
+    map.classList.add('v27-map');
+    map.innerHTML=html;
+    bindMap29();
+    renderLegend29();
+  };
+
+  function bindMap29(){
+    const map=document.querySelector('#map');
+    if(!map) return;
+    let drag=null;
+    map.querySelectorAll('.v29-seg').forEach(s=>{
+      s.ondblclick=e=>{e.stopPropagation();openTransfer(s.dataset.p,s.dataset.from,null)};
+      s.ondragstart=e=>{
+        drag={p:s.dataset.p,from:s.dataset.from};
+        s.classList.add('dragging');
+        e.dataTransfer.effectAllowed='move';
+        e.dataTransfer.setData('text/plain',JSON.stringify(drag));
+      };
+      s.ondragend=()=>{drag=null;s.classList.remove('dragging');map.querySelectorAll('.v29-vessel').forEach(v=>v.classList.remove('drop'))};
+    });
+    map.querySelectorAll('.v29-vessel').forEach(v=>{
+      v.ondragenter=e=>{e.preventDefault();if(drag&&drag.from!==v.dataset.dc)v.classList.add('drop')};
+      v.ondragover=e=>{e.preventDefault();if(drag&&drag.from!==v.dataset.dc){e.dataTransfer.dropEffect='move';v.classList.add('drop')}};
+      v.ondragleave=e=>{if(!v.contains(e.relatedTarget))v.classList.remove('drop')};
+      v.ondrop=e=>{
+        e.preventDefault();e.stopPropagation();
+        v.classList.remove('drop');
+        let payload=drag;
+        if(!payload){
+          try{payload=JSON.parse(e.dataTransfer.getData('text/plain')||'null')}catch(_){}
+        }
+        if(payload&&payload.from!==v.dataset.dc) openTransfer(payload.p,payload.from,v.dataset.dc);
+        drag=null;
+      };
+    });
+  }
+
+  function renderLegend29(){
+    const ps=[...new Set(baseRows29().map(r=>r[0]))].sort();
+    const el=document.querySelector('#legend');
+    if(!el)return;
+    el.innerHTML=`<span class="legend-title">Легенда / мультивыбор:</span>
+      <span class="legend-pill ${state.selection.length?'':'selected'}" id="legendAllV29">Все</span>`+
+      ps.map(p=>`<span class="legend-pill ${state.selection.includes(p)?'selected':''}" data-leg-v29="${esc29(p)}">
+        <i class="legend-dot" style="background:${color(p)}"></i>${esc29(p)}</span>`).join('');
+    document.querySelector('#legendAllV29').onclick=()=>{state.selection=[];renderData29()};
+    el.querySelectorAll('[data-leg-v29]').forEach(b=>b.onclick=()=>{
+      const p=b.dataset.legV29;
+      if(state.selection.includes(p))state.selection=state.selection.filter(x=>x!==p);else state.selection.push(p);
+      renderData29();
+    });
+  }
+
+  window.renderQuick=function(){
+    const ds=filteredDcs29();
+    const used=ds.reduce((s,d)=>s+current29(idx(d)),0);
+    const plan=ds.reduce((s,d)=>s+end29(idx(d)),0);
+    const pwr=ds.reduce((s,d)=>s+power29(d),0);
+    const globalCur=dcs().reduce((s,d)=>s+current29(idx(d)),0);
+    const globalCap=dcs().reduce((s,d)=>s+cap29(d,idx(d)),0);
+    const f=document.querySelector('#freeNow'), c=document.querySelector('#cap26');
+    if(f)f.textContent=nf29(Math.max(0,SOURCE.source_current_capacity-globalCur));
+    if(c)c.textContent=nf29(globalCap);
+    const q=document.querySelector('#quick');
+    if(q)q.innerHTML=`<div class="quick-card"><span>Сейчас</span><b>${nf29(used)}</b><small>vCPU</small></div>
+      <div class="quick-card"><span>Итого к 2026</span><b>${nf29(plan)}</b><small>сейчас + план</small></div>
+      <div class="quick-card"><span>План / мощности</span><b>${nf29(Math.max(0,plan-used))} / +${nf29(pwr)}</b><small>по выбранным ДЦ</small></div>`;
+  };
+
+  window.renderTable=function(){
+    const ds=filteredDcs29(),rows=baseRows29(),max=Math.max(1,...rows.flatMap(r=>ds.map(d=>Number(r[2][idx(d)]||0))));
+    const head=document.querySelector('#prodHead'), body=document.querySelector('#prodBody');
+    if(!head||!body)return;
+    head.innerHTML='<tr><th>☑</th><th>Продукт</th><th>Категория</th>'+
+      ds.map(d=>`<th class="num">${esc29(d)}</th>`).join('')+'<th class="num">Всего</th></tr>';
+    body.innerHTML=rows.map(r=>{
+      const active=state.selection.includes(r[0]),total=ds.reduce((s,d)=>s+Number(r[2][idx(d)]||0),0);
+      return `<tr class="${active?'selected':''}" data-p="${esc29(r[0])}">
+        <td><input type="checkbox" data-pick="${esc29(r[0])}" ${active?'checked':''}></td>
+        <td><b>${esc29(r[0])}</b></td><td>${esc29(r[1])}</td>`+
+        ds.map(d=>{const v=Number(r[2][idx(d)]||0),p=v/max;return `<td class="num"><span class="heat" style="background:${p>=.75?'rgba(200,61,73,.15)':p>=.4?'rgba(197,138,43,.15)':'rgba(22,146,103,.12)'};color:${p>=.75?'var(--bad)':p>=.4?'var(--warn)':'var(--good)'}">${nf29(v)}</span></td>`}).join('')+
+        `<td class="num"><b>${nf29(total)}</b></td></tr>`;
+    }).join('');
+    body.querySelectorAll('[data-pick]').forEach(c=>c.onchange=e=>{e.stopPropagation();toggleSelectionV29(c.dataset.pick,c.checked)});
+    body.querySelectorAll('tr[data-p]').forEach(tr=>tr.onclick=e=>{if(e.target.matches('input'))return;toggleSelectionV29(tr.dataset.p,!state.selection.includes(tr.dataset.p))});
+  };
+  function toggleSelectionV29(p,on){if(on){if(!state.selection.includes(p))state.selection.push(p)}else state.selection=state.selection.filter(x=>x!==p);renderData29()}
+
+  window.renderLoad=function(){}; /* hidden in the current visual layer */
+
+  window.renderGeneral=function(){
+    const rs=dcs().map((d,i)=>{
+      const cur=current29(i), end=end29(i), add=Math.max(0,end-cur), power=power29(d), cap=cur+power, free=cap-end;
+      return {d,cur,end,add,power,diff:power-add,cap,free};
+    });
+    const sum=k=>rs.reduce((s,r)=>s+r[k],0), max=Math.max(1,...rs.map(r=>Math.max(r.cur,r.add,r.power)));
+    const totalCur=sum('cur'),totalAdd=sum('add'),totalPower=sum('power'),totalDiff=sum('diff');
+    document.querySelector('#generalSummary').innerHTML=
+      `<div class="gcard"><span>Сейчас</span><b>${nf29(totalCur)}</b></div>
+       <div class="gcard"><span>План до конца 2026</span><b>+${nf29(totalAdd)}</b></div>
+       <div class="gcard"><span>Доп. мощности</span><b>+${nf29(totalPower)}</b></div>
+       <div class="gcard"><span>Мощность − план</span><b style="color:${totalDiff<0?'var(--bad)':'var(--good)'}">${nf29signed(totalDiff)}</b></div>`;
+    document.querySelector('#generalBars').innerHTML=rs.map(r=>{
+      const curH=r.cur/max*195, addH=r.add/max*195, powerH=r.power/max*195;
+      return `<div class="barcol" title="${esc29(r.d)}"><div class="barstack">
+        <div class="barseg now" style="height:${curH}px"></div>
+        <div class="barseg add" style="height:${addH}px"></div>
+        <div class="barseg power" style="height:${powerH}px"></div>
+        <div class="v14-red-line" style="bottom:${Math.max(0,curH-1)}px"></div>
+        <div class="v14-red-label" style="bottom:${Math.max(3,curH+2)}px">${nf29(r.cur)}</div>
+      </div><div class="barlabel">${esc29(r.d)}</div>
+      <div class="barlabel" style="color:${r.diff<0?'var(--bad)':'var(--good)'}">${nf29signed(r.diff)}</div></div>`;
+    }).join('');
+    document.querySelector('#generalBody').innerHTML=rs.map(r=>`<tr>
+      <td>${esc29(r.d)}</td><td>${nf29(r.cur)}</td><td>${nf29(r.add)}</td><td>+${nf29(r.power)}</td>
+      <td class="${r.diff<0?'v-bad':'v-good'}">${nf29signed(r.diff)}</td><td>${nf29(r.cap)}</td>
+      <td class="${r.free<0?'v-bad':r.free<r.cap*.1?'v-warn':'v-good'}">${r.free<0?'−':''}${nf29(Math.abs(r.free))}</td>
+    </tr>`).join('')+
+    `<tr class="v14-total-row"><td>Итого</td><td>${nf29(totalCur)}</td><td>${nf29(totalAdd)}</td><td>+${nf29(totalPower)}</td>
+      <td class="${totalDiff<0?'v-bad':'v-good'}">${nf29signed(totalDiff)}</td><td>${nf29(totalCur+totalPower)}</td><td>—</td></tr>`;
+    document.querySelector('#generalDialog').showModal();
+  };
+
+  /* Journal: all resource quantities are shown in k; undo behavior remains the original one. */
+  window.renderJournal=function(){
+    const a=logRead().slice().reverse(), body=document.querySelector('#journalBody');
+    body.innerHTML=a.length?a.map(x=>{
+      const fc=SOURCE.capacity2026[x.from]||0,tc=SOURCE.capacity2026[x.to]||0;
+      const f0=x.before.from,t0=x.before.to,f1=x.after.from,t1=x.after.to;
+      const fp0=fc?f0/fc*100:null,tp0=tc?t0/tc*100:null,fp1=fc?f1/fc*100:null,tp1=tc?t1/tc*100:null;
+      return `<tr class="${x.undone?'undone':''}">
+        <td>${esc29(x.time)}</td><td><b>${esc29(x.product)}</b></td>
+        <td>${esc29(x.from)}<br>до ${nf29(f0)} · ${fp0==null?'—':fp0.toFixed(1)+'%'}<br><span style="color:var(--bad)">−${nf29(x.amount)}</span><br>после ${nf29(f1)} · ${fp1==null?'—':fp1.toFixed(1)+'%'}</td>
+        <td>${esc29(x.to)}<br>до ${nf29(t0)} · ${tp0==null?'—':tp0.toFixed(1)+'%'}<br><span style="color:var(--good)">+${nf29(x.amount)}</span><br>после ${nf29(t1)} · ${tp1==null?'—':tp1.toFixed(1)+'%'}</td>
+        <td><b>${nf29(x.amount)}</b></td><td><button class="undo" data-id="${esc29(x.id)}" ${x.undone?'disabled':''}>${x.undone?'Отменено':'Отменить перенос'}</button></td>
+      </tr>`;
+    }).join(''):'<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:22px">Переносов пока нет.</td></tr>';
+    body.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>undoTransfer(b.dataset.id));
+    document.querySelector('#journalDialog').showModal();
+  };
+
+  function renderData29(){renderQuick();renderMap();renderTable();}
+  window.renderAll=function(){renderFilters();renderData29();};
+
+  /* Remove the obsolete Сейчас/План chips and any map-only labels if an older renderer leaves them behind. */
+  const mapObserver=new MutationObserver(()=>{
+    document.querySelectorAll('#map .v27-current-chip,#map .v27-plan-chip,#map .v27-plan-line,#map .v27-plan-label').forEach(x=>x.remove());
+  });
+  mapObserver.observe(document.querySelector('#map'),{childList:true,subtree:true});
+
+  document.querySelector('#generalBtn').onclick=window.renderGeneral;
+  document.querySelector('#journalBtn').onclick=window.renderJournal;
+
+  /* Initial render */
+  window.renderAll();
+})();
+</script>
+
+<script id="v29b-final-polish">
+(function(){
+  if(typeof state==='undefined') return;
+  const kfmt=n=>new Intl.NumberFormat('ru-RU',{minimumFractionDigits:1,maximumFractionDigits:1}).format((Number(n)||0)/1000)+'k';
+  const raw=n=>Math.max(0,Math.floor(Number(n)||0));
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+  function openPower29(){
+    const g=document.querySelector('#powerGrid'); if(!g)return;
+    g.innerHTML=dcs().map(d=>`<div class="power-item"><label>${esc(d)}</label>
+      <input type="number" min="0" step="1" value="${raw((state.power||{})[d])}" data-power-dc="${esc(d)}">
+      <div class="v29-k-input-note">${kfmt((state.power||{})[d])}</div></div>`).join('');
+    const note=document.querySelector('#powerTotalNote');
+    const update=()=>{
+      const total=[...g.querySelectorAll('input')].reduce((s,i)=>s+raw(i.value),0);
+      if(note)note.textContent='Всего дополнительной мощности: +'+kfmt(total)+' (точное значение вводится в vCPU)';
+      g.querySelectorAll('input').forEach(i=>{
+        const n=i.parentElement.querySelector('.v29-k-input-note');
+        if(n)n.textContent=kfmt(i.value);
+      });
+    };
+    g.querySelectorAll('input').forEach(i=>i.oninput=update);
+    update();
+    document.querySelector('#powerDialog').showModal();
+  }
+
+  document.querySelector('#powerBtn')?.addEventListener('click',openPower29);
+  /* renderFilters recreates #powerBtn, so make the handler available to that renderer. */
+  const oldRenderFilters=window.renderFilters;
+  window.renderFilters=function(){
+    oldRenderFilters();
+    const b=document.querySelector('#powerBtn');
+    if(b)b.onclick=openPower29;
+  };
+
+  const savePower=document.querySelector('#savePower');
+  if(savePower)savePower.onclick=()=>{
+    document.querySelectorAll('#powerGrid input[data-power-dc]').forEach(i=>{
+      state.power[i.dataset.powerDc]=raw(i.value);
+    });
+    localStorage.setItem('capacity_clean_v11-power',JSON.stringify(state.power||{}));
+    document.querySelector('#powerDialog').close();
+    if(typeof renderAll==='function')renderAll();
+  };
+
+  /* Exact transfer input stays in vCPU; all displayed quantities are k. */
+  window.openTransfer=function(product,from,to){
+    const r=state.planRows.find(x=>x[0]===product); if(!r)return;
+    const meta=document.querySelector('#transferMeta');
+    if(meta)meta.textContent=product;
+    const fromEl=document.querySelector('#fromDc'),toEl=document.querySelector('#toDc');
+    fromEl.innerHTML=dcs().map(d=>`<option value="${esc(d)}" ${d===from?'selected':''}>${esc(d)}</option>`).join('');
+    toEl.innerHTML=dcs().map(d=>`<option value="${esc(d)}" ${d===to?'selected':''}>${esc(d)}</option>`).join('');
+    const avail=document.querySelector('#transferAvailable'), amount=document.querySelector('#transferAmount'), err=document.querySelector('#transferErr');
+    const sync=()=>{
+      const a=Number(r[2][idx(fromEl.value)]||0);
+      avail.textContent=kfmt(a);
+      amount.max=a;
+    };
+    fromEl.onchange=sync; sync();
+    amount.value='';err.textContent='';
+    document.querySelector('#applyTransfer').onclick=()=>{
+      const f=fromEl.value,t=toEl.value,a=Math.floor(Number(amount.value)),fi=idx(f),ti=idx(t),av=Number(r[2][fi]||0);
+      if(f===t||!Number.isFinite(a)||a<1||a>av){
+        err.textContent='Количество должно быть от 1 до '+kfmt(av)+', а ДЦ должны различаться.';
+        return;
+      }
+      const beforeF=dcTotal(state.planRows,fi),beforeT=dcTotal(state.planRows,ti),beforePF=r[2][fi],beforePT=r[2][ti];
+      r[2][fi]-=a;r[2][ti]+=a;
+      const afterF=dcTotal(state.planRows,fi),afterT=dcTotal(state.planRows,ti);
+      const j=logRead();
+      j.push({id:'m-'+Date.now()+'-'+Math.random().toString(16).slice(2),time:new Date().toLocaleString('ru-RU'),product,from:f,to:t,amount:a,
+        before:{from:beforeF,to:beforeT,productFrom:beforePF,productTo:beforePT},
+        after:{from:afterF,to:afterT,productFrom:r[2][fi],productTo:r[2][ti]}});
+      localStorage.setItem('capacity_clean_v11-plan',JSON.stringify(state.planRows));
+      logWrite(j);
+      document.querySelector('#transferDialog').close();
+      state.selection=[];renderAll();
+    };
+    document.querySelector('#transferDialog').showModal();
+  };
+
+  /* Update the explanatory note with the same k-format and current saved power values. */
+  function updateNote29(){
+    const note=document.querySelector('.plan-note');
+    if(!note)return;
+    let live=document.querySelector('#powerNoteLive');
+    if(!live){
+      note.innerHTML='<b>План до конца 2026</b><span class="line">серый фон — ёмкость ДЦ на 31/12/2026;</span><span class="line">цветные сегменты — распределение продуктов;</span><span class="line"><b>Новые мощности:</b> <span id="powerNoteLive"></span></span>';
+      live=document.querySelector('#powerNoteLive');
+    }
+    const vals=dcs().filter(d=>Number((state.power||{})[d]||0)>0).map(d=>esc(d.split(' · ')[0])+' + '+kfmt(state.power[d]));
+    if(live)live.innerHTML=vals.length?vals.join('; '):'не планируются';
+  }
+
+  const oldRenderMap=window.renderMap;
+  window.renderMap=function(){oldRenderMap();updateNote29()};
+  const oldRenderAll=window.renderAll;
+  window.renderAll=function(){oldRenderAll();updateNote29()};
+})();
+</script>
+
+<script id="v29c-final-render">
+(function(){
+  if(typeof state==='undefined') return;
+  function renderAll29c(){
+    window.renderFilters();
+    window.renderQuick();
+    window.renderMap();
+    if(typeof window.renderLoad==='function')window.renderLoad();
+    window.renderTable();
+  }
+  window.renderAll=renderAll29c;
+  window.renderAll();
+})();
+</script>
+<style id="v30-data-style">
+.v30-balance-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.v30-balance-card{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);min-width:0}
+.v30-balance-card span{display:block;color:var(--muted);font-size:10px;margin-bottom:4px}.v30-balance-card b{font-size:17px}
+@media(max-width:900px){.v30-balance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<script id="v30-data-update">
+(function(){
+  if(typeof state==='undefined') return;
+  const RESOURCE=['CC','HC','RC','KC','DC','IC','PC','SC','UC','ZC','EC','NC'];
+  const DC_TO_RESOURCE={
+    'M100 · EC':'EC','MEDV · PC':'PC','UDOM · UC':'UC','PHR1 · HC':'HC',
+    'PHR2 · RC':'RC','PHR3 · KC':'KC','PHR4 · DC':'DC','ICVA · IC':'IC',
+    'ICVS · CC':'CC','GZNK · ZC':'ZC','SDNХ · NC':'NC','OSTN · SC':'SC'
+  };
+  const DATA_ROWS=[
+    ['Discovery Feature Engineering',[600,300,1500,0,3000,3000,2000,0,1500,0,0,0]],
+    ['ЕКП VK Видео',[0,5500,0,0,0,0,5500,0,5500,0,0,0]],
+    ['ЕКП Общие Рекомы',[500,5000,2850,0,2750,0,5000,0,5000,0,0,0]],
+    ['ЕКП Реклама',[0,0,5000,0,0,0,6800,0,0,0,0,5000]],
+    ['ЕКП Реклама Ecom',[0,0,0,0,0,0,10000,0,0,0,0,0]],
+    ['ЕКП Лента Одноклассники',[0,2250,0,0,0,2250,0,0,0,2250,0,0]],
+    ['ЕКП Пуши Одноклассники',[0,200,0,0,0,200,0,0,0,200,0,0]],
+    ['ЕКП Инфра',[0,4388,368,0,0,1328,3628,0,2996,1328,0,368]],
+    ['Поиск по людям',[0,0,0,4000,0,4000,0,0,0,4000,0,0]],
+    ['Поиск по Дзен',[0,0,0,1000,0,1000,0,0,0,1000,0,0]],
+    ['Поиск по товарам',[0,0,0,2000,0,2000,0,0,0,2000,0,0]],
+    ['Поиск Единое Видео',[0,0,0,12000,0,0,0,0,12000,0,12000,0]],
+    ['Поиск',[0,0,0,0,0,0,0,0,0,30000,0,0]]
+  ];
+  // The CSV contains three separate rows for "ЕКП Лента Одноклассники";
+  // they are intentionally aggregated into one product for the dashboard.
+  DATA_ROWS.push(['__AGG__',[0,0,0,0,0,0,0,0,0,0,0,0]]);
+  DATA_ROWS.pop();
+  const ORDER=[1100,17638,9718,19000,5750,13778,32928,0,26996,40778,12000,5368];
+  const STOCK=[1400,28718,1226,193,407,2563,2279,17,3436,0,12753,0];
+  const POWER=[0,0,0,0,0,41644,0,0,0,41000,23800,5368];
+  const BALANCE=[300,23080,15808,-12207,23957,30429,-30649,17,-16960,222,31153,0];
+  const CLOUD=[0,50638,0,0,0,0,0,0,0,0,0,0];
+
+  // Build the additions from the supplied CSV and merge them into the current baseline.
+  const addByName=new Map();
+  for(const [name,vals] of DATA_ROWS){
+    const a=addByName.get(name)||Array(12).fill(0);
+    vals.forEach((v,i)=>a[i]+=Number(v)||0); addByName.set(name,a);
+  }
+  const currentByName=new Map(state.nowRows.map(r=>[r[0],r]));
+  const merged=state.nowRows.map(r=>[r[0],r[1],Array.from(r[2])]);
+  for(const [name,add] of addByName){
+    const r=currentByName.get(name);
+    if(r){
+      const target=merged.find(x=>x[0]===name); add.forEach((v,i)=>target[2][i]=(Number(target[2][i])||0)+v);
+    }else merged.push([name,'План 2026',Array.from(add)]);
+  }
+  state.planRows=merged;
+
+  // "Получим до конца года" is the new capacity. Map resource columns to dashboard DCs.
+  state.power={};
+  for(const d of dcs()){
+    const res=DC_TO_RESOURCE[d], i=RESOURCE.indexOf(res);
+    state.power[d]=i>=0?POWER[i]:0;
+  }
+  if(typeof SOURCE!=='undefined'){
+    SOURCE.capacity2026={};
+    for(const d of dcs()){
+      const i=idx(d); SOURCE.capacity2026[d]=(dcTotal(state.nowRows,i)||0)+(state.power[d]||0);
+    }
+    SOURCE.v30PlanSummary={order:ORDER,stock:STOCK,power:POWER,balance:BALANCE,cloud:CLOUD};
+  }
+
+  const fmt=n=>new Intl.NumberFormat('ru-RU',{minimumFractionDigits:1,maximumFractionDigits:1}).format((Number(n)||0)/1000)+'k';
+  const signed=n=>(Number(n)||0)>=0?'+'+fmt(n):'−'+fmt(Math.abs(Number(n)||0));
+
+  // Override the general section with the supplied plan summary.
+  window.renderGeneral=function(){
+    const ds=dcs(), rows=ds.map((d,i)=>{
+      const cur=dcTotal(state.nowRows,i), add=ORDER[RESOURCE.indexOf(DC_TO_RESOURCE[d])]||0;
+      const power=state.power[d]||0, bal=BALANCE[RESOURCE.indexOf(DC_TO_RESOURCE[d])]||0;
+      return {d,cur,add,power,balance:bal,end:cur+add};
+    });
+    const totalCur=rows.reduce((s,r)=>s+r.cur,0), totalAdd=ORDER.reduce((a,b)=>a+b,0), totalPower=POWER.reduce((a,b)=>a+b,0), totalBal=BALANCE.reduce((a,b)=>a+b,0);
+    const gs=document.querySelector('#generalSummary');
+    if(gs) gs.innerHTML=`
+      <div class="gcard"><span>Итого заказ</span><b>${fmt(totalAdd)}</b><small>обязательно выделить</small></div>
+      <div class="gcard"><span>Запас Реком + Поиск</span><b>${fmt(STOCK.reduce((a,b)=>a+b,0))}</b><small>имеющийся запас</small></div>
+      <div class="gcard"><span>Получим до конца года</span><b>+${fmt(totalPower)}</b><small>новые мощности</small></div>
+      <div class="gcard"><span>Итого без передвижений</span><b>${signed(totalBal)}</b><small>профицит / дефицит</small></div>`;
+    const body=document.querySelector('#generalBody');
+    if(body) body.innerHTML=rows.map(r=>`<tr><td>${esc(r.d)}</td><td>${fmt(r.cur)}</td><td>${fmt(r.add)}</td><td>+${fmt(r.power)}</td><td class="${r.balance<0?'v-bad':'v-good'}">${signed(r.balance)}</td><td>${fmt(r.end)}</td><td>${r.balance<0?'дефицит':'профицит'}</td></tr>`).join('')+
+      `<tr class="v14-total-row"><td>Итого</td><td>${fmt(totalCur)}</td><td>${fmt(totalAdd)}</td><td>+${fmt(totalPower)}</td><td class="${totalBal<0?'v-bad':'v-good'}">${signed(totalBal)}</td><td>${fmt(totalCur+totalAdd)}</td><td>—</td></tr>`;
+  };
+
+  // Add a compact source-data block below the general summary if the target exists.
+  const gs=document.querySelector('#generalSummary');
+  if(gs && !document.querySelector('#v30-source-summary')){
+    const wrap=document.createElement('div'); wrap.id='v30-source-summary'; wrap.className='v30-balance-grid';
+    wrap.innerHTML=`<div class="v30-balance-card"><span>Сдать в Облако</span><b>${fmt(CLOUD.reduce((a,b)=>a+b,0))}</b></div><div class="v30-balance-card"><span>RC + HC + KC + DC</span><b>${fmt(CLOUD.reduce((a,b)=>a+b,0))}</b></div><div class="v30-balance-card"><span>Плановых продуктов</span><b>${addByName.size}</b></div><div class="v30-balance-card"><span>Баланс без передвижений</span><b>${signed(BALANCE.reduce((a,b)=>a+b,0))}</b></div>`;
+    gs.parentNode.insertBefore(wrap,gs.nextSibling);
+  }
+
+  try{localStorage.setItem('capacity_clean_v11-plan',JSON.stringify(state.planRows));localStorage.setItem('capacity_clean_v11-power',JSON.stringify(state.power))}catch(e){}
+  if(typeof window.renderAll==='function') window.renderAll();
+})();
+</script>
+
+<style id="v31-clean-metrics">
+.v31-upload-note{font-size:10px;color:var(--muted);margin-top:2px}
+</style>
+<script id="v31-clean-controller">
+(function(){
+  if(typeof state==='undefined') return;
+  const nf31=n=>new Intl.NumberFormat('ru-RU',{minimumFractionDigits:1,maximumFractionDigits:1}).format((Number(n)||0)/1000)+'k';
+  const esc31=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const RESOURCE31=['CC','HC','RC','KC','DC','IC','PC','SC','UC','ZC','EC','NC'];
+  const DC31={
+    'M100 · EC':'EC','MEDV · PC':'PC','UDOM · UC':'UC','PHR1 · HC':'HC','PHR2 · RC':'RC','PHR3 · KC':'KC',
+    'PHR4 · DC':'DC','ICVA · IC':'IC','ICVS · CC':'CC','GZNK · ZC':'ZC','SDNХ · NC':'NC','OSTN · SC':'SC'
+  };
+  // Source-of-truth values from the supplied 2026 planning table.
+  const ORDER31=[1100,17638,9718,19000,5750,13778,32928,0,26996,40778,12000,5368];
+  const POWER31=[0,0,0,0,0,41644,0,41000,23800,5368,0,0];
+  const STOCK31=[1400,28718,1226,193,407,2563,2279,17,3436,0,12753,0];
+  const BAL31=[300,23080,15808,-12207,23957,30429,-30649,17,-16960,222,31153,0];
+  const currentCap31=1245373;
+  const powerTotal31=POWER31.reduce((a,b)=>a+b,0); // 111 812
+  const endCap31=currentCap31+powerTotal31; // 1 357 185
+
+  function current31(){return dcs().reduce((s,d)=>s+dcTotal(state.nowRows,idx(d)),0)}
+  function freeMap31(){return window.__freeNowByDc||{}}
+  function freeTotal31(ds){const m=freeMap31();return ds.reduce((s,d)=>s+Number(m[d]||0),0)}
+
+  // Final top metrics renderer. No inferred free capacity: it comes only from the separate upload.
+  window.renderFilters=function(){
+    const f=document.querySelector('#filters'); if(!f)return;
+    const defs=[['category','Категория'],['product','Продукт'],['geo','Все гео'],['dc','ДЦ']];
+    f.innerHTML=defs.map(([k,t])=>`<div class="filter" data-k="${k}"><button type="button">${t}: <b>${esc31((state.filters[k]||[]).length?((state.filters[k]||[]).length+' выбрано'):'Все')}</b> ▾</button><div class="menu"><input class="search" placeholder="Поиск"><div class="menu-actions"><button type="button" data-all>Все</button><button type="button" data-none>Сбросить</button></div><div class="opts"></div></div></div>`).join('')+
+      `<div class="metrics">
+        <div class="metric"><span>Ёмкость сейчас</span><b id="v31Current">${nf31(currentCap31)}</b></div>
+        <div class="metric"><span>Свободно сейчас</span><b id="v31Free">—</b><div class="v31-upload-note">загружается отдельно</div></div>
+        <div class="metric"><span>Ёмкость к концу 2026</span><b id="v31End">${nf31(endCap31)}</b></div>
+        <button class="power-config-inline" type="button" id="freeImportBtn">Загрузить свободные ядра</button>
+        <button class="power-config-inline" type="button" id="v31PowerBtn">Изменить мощности</button>
+      </div>`;
+    f.querySelectorAll('.filter').forEach(box=>{
+      const k=box.dataset.k,opts=box.querySelector('.opts'),search=box.querySelector('.search');
+      const vals=filterValues(k),chosen=state.filters[k]||[];
+      opts.innerHTML=vals.map(v=>`<label class="opt"><input type="checkbox" value="${esc31(v)}" ${chosen.includes(v)?'checked':''}><span>${esc31(v)}</span></label>`).join('');
+      opts.querySelectorAll('input').forEach(inp=>inp.onchange=()=>{state.filters[k]=[...opts.querySelectorAll('input:checked')].map(x=>x.value);state.selection=[];box.querySelector('b').textContent=filterValues(k).length===state.filters[k].length?'Все':state.filters[k].length+' выбрано';renderData31()});
+      box.querySelector(':scope > button').onclick=e=>{e.preventDefault();e.stopPropagation();f.querySelectorAll('.filter.open').forEach(x=>{if(x!==box)x.classList.remove('open')});box.classList.toggle('open')};
+      box.querySelector('[data-all]').onclick=e=>{e.preventDefault();e.stopPropagation();state.filters[k]=[];state.selection=[];opts.querySelectorAll('input').forEach(x=>x.checked=false);box.querySelector('b').textContent='Все';renderData31();box.classList.add('open')};
+      box.querySelector('[data-none]').onclick=e=>{e.preventDefault();e.stopPropagation();state.filters[k]=['__NONE__'];state.selection=[];opts.querySelectorAll('input').forEach(x=>x.checked=false);box.querySelector('b').textContent='0';renderData31();box.classList.add('open')};
+      search.oninput=e=>{const q=e.target.value.toLowerCase();opts.querySelectorAll('.opt').forEach(o=>o.style.display=o.textContent.toLowerCase().includes(q)?'flex':'none')};
+    });
+    const fb=document.querySelector('#freeImportBtn'); if(fb) fb.onclick=()=>document.querySelector('#freeImportDialog')?.showModal();
+    const pb=document.querySelector('#v31PowerBtn'); if(pb && typeof openPower29==='function') pb.onclick=openPower29;
+  };
+
+  window.renderQuick=function(){
+    const ds=filteredDcs();
+    const used=ds.reduce((s,d)=>s+dcTotal(state.nowRows,idx(d)),0);
+    const end=ds.length===dcs().length?endCap31:ds.reduce((s,d)=>s+dcTotal(state.nowRows,idx(d)),0)+ds.reduce((s,d)=>s+Number((state.power||{})[d]||0),0);
+    const free=freeTotal31(ds);
+    const f=document.querySelector('#v31Free'); if(f)f.textContent=Object.keys(freeMap31()).length?nf31(free):'—';
+    const c=document.querySelector('#v31Current'); if(c)c.textContent=ds.length===dcs().length?nf31(currentCap31):nf31(used);
+    const e=document.querySelector('#v31End'); if(e)e.textContent=nf31(end);
+    const q=document.querySelector('#quick'); if(q)q.innerHTML=`<div class="quick-card"><span>Ёмкость сейчас</span><b>${nf31(ds.length===dcs().length?currentCap31:used)}</b><small>фактическая ёмкость</small></div><div class="quick-card"><span>Итого заказ</span><b>${nf31(ORDER31.reduce((a,b)=>a+b,0))}</b><small>обязательно выделить</small></div><div class="quick-card"><span>Запас Реком + Поиск</span><b>${nf31(STOCK31.reduce((a,b)=>a+b,0))}</b><small>имеющийся запас</small></div><div class="quick-card"><span>Свободно сейчас</span><b>${Object.keys(freeMap31()).length?nf31(free):'—'}</b><small>${Object.keys(freeMap31()).length?'из загруженного файла':'загрузите отдельный файл'}</small></div><div class="quick-card"><span>Ёмкость к концу 2026</span><b>${nf31(end)}</b><small>сейчас + новые мощности</small></div><div class="quick-card"><span>Получим до конца года</span><b>+${nf31(powerTotal31)}</b><small>новые мощности</small></div>`;
+  };
+
+  function renderData31(){window.renderQuick();window.renderMap();window.renderTable();}
+  window.renderAll=function(){window.renderFilters();renderData31()};
+  window.renderAll();
+})();
+</script>
+
+<style id="v32-power-fix">
+#v31PowerBtn{cursor:pointer!important;pointer-events:auto!important}
+</style>
+<script id="v32-power-fix-controller">
+(function(){
+  if(typeof state==='undefined') return;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const kfmt=n=>new Intl.NumberFormat('ru-RU',{minimumFractionDigits:1,maximumFractionDigits:1}).format((Number(n)||0)/1000)+'k';
+  const raw=n=>Math.max(0,Math.floor(Number(n)||0));
+
+  // IMPORTANT: openPower29 was scoped inside another IIFE and therefore is not
+  // available here. This is a self-contained replacement for the final button.
+  function openPower32(){
+    const dialog=document.querySelector('#powerDialog');
+    const grid=document.querySelector('#powerGrid');
+    if(!dialog||!grid) return;
+    grid.innerHTML=dcs().map(d=>`<div class="power-item"><label>${esc(d)}</label>
+      <input type="number" min="0" step="1" value="${raw((state.power||{})[d])}" data-power-dc="${esc(d)}">
+      <div style="font-size:10px;color:var(--muted);margin-top:3px">${kfmt((state.power||{})[d])}</div>
+    </div>`).join('');
+    const note=document.querySelector('#powerTotalNote');
+    const update=()=>{
+      const total=[...grid.querySelectorAll('input[data-power-dc]')].reduce((s,i)=>s+raw(i.value),0);
+      if(note) note.textContent='Всего дополнительной мощности: +'+kfmt(total)+' (точное значение вводится в vCPU)';
+      grid.querySelectorAll('input[data-power-dc]').forEach(i=>{
+        const n=i.parentElement.querySelector('div');
+        if(n)n.textContent=kfmt(i.value);
+      });
+    };
+    grid.querySelectorAll('input[data-power-dc]').forEach(i=>i.addEventListener('input',update));
+    update();
+    dialog.showModal();
+  }
+
+  function bindPower32(){
+    const b=document.querySelector('#v31PowerBtn');
+    if(b){ b.onclick=function(e){e.preventDefault();e.stopPropagation();openPower32();}; }
+    const save=document.querySelector('#savePower');
+    if(save){
+      save.onclick=function(e){
+        e.preventDefault();
+        document.querySelectorAll('#powerGrid input[data-power-dc]').forEach(i=>{
+          state.power[i.dataset.powerDc]=raw(i.value);
+        });
+        try{localStorage.setItem('capacity_clean_v11-power',JSON.stringify(state.power||{}));}catch(_){ }
+        document.querySelector('#powerDialog')?.close();
+        if(typeof window.renderAll==='function') window.renderAll();
+      };
+    }
+  }
+
+  // v31 renderFilters replaces the button on every render, so bind after each render.
+  const oldRF=window.renderFilters;
+  window.renderFilters=function(){ oldRF(); bindPower32(); };
+  bindPower32();
+  if(typeof window.renderAll==='function') window.renderAll();
+})();
+</script>
